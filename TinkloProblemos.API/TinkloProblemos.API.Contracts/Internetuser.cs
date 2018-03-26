@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace TinkloProblemos.API.Database
+namespace TinkloProblemos.API.Contracts
 {
-    public partial class Internetuser
+    public class Internetuser
     {
         public Internetuser()
         {

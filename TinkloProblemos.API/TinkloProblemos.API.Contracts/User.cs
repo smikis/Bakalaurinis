@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TinkloProblemos.API.Database
+namespace TinkloProblemos.API.Contracts
 {
-    public partial class User
+    public class User
     {
         public User()
         {

@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace TinkloProblemos.API.Database
+namespace TinkloProblemos.API.Contracts
 {
-    public partial class Internetuserdevice
+    public class Internetuserdevice
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -11,6 +10,7 @@ namespace TinkloProblemos.API.Database
         public string MacAddress { get; set; }
         public string Description { get; set; }
         public int InternetUserId { get; set; }
+        public DateTime WarrantyExpiration { get; set; }
 
         public Internetuser InternetUser { get; set; }
     }

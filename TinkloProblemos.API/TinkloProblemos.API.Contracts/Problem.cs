@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TinkloProblemos.API.Database
+namespace TinkloProblemos.API.Contracts
 {
-    public partial class Problem
+    public class Problem
     {
         public Problem()
         {
@@ -20,6 +20,7 @@ namespace TinkloProblemos.API.Database
         public int AssignedUser { get; set; }
         public int StatusId { get; set; }
         public int InternetUserId { get; set; }
+        public DateTime Created { get; set; }
 
         public User AssignedUserNavigation { get; set; }
         public Internetuser InternetUser { get; set; }

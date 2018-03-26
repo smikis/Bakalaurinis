@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace TinkloProblemos.API.Database
+namespace TinkloProblemos.API.Contracts
 {
-    public partial class Timespent
+    public class Timespent
     {
         public int Id { get; set; }
         public decimal HoursSpent { get; set; }

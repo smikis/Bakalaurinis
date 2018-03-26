@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TinkloProblemos.API.Database
+﻿namespace TinkloProblemos.API.Contracts
 {
-    public partial class CategoryProblem
+    public class CategoryProblem
     {
         public int CategoryId { get; set; }
         public int ProblemId { get; set; }
 
-        public Category Category { get; set; }
+        public Category.Category Category { get; set; }
         public Problem Problem { get; set; }
     }
 }

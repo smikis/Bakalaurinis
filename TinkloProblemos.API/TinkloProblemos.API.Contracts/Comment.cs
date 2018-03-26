@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TinkloProblemos.API.Database
+﻿namespace TinkloProblemos.API.Contracts
 {
-    public partial class Comment
+    public class Comment
     {
         public int Id { get; set; }
         public string Text { get; set; }
