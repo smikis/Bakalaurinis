@@ -1,11 +1,17 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Identity.Dapper;
+using Identity.Dapper.Entities;
+using Identity.Dapper.PostgreSQL.Connections;
+using Identity.Dapper.PostgreSQL.Models;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using TinkloProblemos.API.Database;
 using TinkloProblemos.API.Interfaces.Repositories;
 using TinkloProblemos.API.Interfaces.Services;
+using TinkloProblemos.API.Models;
 using TinkloProblemos.API.Services;
 
 namespace TinkloProblemos.API
@@ -24,6 +30,20 @@ namespace TinkloProblemos.API
         {
             services.AddSingleton<ICategoryRepository, CategoryRepository>();
             services.AddSingleton<ICategoryService, CategoryService>();
+
+            services.ConfigureDapperConnectionProvider<PostgreSqlConnectionProvider>(Configuration.GetSection("DapperIdentity"))
+                .ConfigureDapperIdentityCryptography(Configuration.GetSection("DapperIdentityCryptography"));
+
+            services.AddIdentity<CustomUser, CustomRole>(x =>
+                {
+                    x.Password.RequireDigit = false;
+                    x.Password.RequiredLength = 1;
+                    x.Password.RequireLowercase = false;
+                    x.Password.RequireNonAlphanumeric = false;
+                    x.Password.RequireUppercase = false;
+                })
+                .AddDapperIdentityFor<PostgreSqlConfiguration>()
+                .AddDefaultTokenProviders();
 
             services.AddMvc();
             services.AddSwaggerGen(c =>
@@ -49,7 +69,7 @@ namespace TinkloProblemos.API
             }
 
             app.UseMvc();
-
+            app.UseAuthentication();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

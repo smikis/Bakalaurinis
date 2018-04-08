@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinkloProblemos.API.Databas
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinkloProblemos.API.Contracts", "TinkloProblemos.API.Contracts\TinkloProblemos.API.Contracts.csproj", "{655A6FBC-CBE0-43F9-A83B-80F3EEB0AFF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinkloProblemos.API.Interfaces", "TinkloProblemos.API.Interfaces\TinkloProblemos.API.Interfaces.csproj", "{4EE81A9E-DD94-4E1B-827C-15EC786B34DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinkloProblemos.API.Interfaces", "TinkloProblemos.API.Interfaces\TinkloProblemos.API.Interfaces.csproj", "{4EE81A9E-DD94-4E1B-827C-15EC786B34DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinkloProblemos.API.Services", "TinkloProblemos.API.Services\TinkloProblemos.API.Services.csproj", "{C218C060-2583-494E-A0AE-D96EBD64570A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinkloProblemos.API.Services", "TinkloProblemos.API.Services\TinkloProblemos.API.Services.csproj", "{C218C060-2583-494E-A0AE-D96EBD64570A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
