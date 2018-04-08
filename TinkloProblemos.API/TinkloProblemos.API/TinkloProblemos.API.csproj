@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TinkloProblemos.API.Contracts\TinkloProblemos.API.Contracts.csproj" />
     <ProjectReference Include="..\TinkloProblemos.API.Database\TinkloProblemos.API.Database.csproj" />
+    <ProjectReference Include="..\TinkloProblemos.API.Identity\TinkloProblemos.API.Identity.csproj" />
     <ProjectReference Include="..\TinkloProblemos.API.Services\TinkloProblemos.API.Services.csproj" />
   </ItemGroup>
 

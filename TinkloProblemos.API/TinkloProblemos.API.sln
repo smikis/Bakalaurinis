@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinkloProblemos.API.Interfa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinkloProblemos.API.Services", "TinkloProblemos.API.Services\TinkloProblemos.API.Services.csproj", "{C218C060-2583-494E-A0AE-D96EBD64570A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinkloProblemos.API.Identity", "TinkloProblemos.API.Identity\TinkloProblemos.API.Identity.csproj", "{0A657CBC-92D8-404D-8F15-6CEDDE7F4133}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C218C060-2583-494E-A0AE-D96EBD64570A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C218C060-2583-494E-A0AE-D96EBD64570A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C218C060-2583-494E-A0AE-D96EBD64570A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A657CBC-92D8-404D-8F15-6CEDDE7F4133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A657CBC-92D8-404D-8F15-6CEDDE7F4133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A657CBC-92D8-404D-8F15-6CEDDE7F4133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A657CBC-92D8-404D-8F15-6CEDDE7F4133}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

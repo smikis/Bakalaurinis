@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Identity.Dapper.Entities;
-using Identity.Dapper.Stores;
-using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using TinkloProblemos.API.Models;
+using TinkloProblemos.API.Identity.Entities;
 
 namespace TinkloProblemos.API.Controllers
 {
@@ -16,11 +9,11 @@ namespace TinkloProblemos.API.Controllers
     [Route("api/User")]
     public class UserController : Controller
     {
-        private readonly UserManager<CustomUser> _userManager;
-        private readonly SignInManager<CustomUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public UserController(UserManager<CustomUser> userManager,
-            SignInManager<CustomUser> signInManager)
+        public UserController(UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -30,12 +23,12 @@ namespace TinkloProblemos.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var user = new CustomUser
+            var user = new ApplicationUser
             {
                 UserName = "test",
                 Email = "tomas@tomas.lt"
             };
-            var result = await _userManager.CreateAsync(user, "test11!");
+            var result = await _userManager.CreateAsync(user, "Test11!");
             if (result.Succeeded)
             {
 
