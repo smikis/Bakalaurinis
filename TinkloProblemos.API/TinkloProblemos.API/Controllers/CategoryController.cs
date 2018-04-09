@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TinkloProblemos.API.Contracts;
@@ -23,6 +24,7 @@ namespace TinkloProblemos.API.Controllers
         }
 
         // GET: api/Category
+        [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpGet]
         public IEnumerable<CategoryDto> Get()
         {
@@ -30,7 +32,7 @@ namespace TinkloProblemos.API.Controllers
         }
 
         // GET: api/Category/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}"), Authorize]
         public CategoryDto Get(int id)
         {
             return _categoryService.GetById(id);

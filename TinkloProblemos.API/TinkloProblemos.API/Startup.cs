@@ -1,10 +1,13 @@
 ﻿using Daarto.IdentityProvider.Stores;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Text;
 using TinkloProblemos.API.Database;
 using TinkloProblemos.API.Identity;
 using TinkloProblemos.API.Identity.Entities;
@@ -27,23 +30,36 @@ namespace TinkloProblemos.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<ICategoryRepository, CategoryRepository>();
-            services.AddSingleton<ICategoryService, CategoryService>();
-
-            services.AddIdentity<ApplicationUser, ApplicationRole>()
-                              .AddUserManager<ApplicationUserManager>()
-                              .AddRoleManager<ApplicationRoleManager>()
-                              .AddSignInManager<ApplicationSignInManager>()
-                              .AddDefaultTokenProviders();
-
+            services.AddSingleton<ICategoryService, CategoryService>();         
 
             string connectionString = Configuration.GetConnectionString("Database");
-
-            // Configure custom services to be used by the framework.
             services.AddTransient<IDatabaseConnectionService>(e => new DatabaseConnectionService(connectionString));
             services.AddTransient<IUserStore<ApplicationUser>, UserStore>();
             services.AddTransient<IRoleStore<ApplicationRole>, RoleStore>();
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
 
+
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = Configuration["Jwt:Issuer"],
+                ValidAudience = Configuration["Jwt:Issuer"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+            };
+        });
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                            .AddUserManager<ApplicationUserManager>()
+                            .AddRoleManager<ApplicationRoleManager>()
+                            .AddSignInManager<ApplicationSignInManager>()
+                            .AddDefaultTokenProviders();
 
             services.AddMvc();
             services.AddSwaggerGen(c =>
@@ -68,8 +84,8 @@ namespace TinkloProblemos.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
             app.UseAuthentication();
+            app.UseMvc();          
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
