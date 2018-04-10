@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TinkloProblemos.API.Contracts\TinkloProblemos.API.Contracts.csproj" />
+    <ProjectReference Include="..\TinkloProblemos.API.Identity\TinkloProblemos.API.Identity.csproj" />
   </ItemGroup>
 
 </Project>

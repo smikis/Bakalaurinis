@@ -30,7 +30,8 @@ namespace TinkloProblemos.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<ICategoryRepository, CategoryRepository>();
-            services.AddSingleton<ICategoryService, CategoryService>();         
+            services.AddSingleton<ICategoryService, CategoryService>();
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
 
             string connectionString = Configuration.GetConnectionString("Database");
             services.AddTransient<IDatabaseConnectionService>(e => new DatabaseConnectionService(connectionString));
