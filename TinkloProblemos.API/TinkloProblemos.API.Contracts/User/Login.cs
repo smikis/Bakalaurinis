@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TinkloProblemos.API.Models
+namespace TinkloProblemos.API.Contracts.User
 {
     public class Login
     {

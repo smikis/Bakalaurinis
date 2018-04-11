@@ -1,13 +1,12 @@
-﻿using Daarto.IdentityProvider.Tables;
-using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using TinkloProblemos.API.Identity;
+using Microsoft.AspNetCore.Identity;
 using TinkloProblemos.API.Identity.Entities;
+using TinkloProblemos.API.Identity.Tables;
 
-namespace Daarto.IdentityProvider.Stores
+namespace TinkloProblemos.API.Identity.Stores
 {
     public class RoleStore : IQueryableRoleStore<ApplicationRole>
     {

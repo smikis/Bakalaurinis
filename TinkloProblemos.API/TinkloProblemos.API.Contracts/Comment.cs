@@ -1,4 +1,6 @@
-﻿namespace TinkloProblemos.API.Contracts
+﻿using TinkloProblemos.API.Identity.Entities;
+
+namespace TinkloProblemos.API.Contracts
 {
     public class Comment
     {
@@ -8,6 +10,6 @@
         public int ProblemId { get; set; }
 
         public Problem Problem { get; set; }
-        public User User { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

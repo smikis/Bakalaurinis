@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using TinkloProblemos.API.Contracts.User;
 using TinkloProblemos.API.Identity.Entities;
+using TinkloProblemos.API.Interfaces.Services;
 
 namespace TinkloProblemos.API.Controllers
 {
@@ -9,31 +11,38 @@ namespace TinkloProblemos.API.Controllers
     [Route("api/User")]
     public class UserController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IUserService _userService;
 
-        public UserController(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+        public UserController(IUserService userService)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _userService = userService;
         }
 
-        
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet]
+        public IActionResult Get()
         {
-            var user = new ApplicationUser
-            {
-                UserName = "test",
-                Email = "tomas@tomas.lt"
-            };
-            var result = await _userManager.CreateAsync(user, "Test11!");
-            if (result.Succeeded)
-            {
+            return Ok(_userService.GetUsers());
+        }
 
+        [HttpGet("{page}/{pageSize}")]
+        public  IActionResult Get(int page, int pageSize)
+        {
+            return  Ok(_userService.GetUsers(page,pageSize));
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] Register registerModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _userService.CreateUserAsync(registerModel);
+                if (result)
+                {
+                    return Ok("User created");
+                }
             }
-            return Ok();
+            return BadRequest();
         }
     }
 }

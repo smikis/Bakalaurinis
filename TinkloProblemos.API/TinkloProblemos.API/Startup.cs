@@ -1,5 +1,4 @@
-﻿using Daarto.IdentityProvider.Stores;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -11,6 +10,7 @@ using System.Text;
 using TinkloProblemos.API.Database;
 using TinkloProblemos.API.Identity;
 using TinkloProblemos.API.Identity.Entities;
+using TinkloProblemos.API.Identity.Stores;
 using TinkloProblemos.API.Interfaces.Repositories;
 using TinkloProblemos.API.Interfaces.Services;
 using TinkloProblemos.API.Services;
@@ -32,6 +32,7 @@ namespace TinkloProblemos.API
             services.AddSingleton<ICategoryRepository, CategoryRepository>();
             services.AddSingleton<ICategoryService, CategoryService>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.AddTransient<IUserService, UserService>();
 
             string connectionString = Configuration.GetConnectionString("Database");
             services.AddTransient<IDatabaseConnectionService>(e => new DatabaseConnectionService(connectionString));

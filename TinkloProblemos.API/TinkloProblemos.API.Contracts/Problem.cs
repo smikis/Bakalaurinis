@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TinkloProblemos.API.Identity.Entities;
 
 namespace TinkloProblemos.API.Contracts
 {
@@ -22,7 +23,7 @@ namespace TinkloProblemos.API.Contracts
         public int InternetUserId { get; set; }
         public DateTime Created { get; set; }
 
-        public User AssignedUserNavigation { get; set; }
+        public ApplicationUser AssignedUserNavigation { get; set; }
         public Internetuser InternetUser { get; set; }
         public Status Status { get; set; }
         public ICollection<CategoryProblem> CategoryProblem { get; set; }

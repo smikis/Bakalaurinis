@@ -1,17 +1,15 @@
-﻿using Daarto.IdentityProvider.Tables;
-using Microsoft.AspNetCore.Identity;
-using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using TinkloProblemos.API.Identity;
+using Microsoft.AspNetCore.Identity;
+using MySql.Data.MySqlClient;
 using TinkloProblemos.API.Identity.Entities;
+using TinkloProblemos.API.Identity.Tables;
 
-namespace Daarto.IdentityProvider.Stores
+namespace TinkloProblemos.API.Identity.Stores
 {
     public class UserStore : IQueryableUserStore<ApplicationUser>, IUserEmailStore<ApplicationUser>, IUserLoginStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>,
         IUserPhoneNumberStore<ApplicationUser>, IUserTwoFactorStore<ApplicationUser>, IUserSecurityStampStore<ApplicationUser>,

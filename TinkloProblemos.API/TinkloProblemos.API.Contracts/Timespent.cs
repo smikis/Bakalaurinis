@@ -1,4 +1,5 @@
 ﻿using System;
+using TinkloProblemos.API.Identity.Entities;
 
 namespace TinkloProblemos.API.Contracts
 {
@@ -12,6 +13,6 @@ namespace TinkloProblemos.API.Contracts
         public int ProblemId { get; set; }
 
         public Problem Problem { get; set; }
-        public User User { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

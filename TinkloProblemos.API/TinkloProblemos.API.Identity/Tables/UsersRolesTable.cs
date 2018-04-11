@@ -1,13 +1,13 @@
-﻿using Dapper;
-using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Dapper;
+using MySql.Data.MySqlClient;
 using TinkloProblemos.API.Identity.Entities;
 
-namespace Daarto.IdentityProvider.Tables
+namespace TinkloProblemos.API.Identity.Tables
 {
     public class UsersRolesTable
     {

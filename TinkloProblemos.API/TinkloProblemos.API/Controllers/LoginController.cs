@@ -12,8 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using TinkloProblemos.API.Contracts.User;
 using TinkloProblemos.API.Identity.Entities;
-using TinkloProblemos.API.Models;
 
 namespace TinkloProblemos.API.Controllers
 {
