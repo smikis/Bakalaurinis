@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TinkloProblemos.API.Contracts;
 using TinkloProblemos.API.Contracts.Category;
-using TinkloProblemos.API.Database;
-using TinkloProblemos.API.Interfaces.Repositories;
 using TinkloProblemos.API.Interfaces.Services;
 
 namespace TinkloProblemos.API.Controllers
@@ -54,11 +47,11 @@ namespace TinkloProblemos.API.Controllers
         
         // PUT: api/Category/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]CategoryDto value)
+        public IActionResult Put(int id, [FromBody]CategoryUpdateDto value)
         {
             if (ModelState.IsValid)
             {
-                if (_categoryService.Update(value))
+                if (_categoryService.Update(value, id))
                 {
                     return Ok();
                 }

@@ -1,8 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TinkloProblemos.API.Contracts.User;
-using TinkloProblemos.API.Identity.Entities;
 using TinkloProblemos.API.Interfaces.Services;
 
 namespace TinkloProblemos.API.Controllers

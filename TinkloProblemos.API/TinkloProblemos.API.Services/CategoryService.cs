@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using TinkloProblemos.API.Contracts.Category;
 using TinkloProblemos.API.Interfaces.Repositories;
 using TinkloProblemos.API.Interfaces.Services;
@@ -42,9 +40,9 @@ namespace TinkloProblemos.API.Services
             return false;
         }
 
-        public bool Update(CategoryDto category)
+        public bool Update(CategoryUpdateDto category, int categoryId)
         {
-            if (_categoryRepository.Update(category) != 0)
+            if (_categoryRepository.Update(category, categoryId) != 0)
             {
                 return true;
             }

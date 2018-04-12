@@ -30,7 +30,10 @@ namespace TinkloProblemos.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<ICategoryRepository, CategoryRepository>();
-            services.AddSingleton<ICategoryService, CategoryService>();
+            services.AddSingleton<IInternetUserRepository, InternetUserRepository>();
+
+            services.AddTransient<IInternetUserService, InternetUserService>();
+            services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IUserService, UserService>();
 

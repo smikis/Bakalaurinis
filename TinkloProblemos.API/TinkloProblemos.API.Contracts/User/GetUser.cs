@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TinkloProblemos.API.Contracts.User
+﻿namespace TinkloProblemos.API.Contracts.User
 {
     public class GetUser
     {

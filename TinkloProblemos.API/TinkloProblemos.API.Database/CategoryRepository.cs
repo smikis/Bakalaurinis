@@ -3,7 +3,6 @@ using System.Data;
 using System.Linq;
 using Dapper;
 using Microsoft.Extensions.Configuration;
-using TinkloProblemos.API.Contracts;
 using MySql.Data.MySqlClient;
 using TinkloProblemos.API.Contracts.Category;
 using TinkloProblemos.API.Database.Queries;
@@ -53,11 +52,11 @@ namespace TinkloProblemos.API.Database
             }
         }
 
-        public int Update(CategoryDto prod)
+        public int Update(CategoryUpdateDto prod, int categoryId)
         {
             using (IDbConnection dbConnection = Connection)
             {
-                return dbConnection.Execute(CategoryQueries.Update, prod);
+                return dbConnection.Execute(CategoryQueries.Update, new { prod, categoryId });
             }
         }
     }

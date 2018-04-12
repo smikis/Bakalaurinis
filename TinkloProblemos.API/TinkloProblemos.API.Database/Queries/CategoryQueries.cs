@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TinkloProblemos.API.Database.Queries
+﻿namespace TinkloProblemos.API.Database.Queries
 {
     public static class CategoryQueries
     {

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using TinkloProblemos.API.Contracts;
 using TinkloProblemos.API.Contracts.Category;
 
 namespace TinkloProblemos.API.Interfaces.Repositories
@@ -10,6 +9,6 @@ namespace TinkloProblemos.API.Interfaces.Repositories
         IEnumerable<CategoryDto> GetAll();
         CategoryDto GetById(int id);
         int Delete(int id);
-        int Update(CategoryDto prod);
+        int Update(CategoryUpdateDto prod, int categoryId);
     }
 }

@@ -9,6 +9,6 @@ namespace TinkloProblemos.API.Interfaces.Services
         IEnumerable<CategoryDto> GetAll();
         CategoryDto GetById(int id);
         bool Delete(int id);
-        bool Update(CategoryDto category);
+        bool Update(CategoryUpdateDto category, int categoryId);
     }
 }
