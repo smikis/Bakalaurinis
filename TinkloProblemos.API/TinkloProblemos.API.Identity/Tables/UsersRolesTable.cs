@@ -18,7 +18,7 @@ namespace TinkloProblemos.API.Identity.Tables
             _sqlConnection = sqlConnection;
         }
 
-        public Task AddToRoleAsync(ApplicationUser user, Guid roleId)
+        public Task AddToRoleAsync(ApplicationUser user, string roleId)
         {
             const string command = "INSERT INTO UsersRoles " +
                                    "VALUES (@UserId, @RoleId);";
@@ -30,7 +30,7 @@ namespace TinkloProblemos.API.Identity.Tables
             });
         }
 
-        public Task RemoveFromRoleAsync(ApplicationUser user, Guid roleId)
+        public Task RemoveFromRoleAsync(ApplicationUser user, string roleId)
         {
             const string command = "DELETE " +
                                    "FROM UsersRoles " +

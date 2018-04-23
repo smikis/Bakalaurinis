@@ -9,5 +9,7 @@ namespace TinkloProblemos.API.Interfaces.Services
         Task<bool> CreateUserAsync(Register registerModel);
         IEnumerable<GetUser> GetUsers();
         IEnumerable<GetUser> GetUsers(int page, int pageSize);
+        Task<bool> UpdateUser(EditUser editUser, string userId);
+        Task<bool> DeleteUser(string userId);
     }
 }

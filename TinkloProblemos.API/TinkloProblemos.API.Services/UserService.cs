@@ -25,7 +25,7 @@ namespace TinkloProblemos.API.Services
                 Email = x.Email,
                 Id = x.Id,
                 LastName = x.LastName,
-                Name = x.Name
+                Name = x.FirstName
             });
         }
 
@@ -37,7 +37,7 @@ namespace TinkloProblemos.API.Services
                 Email = x.Email,
                 Id = x.Id,
                 LastName = x.LastName,
-                Name = x.Name
+                Name = x.FirstName
             });
         }
 
@@ -55,10 +55,39 @@ namespace TinkloProblemos.API.Services
             var result = await _userManager.CreateAsync(applicationUser, registerModel.Password);
             if (result.Succeeded)
             {
-                //Add user to role
+                await _userManager.AddToRoleAsync(applicationUser, "User");
                 return true;
             }
             return false;
         }
+
+        public async Task<bool> UpdateUser(EditUser editUser, string userId)
+        {
+            var oldUser = await _userManager.FindByIdAsync(userId);
+            oldUser.FirstName = editUser.Name;
+            oldUser.LastName = editUser.LastName;
+            oldUser.Address = editUser.Address;
+            oldUser.Email = editUser.Email;
+            var result = await _userManager.UpdateAsync(oldUser);
+            if (result.Succeeded)
+            {
+                return true;
+            }
+            return false;
+
+        }
+
+        public async Task<bool> DeleteUser(string userId)
+        {
+            var oldUser = await _userManager.FindByIdAsync(userId);
+            var result = await _userManager.DeleteAsync(oldUser);
+            if (result.Succeeded)
+            {
+                return true;
+            }
+            return false;
+
+        }
+
     }
 }

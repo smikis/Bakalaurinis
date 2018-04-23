@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TinkloProblemos.API.Contracts.User;
+using TinkloProblemos.API.Extensions;
 using TinkloProblemos.API.Interfaces.Services;
 
 namespace TinkloProblemos.API.Controllers
@@ -40,7 +41,32 @@ namespace TinkloProblemos.API.Controllers
                     return Ok("User created");
                 }
             }
+            return BadRequest(this.GetModelStateErrors());
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromBody] EditUser editUser, string id)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _userService.UpdateUser(editUser, id);
+                if (result)
+                {
+                    return Ok("User created");
+                }
+            }
+            return BadRequest(this.GetModelStateErrors());
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (await _userService.DeleteUser(id))
+            {
+                return Ok();
+            }
             return BadRequest();
         }
+
     }
 }
