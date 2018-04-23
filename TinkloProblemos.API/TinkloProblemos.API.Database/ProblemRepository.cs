@@ -31,9 +31,9 @@ namespace TinkloProblemos.API.Database
                 using (var transaction = dbConnection.BeginTransaction())
                 {
                     var createdId = dbConnection.ExecuteScalar<int>(ProblemQueries.Add, problem, transaction);
-                    var result = dbConnection.Execute(ProblemCategoryQueries.Add, new {CategoryId = problem.Category, ProblemId = createdId}, transaction);
+                    dbConnection.Execute(ProblemCategoryQueries.Add, new {CategoryId = problem.Category, ProblemId = createdId}, transaction);
                     transaction.Commit();
-                    return result;
+                    return createdId;
                 }
                 
             }

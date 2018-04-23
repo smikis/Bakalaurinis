@@ -24,9 +24,10 @@ namespace TinkloProblemos.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_problemService.Add(value))
+                var result = _problemService.Add(value);
+                if (result.Success)
                 {
-                    return Ok();
+                    return Ok(result.Key);
                 }
             }
             return BadRequest();

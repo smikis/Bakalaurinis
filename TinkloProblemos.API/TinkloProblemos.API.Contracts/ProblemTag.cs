@@ -6,6 +6,6 @@
         public int ProblemId { get; set; }
 
         public Problem.Problem Problem { get; set; }
-        public Tag Tag { get; set; }
+        public Tag.Tag Tag { get; set; }
     }
 }

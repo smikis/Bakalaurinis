@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using TinkloProblemos.API.Contracts.Models;
 using TinkloProblemos.API.Contracts.Problem;
+using TinkloProblemos.API.Contracts.Tag;
 using TinkloProblemos.API.Interfaces.Repositories;
 using TinkloProblemos.API.Interfaces.Services;
 
@@ -10,17 +13,33 @@ namespace TinkloProblemos.API.Services
     public class ProblemService : IProblemService
     {
         private readonly IProblemRepository _problemRepository;
-        public ProblemService(IProblemRepository problemRepository)
+        private readonly ITagRepository _tagRepository;
+        public ProblemService(IProblemRepository problemRepository, ITagRepository tagRepository)
         {
             _problemRepository = problemRepository;
+            _tagRepository = tagRepository;
         }
-        public bool Add(CreateProblem createProblem)
+        public DatabaseResult Add(CreateProblem createProblem)
         {
-            if (_problemRepository.Add(createProblem) != 0)
+            var databaseResult = new DatabaseResult
             {
-                return true;
+                Success = false
+            };
+
+            var result = _problemRepository.Add(createProblem);
+           
+            if (result != 0)
+            {
+                databaseResult.Key = result;
+                databaseResult.Success = true;
+                if (createProblem.Tags != null && createProblem.Tags.Any())
+                {
+                    var problemTags = createProblem.Tags.Select(x => new ProblemTagDto {ProblemId = result, TagId = x});
+                    _tagRepository.AddToProblem(problemTags);
+                }
             }
-            return false;
+
+            return databaseResult;
         }
     }
 }
