@@ -6,12 +6,12 @@ namespace TinkloProblemos.API.Contracts
     {
         public Status()
         {
-            Problem = new HashSet<Problem>();
+            Problem = new HashSet<Problem.Problem>();
         }
 
         public int Id { get; set; }
         public int Name { get; set; }
 
-        public ICollection<Problem> Problem { get; set; }
+        public ICollection<Problem.Problem> Problem { get; set; }
     }
 }

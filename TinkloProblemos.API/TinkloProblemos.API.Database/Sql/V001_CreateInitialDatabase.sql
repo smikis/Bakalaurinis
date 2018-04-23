@@ -96,9 +96,9 @@ CREATE TABLE Category_Problem (CategoryId int(10) NOT NULL, ProblemId int(10) NO
 CREATE TABLE Comment (Id int(10) NOT NULL AUTO_INCREMENT, Text varchar(5000) NOT NULL, UserId CHAR(38) NOT NULL, ProblemId int(10) NOT NULL, PRIMARY KEY (Id));
 CREATE TABLE InternetUser (Id int(10) NOT NULL AUTO_INCREMENT, FirstName varchar(255) NOT NULL, LastName int(10) NOT NULL, Description varchar(512), Location varchar(255), IpAddress varchar(255), PRIMARY KEY (Id));
 CREATE TABLE InternetUserDevice (Id int(10) NOT NULL AUTO_INCREMENT, Name varchar(255) NOT NULL, Manufacturer varchar(255), MacAddress varchar(255), WarrantyExpiration date, Description varchar(512), InternetUserId int(10) NOT NULL, PRIMARY KEY (Id));
-CREATE TABLE Problem (Id int(10) NOT NULL AUTO_INCREMENT, Name varchar(255) NOT NULL, Description varchar(9000) NOT NULL, Location varchar(512), Created date NOT NULL, AssignedUser CHAR(38) NOT NULL, StatusId int(10) NOT NULL, InternetUserId int(10) NOT NULL, CONSTRAINT Id PRIMARY KEY (Id));
+CREATE TABLE Problem (Id int(10) NOT NULL AUTO_INCREMENT, Name varchar(255) NOT NULL, Description varchar(9000) NOT NULL, Location varchar(512), Created datetime NOT NULL, AssignedUser CHAR(38), StatusId int(10) NOT NULL, InternetUserId int(10), CONSTRAINT Id PRIMARY KEY (Id));
 CREATE TABLE Problem_Tag (TagId int(10) NOT NULL, ProblemId int(10) NOT NULL, PRIMARY KEY (TagId, ProblemId));
-CREATE TABLE Status (Id int(10) NOT NULL AUTO_INCREMENT, Name int(10) NOT NULL, PRIMARY KEY (Id));
+CREATE TABLE Status (Id int(10) NOT NULL AUTO_INCREMENT, Name varchar(50) NOT NULL, PRIMARY KEY (Id));
 CREATE TABLE `Tag` (Id int(10) NOT NULL AUTO_INCREMENT, Name varchar(50) NOT NULL, PRIMARY KEY (Id));
 CREATE TABLE TimeSpent (Id int(10) NOT NULL AUTO_INCREMENT, HoursSpent decimal(2, 0) DEFAULT 0 NOT NULL, Description varchar(512), DateRecorded timestamp DEFAULT NOW() NOT NULL, UserId CHAR(38) NOT NULL, ProblemId int(10) NOT NULL, PRIMARY KEY (Id));
 ALTER TABLE Problem ADD CONSTRAINT FKProblem611514 FOREIGN KEY (AssignedUser) REFERENCES `Users` (Id);

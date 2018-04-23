@@ -31,11 +31,13 @@ namespace TinkloProblemos.API
         {
             services.AddSingleton<ICategoryRepository, CategoryRepository>();
             services.AddSingleton<IInternetUserRepository, InternetUserRepository>();
+            services.AddSingleton<IProblemRepository, ProblemRepository>();
 
             services.AddTransient<IInternetUserService, InternetUserService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IProblemService, ProblemService>();
 
             string connectionString = Configuration.GetConnectionString("Database");
             services.AddTransient<IDatabaseConnectionService>(e => new DatabaseConnectionService(connectionString));

@@ -12,7 +12,7 @@ namespace TinkloProblemos.API.Contracts
         public int UserId { get; set; }
         public int ProblemId { get; set; }
 
-        public Problem Problem { get; set; }
+        public Problem.Problem Problem { get; set; }
         public ApplicationUser User { get; set; }
     }
 }

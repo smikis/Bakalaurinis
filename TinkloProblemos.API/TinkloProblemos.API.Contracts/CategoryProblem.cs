@@ -6,6 +6,6 @@
         public int ProblemId { get; set; }
 
         public Category.Category Category { get; set; }
-        public Problem Problem { get; set; }
+        public Problem.Problem Problem { get; set; }
     }
 }

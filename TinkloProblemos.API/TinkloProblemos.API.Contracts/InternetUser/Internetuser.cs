@@ -7,7 +7,7 @@ namespace TinkloProblemos.API.Contracts
         public Internetuser()
         {
             Internetuserdevice = new HashSet<Internetuserdevice>();
-            Problem = new HashSet<Problem>();
+            Problem = new HashSet<Problem.Problem>();
         }
 
         public int Id { get; set; }
@@ -18,6 +18,6 @@ namespace TinkloProblemos.API.Contracts
         public string IpAddress { get; set; }
 
         public ICollection<Internetuserdevice> Internetuserdevice { get; set; }
-        public ICollection<Problem> Problem { get; set; }
+        public ICollection<Problem.Problem> Problem { get; set; }
     }
 }

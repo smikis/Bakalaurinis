@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using TinkloProblemos.API.Identity.Entities;
 
-namespace TinkloProblemos.API.Contracts
+namespace TinkloProblemos.API.Contracts.Problem
 {
     public class Problem
     {
