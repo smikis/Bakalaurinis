@@ -1,0 +1,7 @@
+.form-element{
+    min-width: 40vh;
+}
+
+mat-card-header {
+    justify-content: center;
+}

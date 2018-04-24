@@ -45,7 +45,8 @@ import {
   MatToolbarModule,
   MatTooltipModule,
 } from '@angular/material';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -58,10 +59,12 @@ const appRoutes: Routes = [
     LoginComponent
   ],
   imports: [
+    FlexLayoutModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true }),
     BrowserModule,
     HttpModule,
     FormsModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     CdkTableModule,
     MatAutocompleteModule,
