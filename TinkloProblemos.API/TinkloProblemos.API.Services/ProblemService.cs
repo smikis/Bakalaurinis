@@ -27,14 +27,14 @@ namespace TinkloProblemos.API.Services
             };
 
             var result = _problemRepository.Add(createProblem);
-           
+
             if (result != 0)
             {
                 databaseResult.Key = result;
                 databaseResult.Success = true;
                 if (createProblem.Tags != null && createProblem.Tags.Any())
                 {
-                    var problemTags = createProblem.Tags.Select(x => new ProblemTagDto {ProblemId = result, TagId = x});
+                    var problemTags = createProblem.Tags.Select(x => new ProblemTagDto { ProblemId = result, TagId = x });
                     _tagRepository.AddToProblem(problemTags);
                 }
             }
@@ -48,9 +48,14 @@ namespace TinkloProblemos.API.Services
             return _problemRepository.GetProblems(skip, pageSize);
         }
 
-        public IEnumerable<GetProblem> GetProblems(int page, int pageSize, string category, string status, string assingnedUser, DateTime? dateFrom, DateTime? dateTo)
+        public IEnumerable<GetProblem> GetProblems(int page, int pageSize, string category, string status, string assingnedUser, string searchTerm, DateTime? dateFrom, DateTime? dateTo)
         {
             int skip = (page - 1) * pageSize;
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                var sqlSearchQuery = ConvertToSqlSearchQuery(searchTerm);
+                return _problemRepository.GetProblemsFilteredSearch(skip, pageSize, category, status, assingnedUser, sqlSearchQuery, dateFrom, dateTo);
+            }
             return _problemRepository.GetProblemsFiltered(skip, pageSize, category, status, assingnedUser, dateFrom, dateTo);
         }
 
@@ -62,6 +67,23 @@ namespace TinkloProblemos.API.Services
         public IEnumerable<GetProblem> GetUserProblems(string category, string status, string assingnedUser)
         {
             return _problemRepository.GetProblemsUser(category, status, assingnedUser);
+        }
+
+        private string ConvertToSqlSearchQuery(string searchTerm)
+        {
+            var words = searchTerm.Split(' ');
+            if (words.Length == 1)
+            {
+                return $"+{searchTerm}*";
+            }
+
+            var searchQuery = new StringBuilder();
+            foreach (var word in words)
+            {
+                searchQuery.Append($"+{word}* ");
+            }
+
+            return searchQuery.ToString();
         }
     }
 }

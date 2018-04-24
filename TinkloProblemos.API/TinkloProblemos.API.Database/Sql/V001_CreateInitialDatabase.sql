@@ -113,3 +113,5 @@ ALTER TABLE Category_Problem ADD CONSTRAINT FKCategory_P650586 FOREIGN KEY (Prob
 ALTER TABLE Problem ADD CONSTRAINT FKProblem836090 FOREIGN KEY (StatusId) REFERENCES Status (Id);
 ALTER TABLE Problem ADD CONSTRAINT FKProblem951214 FOREIGN KEY (InternetUserId) REFERENCES InternetUser (Id);
 ALTER TABLE InternetUserDevice ADD CONSTRAINT FKInternetUs985626 FOREIGN KEY (InternetUserId) REFERENCES InternetUser (Id);
+
+alter table problem ADD FULLTEXT INDEX (Name,Description,Location);
