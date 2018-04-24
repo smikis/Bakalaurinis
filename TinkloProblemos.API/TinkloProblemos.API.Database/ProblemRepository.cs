@@ -38,6 +38,22 @@ namespace TinkloProblemos.API.Database
                 
             }
         }
-      
+
+        public IEnumerable<GetProblem> GetProblems(int skip, int take)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                return dbConnection.Query<GetProblem>(ProblemQueries.GetAllUnfiltered, new {skip, take});
+            }
+        }
+
+        public IEnumerable<GetProblem> GetProblemsFiltered(int skip, int take, string categoryName, string status, string assignedUser, DateTime dateFrom, DateTime dateTo)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                return dbConnection.Query<GetProblem>(ProblemQueries.GetFiltered, new { skip, take,categoryName, status, assignedUser, dateFrom, dateTo  });
+            }
+        }
+
     }
 }

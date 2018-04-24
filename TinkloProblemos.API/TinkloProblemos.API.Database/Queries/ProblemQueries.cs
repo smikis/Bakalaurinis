@@ -6,5 +6,28 @@
                                     VALUES(@Name, @Description, @Location, NOW(), @StatusId, @AssignedUser, @InternetUserId);
                                     SELECT LAST_INSERT_ID();";
 
+        public static string GetAllUnfiltered =
+            @"SELECT problem.Id, problem.Name,problem.Location, problem.Created, category.Id as categoryId, category.Name as categoryName,
+users.Id as assignedUserId, users.FirstName as assignedUserFirstName, users.Email as assignedUserEmail, status.name as status
+FROM problem left join category_problem on problem.id = category_problem.problemId
+left join category on category.id = category_problem.categoryId
+left join users on users.id = problem.assignedUser
+inner join status on status.id = problem.statusId
+LIMIT @skip, @take;";
+
+        public static string GetFiltered =
+            @"SELECT problem.Id, problem.Name,problem.Location, problem.Created, category.Id as categoryId, category.Name as categoryName,
+users.Id as assignedUserId, users.FirstName as assignedUserFirstName, users.Email as assignedUserEmail, status.name as status
+FROM problem left join category_problem on problem.id = category_problem.problemId
+left join category on category.id = category_problem.categoryId
+left join users on users.id = problem.assignedUser
+inner join status on status.id = problem.statusId
+where ((@categoryName is not null AND category.Name = @categoryName) OR @categoryName is null)
+AND ((@status is not null AND status.Name = @status) OR @status is null)
+AND ((@assignedUser is not null AND users.Id = @assignedUser) OR @assignedUser is null)
+AND ((@dateFrom is not null AND problem.Created >= @dateFrom) OR @dateFrom is null)
+AND ((@dateTo is not null AND problem.Created <= @dateTo) OR @dateTo is null)
+LIMIT @skip, @take";
+
     }
 }
