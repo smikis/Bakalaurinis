@@ -48,10 +48,20 @@ namespace TinkloProblemos.API.Services
             return _problemRepository.GetProblems(skip, pageSize);
         }
 
-        public IEnumerable<GetProblem> GetProblems(int page, int pageSize, string category, string status, string assingnedUser, DateTime dateFrom, DateTime dateTo)
+        public IEnumerable<GetProblem> GetProblems(int page, int pageSize, string category, string status, string assingnedUser, DateTime? dateFrom, DateTime? dateTo)
         {
             int skip = (page - 1) * pageSize;
             return _problemRepository.GetProblemsFiltered(skip, pageSize, category, status, assingnedUser, dateFrom, dateTo);
+        }
+
+        public IEnumerable<GetProblem> GetProblems(string category, string status, string assingnedUser, DateTime? dateFrom, DateTime? dateTo)
+        {
+            return _problemRepository.GetProblemsFiltered(category, status, assingnedUser, dateFrom, dateTo);
+        }
+
+        public IEnumerable<GetProblem> GetUserProblems(string category, string status, string assingnedUser)
+        {
+            return _problemRepository.GetProblemsUser(category, status, assingnedUser);
         }
     }
 }

@@ -28,9 +28,23 @@ namespace TinkloProblemos.API.Controllers
 
         // GET: api/Problem
         [HttpGet("filtered/{page}/{pageSize}")]
-        public IEnumerable<GetProblem> GetFiltered(int page, int pageSize, [FromQuery] string category, [FromQuery]string status, [FromQuery]string assingnedUser, [FromQuery]DateTime dateFrom, [FromQuery]DateTime dateTo)
+        public IEnumerable<GetProblem> GetFiltered(int page, int pageSize, [FromQuery] string category, [FromQuery]string status, [FromQuery]string assingnedUser, [FromQuery]DateTime? dateFrom, [FromQuery]DateTime? dateTo)
         {
             return _problemService.GetProblems(page, pageSize, category, status, assingnedUser, dateFrom, dateTo);
+        }
+
+        // GET: api/Problem
+        [HttpGet("filtered")]
+        public IEnumerable<GetProblem> GetFiltered([FromQuery] string category, [FromQuery]string status, [FromQuery]string assingnedUser, [FromQuery]DateTime? dateFrom, [FromQuery]DateTime? dateTo)
+        {
+            return _problemService.GetProblems(category, status, assingnedUser, dateFrom, dateTo);
+        }
+
+        // GET: api/Problem
+        [HttpGet("user/{userId}")]
+        public IEnumerable<GetProblem> GetFiltered([FromQuery] string category, [FromQuery]string status, string userId)
+        {
+            return _problemService.GetUserProblems(category, status, userId);
         }
 
         // POST: api/Problem
