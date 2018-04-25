@@ -75,6 +75,10 @@ export class ProblemListComponent implements OnInit {
     console.log(event);
   }
 
+  selectRow(row) {
+    console.log(row);
+  }
+
   getFilteredData() {
     console.log(this.updateForm.value);
     var dateFrom = <Date>this.updateForm.controls['selectedDateFrom'].value;

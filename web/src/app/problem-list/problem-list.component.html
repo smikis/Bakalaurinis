@@ -7,12 +7,12 @@
   <mat-card-title>Problemos</mat-card-title>
       <form fxLayout="row"  fxLayout.xs="column" fxLayoutGap="1.5em" [formGroup]="updateForm">
           <mat-input-container>
-            <input matInput [matDatepicker]="datePickerFrom" placeholder="Nuo datos" formControlName="selectedDateFrom" />
+            <input matInput [matDatepicker]="datePickerFrom" placeholder="Nuo datos" formControlName="selectedDateFrom" (dateInput)="getFilteredData()" />
             <mat-datepicker-toggle matSuffix [for]="datePickerFrom"></mat-datepicker-toggle>
           </mat-input-container>
           <mat-datepicker #datePickerFrom></mat-datepicker>
           <mat-input-container>
-            <input matInput [matDatepicker]="datePickerTo" placeholder="Iki datos" formControlName="selectedDateTo" />
+            <input matInput [matDatepicker]="datePickerTo" placeholder="Iki datos" formControlName="selectedDateTo" (dateInput)="getFilteredData()" />
             <mat-datepicker-toggle matSuffix [for]="datePickerTo"></mat-datepicker-toggle>
           </mat-input-container>
           <mat-datepicker #datePickerTo></mat-datepicker>
@@ -73,7 +73,7 @@
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"  (click)="selectRow(row)"></mat-row>
     </mat-table>
     <mat-paginator [length]="resultsLength" hidePageSize="true" [pageSize]="pageSize" (page)="onPaginateChange($event)">
     </mat-paginator>

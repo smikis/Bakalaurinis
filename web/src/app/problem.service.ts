@@ -20,12 +20,15 @@ export class ProblemService {
   generateArgs(start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined) : string {
     let args ="?";
     console.log(start);
+    start = <Date> start;
+    end = <Date> end;
     console.log(typeof(start));
-    if(start !== undefined && start!== null) {
-      args = "?" + "dateFrom=" + start;
-    }   
-      if(end !== undefined) {
-        args += "&dateTo=" + end;
+    console.log(end);
+    if(typeof(start) == typeof(Object)) {
+      args = "?" + "dateFrom=" + start.toLocaleDateString('en-GB');
+    } 
+      if(typeof(end) == typeof(Object)) {
+        args += "&dateTo=" + end.toLocaleDateString('en-GN');
       }
       if(category !== undefined) {
         args += "&category=" + category;
