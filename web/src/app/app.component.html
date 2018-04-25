@@ -1,2 +1,19 @@
-
-        <router-outlet></router-outlet>
+<div class="example-container">
+        <mat-toolbar color="primary" class="example-toolbar">
+          <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+          <h1 class="example-app-name">Interneto problemos</h1>
+        </mat-toolbar>
+      
+        <mat-sidenav-container class="example-sidenav-container">
+          <mat-sidenav #snav mode='side'>
+                <div fxLayout="column">
+                    <button mat-list-item class="align-left button-width" mat-button routerLink="/login" routerLinkActive="active"><i class="material-icons">lock_open</i>Login</button>
+                    <button mat-list-item class="align-left button-width" mat-button routerLink="/dashboard" routerLinkActive="active" *ngIf="user"><i class="material-icons">assessment</i> Dashboard</button>
+                </div>
+          </mat-sidenav>
+      
+          <mat-sidenav-content>
+            <router-outlet></router-outlet>
+          </mat-sidenav-content>
+        </mat-sidenav-container>
+</div>

@@ -3,35 +3,38 @@ import { Http, RequestOptionsArgs, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { UrlService, Endpoints } from './url.service';
 import { Subject } from 'rxjs/Subject';
-
+import { Router } from '@angular/router';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject'
 import 'rxjs/add/operator/share';
 
 @Injectable()
 export class LoginService {
 
   private accessToken: string | null;
-  @Output() userAuthenticated : EventEmitter<AuthenticatedUser| null>;
+  @Output() userSubscription = new BehaviorSubject<AuthenticatedUser>(null);
   getAccessToken(): string | null {
     return this.accessToken;
   }
 
-  constructor(private http: Http, private url: UrlService) {
-    this.userAuthenticated = new EventEmitter<AuthenticatedUser | null>();
+  constructor(private http: Http, private url: UrlService, private router : Router) {
     this.accessToken = localStorage.getItem('accessToken');
     if(this.accessToken) {
+        var lastAuthenticatedUser = new AuthenticatedUser('test', ['test', 'Admin']);
+        this.userSubscription.next(lastAuthenticatedUser);
         console.log("Token exists");
     }
   }
 
 
-  login(login: Login) {
-    this.http.post(this.url.getApiUrl(Endpoints.login), login).subscribe(result=> {
-        console.log(result);
-        var lastAuthenticatedUser = new AuthenticatedUser(<string>result.json().email, <string[]>result.json().roles);
-        this.userAuthenticated.emit(lastAuthenticatedUser);
-        this.accessToken = <string>result.json().token;
+  async login(login: Login) {       
+        var response  = await this.http.post(this.url.getApiUrl(Endpoints.login), login).toPromise();
+        console.log(response);
+        var lastAuthenticatedUser = new AuthenticatedUser(<string>response.json().email, <string[]>response.json().roles);
+        console.log(lastAuthenticatedUser);
+        this.accessToken = <string>response.json().token;
+        this.userSubscription.next(lastAuthenticatedUser);    
         window.localStorage.setItem('accessToken', this.accessToken);
-    });
+        return response.ok;
   }
 
   logout(){
