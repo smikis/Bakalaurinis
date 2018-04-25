@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TinkloProblemos.API.Contracts.Problem;
@@ -9,6 +10,7 @@ using TinkloProblemos.API.Interfaces.Services;
 
 namespace TinkloProblemos.API.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Produces("application/json")]
     [Route("api/Problem")]
     public class ProblemController : Controller

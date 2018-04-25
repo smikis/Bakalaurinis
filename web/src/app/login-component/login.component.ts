@@ -14,8 +14,7 @@ export class LoginComponent implements OnInit {
   readonly loginForm : FormGroup;
 
   busy: boolean;
-  authenticationFailed: boolean;
-  communicatoinError: boolean;
+  hide = true;
 
   constructor(private loginService : LoginService, private router : Router, private snackbar: MatSnackBar) {
     this.loginForm = new FormGroup({

@@ -55,7 +55,8 @@ import { CreateProblemComponent } from './create-problem/create-problem.componen
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent }
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'problemList', component: ProblemListComponent }
 ];
 
 @NgModule({
