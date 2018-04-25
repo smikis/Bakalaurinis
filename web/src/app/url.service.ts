@@ -10,7 +10,7 @@ export class UrlService {
 
   constructor() {
    // this.baseUrl = window.location.protocol + '//' + window.location.host + '/WasteControl.Api/';
-   this.baseUrl = "localhost:4200"
+   this.baseUrl = "http://localhost:64448/"
   }
 
   getApiUrl(endpoint: Endpoint) {

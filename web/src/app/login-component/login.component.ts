@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { LoginService } from '../login.service';
+import { LoginService, Login } from '../login.service';
 import { Router } from '@angular/router'
 
 @Component({
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private loginService : LoginService, private router : Router) {
     this.loginForm = new FormGroup({
-      username: new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])
     });
    }
@@ -28,7 +28,11 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-   
+   var login = new Login();
+   login.email = <string>this.loginForm.controls['username'].value;
+   login.password = <string>this.loginForm.controls['password'].value;
+   this.loginService.login(login);
+   console.log(login);
   }
 
 }

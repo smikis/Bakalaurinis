@@ -27,6 +27,10 @@ export class LoginService {
   login(login: Login) {
     this.http.post(this.url.getApiUrl(Endpoints.login), login).subscribe(result=> {
         console.log(result);
+        var lastAuthenticatedUser = new AuthenticatedUser(<string>result.json().email, <string[]>result.json().roles);
+        this.userAuthenticated.emit(lastAuthenticatedUser);
+        this.accessToken = <string>result.json().token;
+        window.localStorage.setItem('accessToken', this.accessToken);
     });
   }
 
@@ -53,12 +57,12 @@ export class LoginService {
 }
 
 export class Login {
-    username: string;
+    email: string;
     password: string;
 }
 
 export class AuthenticatedUser {
-    constructor(public readonly username: string, public readonly roles: string[]) {       
+    constructor(public readonly email: string, public readonly roles: string[]) {       
     }
 
     isInRole(role: string) : boolean {
