@@ -49,6 +49,8 @@ import {
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProblemListComponent } from './problem-list/problem-list.component';
+import { CreateProblemComponent } from './create-problem/create-problem.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -60,7 +62,9 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProblemListComponent,
+    CreateProblemComponent
   ],
   imports: [
     HttpClientModule,
