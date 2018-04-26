@@ -39,9 +39,9 @@ export class ProblemListComponent implements OnInit {
   private searchUpdated: Subject<string> = new Subject<string>();
 
   constructor(private problemService: ProblemService) { 
-    this.problemService.getPage(1,this.pageSize).subscribe(data=> {
-
-      this.dataSource = new ProblemsDataSource(this.problemService, data);
+    this.problemService.getPage(0,this.pageSize).subscribe(data=> {
+      this.resultsLength = data.total;
+      this.dataSource = new ProblemsDataSource(this.problemService, data.data, data.total);
       this.isLoadingResults = false;
     })
 
@@ -63,6 +63,7 @@ export class ProblemListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.paginator.pageIndex = 0;
   }
 
   
@@ -86,7 +87,7 @@ export class ProblemListComponent implements OnInit {
     var category = <string>this.updateForm.controls['category'].value;
     var status = <string>this.updateForm.controls['problemStatus'].value;
     var search = <string>this.updateForm.controls['search'].value;
-    this.dataSource.loadPage(1, this.pageSize, dateFrom, dateTo, category, status, search);
+    this.dataSource.loadPage(0, this.pageSize, dateFrom, dateTo, category, status, search);
   }
 
   onPaginateChange(event : PageEvent){
@@ -101,7 +102,7 @@ export class ProblemsDataSource extends DataSource<any> {
   length : number;
   problems:  Observable<Problem[]>;
   subject: BehaviorSubject<Problem[]>;
-  constructor(private reportService: ProblemService, problems: Problem[]) {
+  constructor(private reportService: ProblemService, problems: Problem[], length:number) {
     super();
     this.length = length;
     this.subject = new BehaviorSubject<Problem[]>(problems);
@@ -111,7 +112,8 @@ export class ProblemsDataSource extends DataSource<any> {
   }
   loadPage(page:number, pageSize:number, start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined){
     this.reportService.getPage(page,pageSize,start,end,category,status,search).subscribe(data=> {
-    this.subject.next(data);
+    this.subject.next(data.data);
+    this.length = data.total;
   })
 }
   disconnect() {}

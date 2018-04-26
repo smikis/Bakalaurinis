@@ -12,22 +12,17 @@ export class ProblemService {
   }
 
 
-  getPage(page:number, pageSize:number, start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined) : Observable<Problem[]> {
+  getPage(page:number, pageSize:number, start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined) : Observable<ProblemPage> {
     let baseUrl = this.url.getApiUrl(Endpoints.problemPage(page,pageSize)) + this.generateArgs(start,end,category,status,search);
-    return this.http.get<Problem[]>(baseUrl);
+    return this.http.get<ProblemPage>(baseUrl);
   }
 
   generateArgs(start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined) : string {
     let args ="?";
-    console.log(start);
-    start = <Date> start;
-    end = <Date> end;
-    console.log(typeof(start));
-    console.log(end);
-    if(typeof(start) == typeof(Object)) {
+    if(typeof start === 'object') {
       args = "?" + "dateFrom=" + start.toLocaleDateString('en-GB');
     } 
-      if(typeof(end) == typeof(Object)) {
+      if(typeof end === 'object') {
         args += "&dateTo=" + end.toLocaleDateString('en-GN');
       }
       if(category !== undefined) {
@@ -44,6 +39,11 @@ export class ProblemService {
 
 }
 
+export interface ProblemPage {
+    total : number;
+    data : Problem[];
+   }
+   
 
 export interface Problem {
   id: number;

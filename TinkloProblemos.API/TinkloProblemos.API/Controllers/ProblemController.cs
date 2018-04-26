@@ -30,7 +30,7 @@ namespace TinkloProblemos.API.Controllers
 
         // GET: api/Problem
         [HttpGet("filtered/{page}/{pageSize}")]
-        public IEnumerable<GetProblem> GetFiltered(int page, int pageSize, [FromQuery] string category, [FromQuery]string status, [FromQuery]string assingnedUser, [FromQuery]string searchTerm, [FromQuery]DateTime? dateFrom, [FromQuery]DateTime? dateTo)
+        public ProblemPage GetFiltered(int page, int pageSize, [FromQuery] string category, [FromQuery]string status, [FromQuery]string assingnedUser, [FromQuery]string searchTerm, [FromQuery]DateTime? dateFrom, [FromQuery]DateTime? dateTo)
         {
             return _problemService.GetProblems(page, pageSize, category, status, assingnedUser, searchTerm, dateFrom, dateTo);
         }

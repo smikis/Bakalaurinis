@@ -8,9 +8,9 @@ namespace TinkloProblemos.API.Interfaces.Repositories
     {
         int Add(CreateProblem problem);
         IEnumerable<GetProblem> GetProblems(int skip, int take);
-        IEnumerable<GetProblem> GetProblemsFiltered(int skip, int take, string categoryName, string status, string assingnedUser, DateTime? dateFrom, DateTime? dateTo);
+        ProblemPage GetProblemsFiltered(int skip, int take, string categoryName, string status, string assingnedUser, DateTime? dateFrom, DateTime? dateTo);
         IEnumerable<GetProblem> GetProblemsUser(string categoryName, string status, string assignedUser);
         IEnumerable<GetProblem> GetProblemsFiltered(string categoryName, string status, string assignedUser, DateTime? dateFrom, DateTime? dateTo);
-        IEnumerable<GetProblem> GetProblemsFilteredSearch(int skip, int take, string categoryName, string status, string assignedUser, string searchQuery, DateTime? dateFrom, DateTime? dateTo);
+        ProblemPage GetProblemsFilteredSearch(int skip, int take, string categoryName, string status, string assignedUser, string searchQuery, DateTime? dateFrom, DateTime? dateTo);
     }
 }

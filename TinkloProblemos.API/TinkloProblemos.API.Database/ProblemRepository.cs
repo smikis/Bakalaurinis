@@ -47,11 +47,19 @@ namespace TinkloProblemos.API.Database
             }
         }
 
-        public IEnumerable<GetProblem> GetProblemsFiltered(int skip, int take, string categoryName, string status, string assignedUser, DateTime? dateFrom, DateTime? dateTo)
+        public ProblemPage GetProblemsFiltered(int skip, int take, string categoryName, string status, string assignedUser, DateTime? dateFrom, DateTime? dateTo)
         {
             using (IDbConnection dbConnection = Connection)
             {
-                return dbConnection.Query<GetProblem>(ProblemQueries.GetFilteredPage, new { skip, take,categoryName, status, assignedUser, dateFrom, dateTo  });
+                var count = dbConnection.ExecuteScalar<int>(ProblemQueries.GetFilteredPageCount,
+                    new {categoryName, status, assignedUser, dateFrom, dateTo});
+                var data = dbConnection.Query<GetProblem>(ProblemQueries.GetFilteredPage,
+                    new {skip, take, categoryName, status, assignedUser, dateFrom, dateTo});
+                return new ProblemPage
+                {
+                    Data = data,
+                    Total = count
+                };
             }
         }
 
@@ -63,11 +71,18 @@ namespace TinkloProblemos.API.Database
             }
         }
 
-        public IEnumerable<GetProblem> GetProblemsFilteredSearch(int skip, int take, string categoryName, string status, string assignedUser, string searchQuery, DateTime? dateFrom, DateTime? dateTo)
+        public ProblemPage GetProblemsFilteredSearch(int skip, int take, string categoryName, string status, string assignedUser, string searchQuery, DateTime? dateFrom, DateTime? dateTo)
         {
             using (IDbConnection dbConnection = Connection)
-            {
-                return dbConnection.Query<GetProblem>(ProblemQueries.GetFilteredSearch, new { skip, take, categoryName, status, assignedUser, dateFrom, dateTo, searchQuery });
+            {          
+                var count = dbConnection.ExecuteScalar<int>(ProblemQueries.GetFilteredSearchCount,
+                    new { categoryName, status, assignedUser, dateFrom, dateTo, searchQuery });
+                var data = dbConnection.Query<GetProblem>(ProblemQueries.GetFilteredSearch, new { skip, take, categoryName, status, assignedUser, dateFrom, dateTo, searchQuery });
+                return new ProblemPage
+                {
+                    Data = data,
+                    Total = count
+                };
             }
         }
 

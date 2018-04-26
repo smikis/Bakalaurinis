@@ -48,9 +48,9 @@ namespace TinkloProblemos.API.Services
             return _problemRepository.GetProblems(skip, pageSize);
         }
 
-        public IEnumerable<GetProblem> GetProblems(int page, int pageSize, string category, string status, string assingnedUser, string searchTerm, DateTime? dateFrom, DateTime? dateTo)
+        public ProblemPage GetProblems(int page, int pageSize, string category, string status, string assingnedUser, string searchTerm, DateTime? dateFrom, DateTime? dateTo)
         {
-            int skip = (page - 1) * pageSize;
+            int skip = page * pageSize;
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 var sqlSearchQuery = ConvertToSqlSearchQuery(searchTerm);
