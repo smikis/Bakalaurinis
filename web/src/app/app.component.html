@@ -9,8 +9,9 @@
         <mat-sidenav-container class="example-sidenav-container">
           <mat-sidenav #snav mode='side'>
                 <div fxLayout="column">
-                    <button mat-list-item class="align-left button-width" mat-button routerLink="/login" routerLinkActive="active"><i class="material-icons">lock_open</i>Login</button>
+                    <button mat-list-item class="align-left button-width" mat-button routerLink="/login" routerLinkActive="active"><i class="material-icons">lock_open</i>Login</button>                  
                     <button mat-list-item class="align-left button-width" mat-button routerLink="/dashboard" routerLinkActive="active" *ngIf="user"><i class="material-icons">assessment</i> Dashboard</button>
+                    <button mat-list-item class="align-left button-width" mat-button routerLink="/problemList" routerLinkActive="active" *ngIf="user"><i class="material-icons">assessment</i> Problemos</button>
                 </div>
           </mat-sidenav>
       

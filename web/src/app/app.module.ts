@@ -51,12 +51,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProblemListComponent } from './problem-list/problem-list.component';
 import { CreateProblemComponent } from './create-problem/create-problem.component';
+import { ViewProblemComponent } from './view-problem/view-problem.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'problemList', component: ProblemListComponent }
+  { path: 'problemList', component: ProblemListComponent },
+  { path: 'problem/:id', component: ViewProblemComponent }
 ];
 
 @NgModule({
@@ -65,7 +67,8 @@ const appRoutes: Routes = [
     LoginComponent,
     DashboardComponent,
     ProblemListComponent,
-    CreateProblemComponent
+    CreateProblemComponent,
+    ViewProblemComponent
   ],
   imports: [
     HttpClientModule,
