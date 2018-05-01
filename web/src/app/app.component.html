@@ -1,22 +1,61 @@
 <div class="example-container">
-        <mat-toolbar color="primary" class="example-toolbar">
-          <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-          <h1 class="example-app-name">Interneto problemos</h1>
-          <div class="spacer"></div>
-          <button mat-button routerLink="/login" routerLinkActive="active"><i class="material-icons">add</i></button>
-        </mat-toolbar>
-      
-        <mat-sidenav-container class="example-sidenav-container">
-          <mat-sidenav #snav mode='side'>
-                <div fxLayout="column">
-                    <button mat-list-item class="align-left button-width" mat-button routerLink="/login" routerLinkActive="active"><i class="material-icons">lock_open</i>Login</button>                  
-                    <button mat-list-item class="align-left button-width" mat-button routerLink="/dashboard" routerLinkActive="active" *ngIf="user"><i class="material-icons">assessment</i> Dashboard</button>
-                    <button mat-list-item class="align-left button-width" mat-button routerLink="/problemList" routerLinkActive="active" *ngIf="user"><i class="material-icons">assessment</i> Problemos</button>
-                </div>
-          </mat-sidenav>
-      
-          <mat-sidenav-content>
+    <mat-toolbar color="primary" class="example-toolbar">
+        <button mat-icon-button (click)="snav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1 class="example-app-name">Interneto problemos</h1>
+        <div class="spacer"></div>
+        <button mat-button routerLink="/login" routerLinkActive="active">
+            <i class="material-icons">add</i>
+        </button>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-sidenav-container">
+        <mat-sidenav #snav mode='side' opened='true' class="sidebar-panel">
+            <mat-nav-list class="navigation">
+                <mat-list-item>
+                    <a class="relative" [routerLink]="['/', 'login']">
+                        <mat-icon>lock_open</mat-icon>
+                        <span>Login</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a class="relative" [routerLink]="['/','dashboard']">
+                        <mat-icon>assessment</mat-icon>
+                        <span>Dashboard</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item (click)="menuExpanded = !menuExpanded">
+                    <a class="relative">
+                        <mat-icon>assessment</mat-icon>
+                        <span>Problems</span>
+                        <span flex></span>
+                        <mat-icon class="menu-caret">arrow_drop_down</mat-icon>
+                    </a>                 
+                </mat-list-item>
+                <mat-list-item routerLinkActive="open" *ngIf="menuExpanded">
+                    <a [routerLink]="['/', 'problemList']" class="relative">Create problem</a>
+                </mat-list-item>
+                <mat-list-item routerLinkActive="open" *ngIf="menuExpanded">
+                    <a [routerLink]="['/', 'problemList']" class="relative">My problems</a>
+                </mat-list-item>
+                <mat-list-item routerLinkActive="open" *ngIf="menuExpanded">
+                    <a [routerLink]="['/', 'problemList']" class="relative">All problems</a>
+                </mat-list-item>
+                <mat-list-item routerLinkActive="open" *ngIf="menuExpanded">
+                    <a [routerLink]="['/', 'problemList']" class="relative">Open problems</a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a class="relative" [routerLink]="['/','dashboard']">
+                        <mat-icon>assessment</mat-icon>
+                        <span>Dashboard</span>
+                    </a>
+                </mat-list-item>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
             <router-outlet></router-outlet>
-          </mat-sidenav-content>
-        </mat-sidenav-container>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
 </div>

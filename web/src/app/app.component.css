@@ -23,3 +23,119 @@
 .spacer {
     flex: 1 1 auto;
   }
+
+  mat-sidenav.sidebar-panel {
+    position: absolute!important;
+    overflow-x: hidden;
+    width: 15rem;
+    -webkit-box-shadow: 0 2px 1px -1px rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 1px 3px 0 rgba(0,0,0,.12)!important;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 1px 3px 0 rgba(0,0,0,.12)!important;
+}
+
+mat-sidenav.sidebar-panel .mat-drawer-focus-trap>.cdk-focus-trap-content {
+    position: relative
+}
+
+mat-sidenav.sidebar-panel>nav {
+    min-width: 15rem
+}
+
+mat-sidenav.sidebar-panel .mat-list-item .mat-list-item-content {
+    display: block;
+    height: auto;
+    max-height: 48px;
+    overflow: hidden;
+    padding: 0;
+    -webkit-transition: max-height .3s cubic-bezier(.35,0,.25,1);
+    transition: max-height .3s cubic-bezier(.35,0,.25,1);
+}
+
+mat-sidenav.sidebar-panel .mat-list-item {
+    height: auto;
+    background-color: transparent;
+    -webkit-transition: background-color .3s cubic-bezier(.35,0,.25,1);
+    transition: background-color .3s cubic-bezier(.35,0,.25,1);
+}
+
+mat-sidenav.sidebar-panel .mat-list-item.open>.mat-list-item-content {
+    max-height: 2e3px;
+    background: rgba(0,0,0,.04)
+}
+
+mat-sidenav.sidebar-panel .mat-nav-list a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 48px;
+    padding: 0 16px
+}
+
+mat-sidenav.sidebar-panel .sub-menu {
+    padding-top: 0;
+    overflow: hidden;
+    -webkit-transition: .5s max-height cubic-bezier(.35,0,.25,1);
+    transition: .5s max-height cubic-bezier(.35,0,.25,1);
+    max-height: 0;
+    -webkit-transform: translateZ(0)!important;
+    transform: translateZ(0)!important
+}
+
+mat-sidenav.sidebar-panel .sub-menu a {
+    padding-left: 64px
+}
+
+mat-sidenav.sidebar-panel .sub-menu .sub-menu a {
+    padding-left: 80px
+}
+
+mat-sidenav.sidebar-panel .sub-menu .sub-menu .sub-menu a {
+    padding-left: 96px
+}
+
+mat-sidenav.sidebar-panel .sub-menu .sub-menu .sub-menu .sub-menu a {
+    padding-left: 112px
+}
+
+mat-sidenav.sidebar-panel .navigation mat-icon:not(.menu-caret) {
+    margin-right: 24px
+}
+
+mat-sidenav.sidebar-panel .navigation .menu-caret {
+    display: inline-block;
+    -webkit-transition: -webkit-transform .3s cubic-bezier(.7,0,.3,1);
+    transition: -webkit-transform .3s cubic-bezier(.7,0,.3,1);
+    transition: transform .3s cubic-bezier(.7,0,.3,1);
+    transition: transform .3s cubic-bezier(.7,0,.3,1),-webkit-transform .3s cubic-bezier(.7,0,.3,1);
+    float: right;
+    margin-left: .3125rem;
+    text-align: center
+}
+
+mat-sidenav.sidebar-panel .navigation .open>.mat-list-item-content>[appAccordionToggle]>.menu-caret {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg)
+}
+
+mat-sidenav.sidebar-panel .navigation .menu-badge {
+    display: inline-block;
+    height: 16px;
+    min-width: 10px;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 16px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 0 4px
+}
+
+mat-sidenav.sidebar-panel .navigation .open>.mat-list-item-content>.sub-menu {
+    max-height: 2e3px
+}
+  
