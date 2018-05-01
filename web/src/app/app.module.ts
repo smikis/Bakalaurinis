@@ -52,6 +52,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProblemListComponent } from './problem-list/problem-list.component';
 import { CreateProblemComponent } from './create-problem/create-problem.component';
 import { ViewProblemComponent } from './view-problem/view-problem.component';
+import { ChartsModule } from 'ng2-charts';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -71,6 +72,7 @@ const appRoutes: Routes = [
     ViewProblemComponent
   ],
   imports: [
+    ChartsModule,
     HttpClientModule,
     FlexLayoutModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true }),

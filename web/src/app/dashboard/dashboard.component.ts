@@ -15,13 +15,62 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  /**
-   * Set the paginator after the view init since this component will
-   * be able to query its view for the initialized paginator.
-   */
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+
+    // Shared chart options
+    globalChartOptions: any = {
+      responsive: true,
+      legend: {
+        display: false,
+        position: 'bottom'
+      }
+    };
+  
+    // Bar
+    barChartLabels: string[] = ['1', '2', '3', '4', '5', '6', '7'];
+    barChartType = 'bar';
+    barChartLegend = true;
+    barChartData: any[] = [{
+      data: [6, 5, 8, 8, 5, 5, 4],
+      label: 'Series A',
+      borderWidth: 0
+    }, {
+      data: [5, 4, 4, 2, 6, 2, 5],
+      label: 'Series B',
+      borderWidth: 0
+    }];
+    barChartOptions: any = Object.assign({
+      scaleShowVerticalLines: false,
+      tooltips: {
+        mode: 'index',
+        intersect: false
+      },
+      responsive: true,
+      scales: {
+        xAxes: [{
+          gridLines: {
+            color: 'rgba(0,0,0,0.02)',
+            defaultFontColor: 'rgba(0,0,0,0.02)',
+            zeroLineColor: 'rgba(0,0,0,0.02)'
+          },
+          stacked: true,
+          ticks: {
+            beginAtZero: true
+          }
+        }],
+        yAxes: [{
+          gridLines: {
+            color: 'rgba(0,0,0,0.02)',
+             defaultFontColor: 'rgba(0,0,0,0.02)',
+            zeroLineColor: 'rgba(0,0,0,0.02)'
+          },
+          stacked: true
+        }]
+      }
+    }, this.globalChartOptions);
+  
 
   ngOnInit() {
   }

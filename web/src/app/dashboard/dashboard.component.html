@@ -1,9 +1,32 @@
-<div class="row">
-  <div class="main">
+<div fxLayout="row wrap">
+  <div class="padding" fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
     <mat-card>
-      <mat-card-header>
-        <mat-card-title>Mano problemos</mat-card-title>
-      </mat-card-header>
+      <h3>Open problems: 20</h3>
+    </mat-card>
+  </div>
+  <div class="padding" fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <mat-card>
+      <h3>Closed problems: 20</h3>
+    </mat-card>
+  </div>
+  <div class="padding" fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <mat-card>
+      <h3>Assigned problems: 20</h3>
+    </mat-card>
+  </div>
+  <div class="padding" fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <mat-card>
+      <h3>Weekly hours: 20</h3>
+    </mat-card>
+  </div>
+</div>
+
+<div fxLayout="row wrap">
+  <div fxFlex.gt-sm="33.33%" fxFlex="100" class="padding">
+    <mat-card>
+      <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center">
+        Priskirtos problemos
+      </mat-card-subtitle>
       <mat-card-content>
         <mat-table #table [dataSource]="dataSource">
 
@@ -39,90 +62,153 @@
         </mat-paginator>
       </mat-card-content>
     </mat-card>
-
-    <mat-card>
-        <mat-card-header>
-          <mat-card-title>Registruotos problemos</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <mat-table #table [dataSource]="dataSource">
-  
-            <!-- Position Column -->
-            <ng-container matColumnDef="position">
-              <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-            </ng-container>
-  
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
-              <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-            </ng-container>
-  
-            <!-- Weight Column -->
-            <ng-container matColumnDef="weight">
-              <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
-            </ng-container>
-  
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="symbol">
-              <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
-            </ng-container>
-  
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-          </mat-table>
-  
-          <mat-paginator #paginator [pageSize]="5" [showFirstLastButtons]="true">
-          </mat-paginator>
-        </mat-card-content>
-      </mat-card>
   </div>
 
+  <div fxFlex.gt-sm="33.33%" fxFlex.gt-xs="50" fxFlex="100" class="padding">
+    <mat-card>
+      <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center">
+        Nepriskirtos problemos
+      </mat-card-subtitle>
+      <mat-card-content>
+        <mat-table #table [dataSource]="dataSource">
 
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+          </ng-container>
 
-  <div class="side">
-      <mat-card>
-          <mat-card-header>
-            <mat-card-title>Registruotas laikas</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <mat-table #table [dataSource]="dataSource">
-    
-              <!-- Position Column -->
-              <ng-container matColumnDef="position">
-                <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-              </ng-container>
-    
-              <!-- Name Column -->
-              <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-              </ng-container>
-    
-              <!-- Weight Column -->
-              <ng-container matColumnDef="weight">
-                <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
-              </ng-container>
-    
-              <!-- Symbol Column -->
-              <ng-container matColumnDef="symbol">
-                <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
-              </ng-container>
-    
-              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            </mat-table>
-    
-            <mat-paginator #paginator [pageSize]="5" [showFirstLastButtons]="true">
-            </mat-paginator>
-          </mat-card-content>
-        </mat-card>
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
 
+          <!-- Weight Column -->
+          <ng-container matColumnDef="weight">
+            <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="symbol">
+            <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <mat-paginator #paginator [pageSize]="5" [showFirstLastButtons]="true">
+        </mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex.gt-sm="33.33%" fxFlex.gt-xs="50" fxFlex="100" class="padding">
+    <mat-card>
+      <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center">
+        Mano uždarytos problemos
+      </mat-card-subtitle>
+      <mat-card-content>
+        <mat-table #table [dataSource]="dataSource">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="weight">
+            <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="symbol">
+            <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <mat-paginator #paginator [pageSize]="5" [showFirstLastButtons]="true">
+        </mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<div fxLayout="row wrap">
+  <div fxFlex.gt-sm="33.33%" fxFlex="100" class="padding">
+    <mat-card>
+      <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center">
+        Problemų skaičius
+      </mat-card-subtitle>
+      <mat-card-content>        
+          <canvas height="200" baseChart class="chart" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+            [colors]="chartColors" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex.gt-sm="33.33%" fxFlex.gt-xs="50" fxFlex="100" class="padding">
+    <mat-card>
+      <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center">
+        Išspręstos problemos
+      </mat-card-subtitle>
+      <mat-card-content>
+        <canvas height="200" baseChart class="chart" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+          [colors]="chartColors" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex.gt-sm="33.33%" fxFlex.gt-xs="50" fxFlex="100" class="padding">
+    <mat-card>
+      <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center">
+        Registruotas laikas
+      </mat-card-subtitle>
+      <mat-card-content>
+        <mat-table #table [dataSource]="dataSource">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="weight">
+            <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="symbol">
+            <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <mat-paginator #paginator [pageSize]="5" [showFirstLastButtons]="true">
+        </mat-paginator>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>
