@@ -9,6 +9,7 @@ import 'rxjs/add/observable/fromEvent';
 import "rxjs/add/operator/debounceTime";
 import { Subject } from "rxjs/Subject";
 import "rxjs/add/operator/distinctUntilChanged";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-problem-list',
   templateUrl: './problem-list.component.html',
@@ -38,7 +39,7 @@ export class ProblemListComponent implements OnInit {
 
   private searchUpdated: Subject<string> = new Subject<string>();
 
-  constructor(private problemService: ProblemService) { 
+  constructor(private problemService: ProblemService, private router: Router) { 
     this.problemService.getPage(0,this.pageSize).subscribe(data=> {
       this.resultsLength = data.total;
       this.dataSource = new ProblemsDataSource(this.problemService, data.data, data.total);
@@ -76,8 +77,8 @@ export class ProblemListComponent implements OnInit {
     console.log(event);
   }
 
-  selectRow(row) {
-    console.log(row);
+  selectRow(row: Problem) {
+    this.router.navigate(['/problem', row.id]);
   }
 
   getFilteredData() {

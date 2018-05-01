@@ -19,9 +19,8 @@
     padding: 20px;
 }
 
-/* Footer */
-.flex-row {
-    flex: 100%;
+.padding-top {
+    margin-top: 5%;
 }
 
 .spacer {
@@ -46,6 +45,14 @@
 }
 .comments-list .media{
     border-bottom: 1px dotted #ccc;
+}
+
+.no-shadow {
+    box-shadow: none!important;
+}
+
+mat-list-item:hover { 
+    background-color: rgba(0, 0, 0, 0.075);
 }
 
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */

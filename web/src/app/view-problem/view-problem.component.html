@@ -2,156 +2,290 @@
   <mat-toolbar>Problemos pavadinimas</mat-toolbar>
 </div>
 
-<div class="flex-row">
-  <button mat-button routerLink="/login" routerLinkActive="active">
-    <i class="material-icons">lock_open</i>Redaguoti</button>
-  <button mat-button routerLink="/login" routerLinkActive="active">
-    <i class="material-icons">lock_open</i>Komentuoti</button>
-  <button mat-button routerLink="/login" routerLinkActive="active">
-    <i class="material-icons">lock_open</i>Uždaryti</button>
-</div>
+
 
 <div class="row">
   <div class="main">
-    <mat-tab-group>
-      <mat-tab label="Problemos informacija">
-        <h3>Aprašymas</h3>
-        <mat-form-field class="example-full-width editable">
-          <textarea matInput matTextareaAutosize matAutosizeMinRows="4" value="orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                    orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
-            matAutosizeMaxRows="10"></textarea>
-          <span matSuffix>
-            <i class="material-icons">edit</i>
-          </span>
-        </mat-form-field>
-        <h3>Registruotas laikas</h3>
-        <mat-table #table [dataSource]="dataSource">
-          <!-- Position Column -->
-          <ng-container matColumnDef="position">
-            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-          </ng-container>
+    <mat-card>
+      <mat-card-content>
+        <mat-tab-group>
+          <mat-tab label="Problemos informacija">
+            <mat-card>
+              <mat-card-content>
+                <div class="flex-row">
+                  <button mat-button routerLink="/login" routerLinkActive="active">
+                    <i class="material-icons">lock_open</i>Redaguoti</button>
+                  <button mat-button routerLink="/login" routerLinkActive="active">
+                    <i class="material-icons">lock_open</i>Komentuoti</button>
+                  <button mat-button routerLink="/login" routerLinkActive="active">
+                    <i class="material-icons">lock_open</i>Uždaryti</button>
+                </div>
+              </mat-card-content>
+            </mat-card>
+            <mat-divider></mat-divider>
 
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-          </ng-container>
+            <mat-card>
+              <mat-card-title>Problemos aprašymas</mat-card-title>
+              <mat-card-content>
+                <mat-form-field class="example-full-width editable">
+                  <textarea matInput matTextareaAutosize matAutosizeMinRows="4" value="orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                          orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
+                    matAutosizeMaxRows="10"></textarea>
+                  <span matSuffix>
+                    <i class="material-icons">edit</i>
+                  </span>
+                </mat-form-field>
+              </mat-card-content>
+            </mat-card>
 
-          <!-- Weight Column -->
-          <ng-container matColumnDef="weight">
-            <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
-          </ng-container>
+            <mat-divider></mat-divider>
 
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="symbol">
-            <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
-          </ng-container>
+            <mat-card>
+              <mat-card-title>Registruotas laikas</mat-card-title>
+              <mat-card-content>
+                <mat-table #table [dataSource]="dataSource">
+                  <!-- Position Column -->
+                  <ng-container matColumnDef="position">
+                    <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+                  </ng-container>
 
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                  </ng-container>
+
+                  <!-- Weight Column -->
+                  <ng-container matColumnDef="weight">
+                    <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+                  </ng-container>
+
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="symbol">
+                    <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+              </mat-card-content>
+            </mat-card>
+
+            <mat-divider></mat-divider>
+
+            <mat-card>
+              <mat-card-title>Komentarai</mat-card-title>
+              <mat-card-content>
+                <mat-card class="no-shadow">
+                  <mat-card-header>
+                    <mat-card-title>
+                      <b>Tomas Valiunas</b>
+                    </mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>Reikia kuo skubiau!</p>
+                  </mat-card-content>
+                </mat-card>
+                <mat-card class="no-shadow">
+                  <mat-card-header>
+                    <mat-card-title>
+                      <b>Administratorius</b>
+                    </mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>Priskirta Deividui</p>
+                  </mat-card-content>
+                </mat-card>
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card>
+              <form fxLayout="row">
+                <textarea matInput matTextareaAutosize placeholder="Komentuoti" matAutosizeMinRows="6" matAutosizeMaxRows="10"></textarea>
+              </form>
+              <hr>
+              <mat-card-actions>
+                <div fxLayout="row">
+                  <span fxFlex></span>
+                  <button mat-raised-button color="primary">Komentuoti</button>
+                </div>
+              </mat-card-actions>
+            </mat-card>
+
+          </mat-tab>
+
+          <mat-tab label="Kliento informacija">
+            <mat-card-content>
+              <h4>Informacija</h4>
+              <div fxLayout="row" layout-align="center">
+                <div fxFlex>
+                  <div fxLayout="column">
+                    <span>Vardas</span>
+                    <strong>Tomas</strong>
+                  </div>
+
+                  <div fxLayout="column">
+                    <span>Pavardė</span>
+                    <strong>Valiūnas</strong>
+                  </div>
+
+                  <div fxLayout="column">
+                    <span>Adresas</span>
+                    <strong>Medvėgalio 10-47, Kaunas</strong>
+                  </div>
 
 
-        <h3>Komentarai </h3>
-        <div class="comments-list">
-          <div class="media">
-            <div class="media-body">
-              <h4 class="media-heading user_name">Baltej Singh</h4>
-              Wow! this is really great.
-            </div>
-          </div>
-          <div class="media">
-            <div>
+                </div>
+                <div fxFlex>
 
-              <h4 class="media-heading user_name">Baltej Singh</h4>
-              Wow! this is really great.
-            </div>
-          </div>
-          </div>
+                  <div fxLayout="column">
+                    <span>Vartotojas nuo</span>
+                    <strong>2018-09-09</strong>
+                  </div>
 
-          <mat-form-field class="example-full-width">
-              <textarea matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="10"></textarea>
+                  <div fxLayout="column">
+                      <span>Turimas planas</span>
+                      <strong>Bazinis+</strong>
+                    </div>
+                  <div fxLayout="column">
+                    <span>IP Adresas</span>
+                    <strong>192.168.1.1</strong>
+                  </div>
+
+                </div>
+              </div>
+            </mat-card-content>
+            <mat-card>
+                <mat-card-header>
+                  <mat-card-title>
+                    <b>Aprašymas</b>
+                  </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper. Nullam
+                        quis risus eget urna mollis ornare vel eu leo. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+                </mat-card-content>
+              </mat-card>
+              <mat-card>
+                  <mat-card-header>
+                    <mat-card-title>
+                      <b>Vartotojo turimi įrenginiai</b>
+                    </mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                      <mat-list role="list">
+                          <mat-list-item role="listitem">Belkin HDX 3000</mat-list-item>
+                          <mat-list-item role="listitem">Mat-Receiver 6300</mat-list-item>
+                          <mat-list-item role="listitem">D-Link Super Model</mat-list-item>
+                        </mat-list>
+                  </mat-card-content>
+                </mat-card>
+          </mat-tab>
+
+          <mat-tab label="Susiję problemos">
+            <mat-table #table [dataSource]="dataSource">
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+              </ng-container>
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="weight">
+                <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="symbol">
+                <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+
+  <div class="side">
+    <mat-card>
+      <mat-card-content>
+        <div>
+          <label>Priskirtas vartotojas: </label>
+          <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never">
+            <input matInput value="Tomas" disabled>
+            <span matSuffix>
+              <i class="material-icons">edit</i>
+            </span>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <label>Priskirtas klientas: </label>
+          <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never">
+            <input class="float-right" matInput value="Tomas" disabled>
+            <span matSuffix>
+              <i class="material-icons">edit</i>
+            </span>
+          </mat-form-field>
+        </div>
+
+        <div>
+            <label>Statusas: </label>
+            <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never">
+              <input matInput value="Sukurta" disabled>
+              <span matSuffix>
+                <i class="material-icons">edit</i>
+              </span>
             </mat-form-field>
-          <button class="align-left" mat-button>Komentuoti</button>
-      </mat-tab>
+          </div>
 
-      <mat-tab label="Kliento informacija">
-          Kliento informacija
-        
-      </mat-tab>
-      <mat-tab label="Susiję problemos">
-        <mat-table #table [dataSource]="dataSource">
-          <!-- Position Column -->
-          <ng-container matColumnDef="position">
-            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-          </ng-container>
+        <div style="min-height: 1vh;"></div>
+        <div>
+          <label>
+            <b>Užduotis sukurta: </b>
+          </label>
+          <span class="float-right" matInput>2018-04-05</span>
+        </div>
 
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-          </ng-container>
+        <div style="min-height: 1vh;"></div>
 
-          <!-- Weight Column -->
-          <ng-container matColumnDef="weight">
-            <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
-          </ng-container>
+        <div>
+          <label>
+            <b>Praleista laiko: </b>
+          </label>
+          <span class="float-right" matInput>32h</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="symbol">
-            <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
-          </ng-container>
-
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
-      </mat-tab>
-    </mat-tab-group>
-    </div>
-
-
-    <div class="side">
-      <div>
-        <label>Priskirtas vartotojas: </label>
-        <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never">
-          <input matInput value="Tomas" disabled>
-          <span matSuffix>
-            <i class="material-icons">edit</i>
-          </span>
+    <mat-card class="padding-top">
+      <mat-card-title>Žymės</mat-card-title>
+      <mat-card-content>
+        <mat-form-field class="demo-chip-list">
+          <mat-chip-list #chipList>
+            <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable" (remove)="remove(fruit)">
+              {{fruit.name}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="New fruit..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)" />
+          </mat-chip-list>
         </mat-form-field>
-      </div>
-
-      <div>
-        <label>Priskirtas klientas: </label>
-        <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never">
-          <input class="float-right" matInput value="Tomas" disabled>
-          <span matSuffix>
-            <i class="material-icons">edit</i>
-          </span>
-        </mat-form-field>
-      </div>
-
-      <div style="min-height: 1vh;"></div>
-      <div>
-        <label>
-          <b>Užduotis sukurta: </b>
-        </label>
-        <span class="float-right" matInput>2018-04-05</span>
-      </div>
-
-      <div style="min-height: 1vh;"></div>
-
-      <div>
-        <label>
-          <b>Praleista laiko: </b>
-        </label>
-        <span class="float-right" matInput>32h</span>
-      </div>
-
-    </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
