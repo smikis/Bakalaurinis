@@ -1,6 +1,6 @@
 ﻿using TinkloProblemos.API.Identity.Entities;
 
-namespace TinkloProblemos.API.Contracts
+namespace TinkloProblemos.API.Contracts.Comment
 {
     public class Comment
     {

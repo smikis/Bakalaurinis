@@ -9,7 +9,7 @@ namespace TinkloProblemos.API.Contracts.Problem
         public Problem()
         {
             CategoryProblem = new HashSet<CategoryProblem>();
-            Comment = new HashSet<Comment>();
+            Comment = new HashSet<Comment.Comment>();
             ProblemTag = new HashSet<ProblemTag>();
             Timespent = new HashSet<Timespent>();
         }
@@ -27,7 +27,7 @@ namespace TinkloProblemos.API.Contracts.Problem
         public Internetuser InternetUser { get; set; }
         public Status Status { get; set; }
         public ICollection<CategoryProblem> CategoryProblem { get; set; }
-        public ICollection<Comment> Comment { get; set; }
+        public ICollection<Comment.Comment> Comment { get; set; }
         public ICollection<ProblemTag> ProblemTag { get; set; }
         public ICollection<Timespent> Timespent { get; set; }
     }

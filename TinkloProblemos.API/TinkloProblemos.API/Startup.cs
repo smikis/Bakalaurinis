@@ -33,6 +33,7 @@ namespace TinkloProblemos.API
             services.AddSingleton<IInternetUserRepository, InternetUserRepository>();
             services.AddSingleton<IProblemRepository, ProblemRepository>();
             services.AddSingleton<ITagRepository, TagRepository>();
+            services.AddSingleton<ICommentRepository, CommentRepository>();
 
             services.AddTransient<IInternetUserService, InternetUserService>();
             services.AddTransient<ICategoryService, CategoryService>();
@@ -40,6 +41,7 @@ namespace TinkloProblemos.API
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IProblemService, ProblemService>();
             services.AddTransient<ITagService, TagService>();
+            services.AddTransient<ICommentService, CommentService>();
 
             string connectionString = Configuration.GetConnectionString("Database");
             services.AddTransient<IDatabaseConnectionService>(e => new DatabaseConnectionService(connectionString));

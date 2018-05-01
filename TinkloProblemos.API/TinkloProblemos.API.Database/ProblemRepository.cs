@@ -39,6 +39,14 @@ namespace TinkloProblemos.API.Database
             }
         }
 
+        public GetProblem GetProblem(int id)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                return dbConnection.QueryFirst<GetProblem>(ProblemQueries.GetProblem, new { id });
+            }
+        }
+
         public IEnumerable<GetProblem> GetProblems(int skip, int take)
         {
             using (IDbConnection dbConnection = Connection)

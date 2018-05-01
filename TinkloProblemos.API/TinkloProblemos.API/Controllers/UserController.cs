@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using TinkloProblemos.API.Contracts.User;
 using TinkloProblemos.API.Extensions;
@@ -6,6 +7,7 @@ using TinkloProblemos.API.Interfaces.Services;
 
 namespace TinkloProblemos.API.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Produces("application/json")]
     [Route("api/User")]
     public class UserController : Controller

@@ -42,6 +42,11 @@ namespace TinkloProblemos.API.Services
             return databaseResult;
         }
 
+        public GetProblem GetProblem(int id)
+        {
+            return _problemRepository.GetProblem(id);
+        }
+
         public IEnumerable<GetProblem> GetProblems(int page, int pageSize)
         {
             int skip = (page - 1) * pageSize;

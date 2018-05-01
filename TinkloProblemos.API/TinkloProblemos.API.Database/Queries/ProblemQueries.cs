@@ -6,6 +6,15 @@
                                     VALUES(@Name, @Description, @Location, NOW(), @StatusId, @AssignedUser, @InternetUserId);
                                     SELECT LAST_INSERT_ID();";
 
+        public static string GetProblem =
+            @"SELECT problem.Id, problem.Name,problem.Location, problem.Created, problem.Description, problem.Created, problem.internetuserid, category.Id as categoryId, category.Name as categoryName,
+users.Id as assignedUserId, users.FirstName as assignedUserFirstName, users.Email as assignedUserEmail, status.name as status
+FROM problem left join category_problem on problem.id = category_problem.problemId
+left join category on category.id = category_problem.categoryId
+left join users on users.id = problem.assignedUser
+inner join status on status.id = problem.statusId
+where problem.id = @id;";
+
         public static string GetAllUnfiltered =
             @"SELECT problem.Id, problem.Name,problem.Location, problem.Description, problem.Created, category.Id as categoryId, category.Name as categoryName,
 users.Id as assignedUserId, users.FirstName as assignedUserFirstName, users.Email as assignedUserEmail, status.name as status

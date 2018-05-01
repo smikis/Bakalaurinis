@@ -22,6 +22,13 @@ namespace TinkloProblemos.API.Controllers
         }
 
         // GET: api/Problem
+        [HttpGet("{id}")]
+        public GetProblem Get(int id)
+        {
+            return _problemService.GetProblem(id);
+        }
+
+        // GET: api/Problem
         [HttpGet("{page}/{pageSize}")]
         public IEnumerable<GetProblem> Get(int page, int pageSize)
         {

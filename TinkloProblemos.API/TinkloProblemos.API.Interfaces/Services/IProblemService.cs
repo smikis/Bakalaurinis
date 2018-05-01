@@ -12,5 +12,6 @@ namespace TinkloProblemos.API.Interfaces.Services
         ProblemPage GetProblems(int page, int pageSize, string category, string status, string assingnedUser, string searchTerm, DateTime? dateFrom, DateTime? dateTo);
         IEnumerable<GetProblem> GetProblems(string category, string status, string assingnedUser, DateTime? dateFrom, DateTime? dateTo);
         IEnumerable<GetProblem> GetUserProblems(string category, string status, string assingnedUser);
+        GetProblem GetProblem(int id);
     }
 }

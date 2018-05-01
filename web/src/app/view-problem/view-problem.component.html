@@ -14,11 +14,13 @@
               <mat-card-content>
                 <div class="flex-row">
                   <button mat-button routerLink="/login" routerLinkActive="active">
-                    <i class="material-icons">lock_open</i>Redaguoti</button>
+                    <i class="material-icons">mode_edit</i>Redaguoti</button>
                   <button mat-button routerLink="/login" routerLinkActive="active">
-                    <i class="material-icons">lock_open</i>Komentuoti</button>
+                    <i class="material-icons">comment</i>Komentuoti</button>
                   <button mat-button routerLink="/login" routerLinkActive="active">
-                    <i class="material-icons">lock_open</i>Uždaryti</button>
+                    <i class="material-icons">lock_outline</i>Uždaryti</button>
+                    <button mat-button routerLink="/login" routerLinkActive="active">
+                      <i class="material-icons">lock_open</i>Atidaryti</button>
                 </div>
               </mat-card-content>
             </mat-card>
@@ -28,8 +30,7 @@
               <mat-card-title>Problemos aprašymas</mat-card-title>
               <mat-card-content>
                 <mat-form-field class="example-full-width editable">
-                  <textarea matInput matTextareaAutosize matAutosizeMinRows="4" value="orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                                          orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
+                  <textarea matInput matTextareaAutosize matAutosizeMinRows="4" [value]="problem?.description"
                     matAutosizeMaxRows="10"></textarea>
                   <span matSuffix>
                     <i class="material-icons">edit</i>
@@ -124,17 +125,17 @@
                 <div fxFlex>
                   <div fxLayout="column">
                     <span>Vardas</span>
-                    <strong>Tomas</strong>
+                    <strong>{{internetUser?.firstName}}</strong>
                   </div>
 
                   <div fxLayout="column">
                     <span>Pavardė</span>
-                    <strong>Valiūnas</strong>
+                    <strong>{{internetUser?.lastName}}</strong>
                   </div>
 
                   <div fxLayout="column">
                     <span>Adresas</span>
-                    <strong>Medvėgalio 10-47, Kaunas</strong>
+                    <strong>{{internetUser?.location}}</strong>
                   </div>
 
 
@@ -143,16 +144,16 @@
 
                   <div fxLayout="column">
                     <span>Vartotojas nuo</span>
-                    <strong>2018-09-09</strong>
+                    <strong>{{internetUser?.created}}</strong>
                   </div>
 
                   <div fxLayout="column">
                       <span>Turimas planas</span>
-                      <strong>Bazinis+</strong>
+                      <strong>{{internetUser?.internetPlan}}</strong>
                     </div>
                   <div fxLayout="column">
                     <span>IP Adresas</span>
-                    <strong>192.168.1.1</strong>
+                    <strong>{{internetUser?.ipAddress}}</strong>
                   </div>
 
                 </div>
@@ -165,8 +166,7 @@
                   </mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper. Nullam
-                        quis risus eget urna mollis ornare vel eu leo. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+                    <p>{{internetUser?.description}}</p>
                 </mat-card-content>
               </mat-card>
               <mat-card>
@@ -224,65 +224,56 @@
   <div class="side">
     <mat-card>
       <mat-card-content>
-        <div>
-          <label>Priskirtas vartotojas: </label>
-          <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never">
-            <input matInput value="Tomas" disabled>
-            <span matSuffix>
-              <i class="material-icons">edit</i>
-            </span>
-          </mat-form-field>
-        </div>
+          <div fxLayout="row">
+              <strong>Priskirtas vartotojas: </strong>
+              <span fxFlex></span>
+              <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never"  (click)="editAssignedUser = true">
+                  <input matInput [value]="problem?.assignedUserEmail" [disabled] ="!editAssignedUser">
+                  <span matSuffix>
+                    <i class="material-icons" *ngIf="!editAssignedUser">edit</i>                                    
+                  </span>
+                </mat-form-field>
+               <i class="hover" *ngIf="editAssignedUser" (click)="editAssignedUser = false" class="material-icons">done</i>
+            </div>
+            <div fxLayout="row">
+                <strong>Priskirtas klientas: </strong>
+                <span fxFlex></span>
+                <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never" (click)="editInternetUser = true">
+                    <input matInput value="Tomas" [disabled] ="!editInternetUser" >
+                    <span matSuffix>
+                      <i class="material-icons">edit</i>
+                    </span>
+                  </mat-form-field>
+              </div>
+              <div fxLayout="row">
+                  <strong>Statusas: </strong>
+                  <span fxFlex></span>
+                  <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never" (click)="editStatus = true">
+                      <input matInput [value]="problem?.status" [disabled] ="!editStatus" >
+                      <span matSuffix>
+                        <i class="material-icons">edit</i>
+                      </span>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row">
+                    <strong>Užduotis sukurta: </strong>
+                    <span fxFlex></span>
+                    <span class="float-right" matInput>{{problem?.created}}</span>
+                  </div>
 
-        <div>
-          <label>Priskirtas klientas: </label>
-          <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never">
-            <input class="float-right" matInput value="Tomas" disabled>
-            <span matSuffix>
-              <i class="material-icons">edit</i>
-            </span>
-          </mat-form-field>
-        </div>
-
-        <div>
-            <label>Statusas: </label>
-            <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never">
-              <input matInput value="Sukurta" disabled>
-              <span matSuffix>
-                <i class="material-icons">edit</i>
-              </span>
-            </mat-form-field>
-          </div>
-
-        <div style="min-height: 1vh;"></div>
-        <div>
-          <label>
-            <b>Užduotis sukurta: </b>
-          </label>
-          <span class="float-right" matInput>2018-04-05</span>
-        </div>
-
-        <div style="min-height: 1vh;"></div>
-
-        <div>
-          <label>
-            <b>Praleista laiko: </b>
-          </label>
-          <span class="float-right" matInput>32h</span>
-        </div>
       </mat-card-content>
     </mat-card>
 
     <mat-card class="padding-top">
       <mat-card-title>Žymės</mat-card-title>
       <mat-card-content>
-        <mat-form-field class="demo-chip-list">
+        <mat-form-field class="example-full-width">
           <mat-chip-list #chipList>
             <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable" (remove)="remove(fruit)">
               {{fruit.name}}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
-            <input placeholder="New fruit..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+            <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
               (matChipInputTokenEnd)="add($event)" />
           </mat-chip-list>
         </mat-form-field>

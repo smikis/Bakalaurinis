@@ -23,4 +23,6 @@ export interface Endpoint { readonly value: string }
 export class Endpoints {
   static readonly login: Endpoint = { value: 'api/Login' };
   static readonly problemPage: (page: number, pageSize: number) => Endpoint = (page, pageSize) => { return { value: `api/Problem/filtered/${page}/${pageSize}` }};
+  static readonly getProblem: (id: number) => Endpoint = (id) => { return { value: `api/Problem/${id}/` }};
+  static readonly getInternetUser: (id: number) => Endpoint = (id) => { return { value: `api/InternetUser/${id}/` }};
 }

@@ -1,19 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import {MatTableDataSource, MatChipInputEvent} from '@angular/material';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
-
+import {ActivatedRoute, Router} from '@angular/router';
+import {ProblemService, Problem} from '../problem.service';
+import {InternetUserService, InternetUser} from '../internet.user.service';
 @Component({
   selector: 'app-view-problem',
   templateUrl: './view-problem.component.html',
-  styleUrls: ['./view-problem.component.css']
+  styleUrls: ['./view-problem.component.css'],
+  providers:[ProblemService,InternetUserService]
 })
 export class ViewProblemComponent implements OnInit {
+  problemId : number;
+  problem: Problem;
+  internetUser: InternetUser;
+  editAssignedUser = false;
+  editInternetUser = false;
+  editStatus = false;
 
   displayedColumns = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<Element>(ELEMENT_DATA);
-  constructor() { }
+  constructor(private route:ActivatedRoute, private problemService: ProblemService, private internetUserService: InternetUserService,  private router: Router) { }
 
   ngOnInit() {
+    this.route.params.subscribe( params => {
+      this.problemId = params['id'];
+        this.problemService.getProblem(this.problemId).subscribe(data=> {
+            this.problem = data;
+            
+            if(this.problem.internetUserId!== undefined) {
+              this.internetUserService.getInternetUser(this.problem.internetUserId).subscribe(data=> {
+                this.internetUser = data;
+              });
+            }
+
+        },
+      error=> {
+        this.redirecOnError();
+      });
+    },
+    error=> {
+      this.redirecOnError();
+    } 
+  );
+  }
+
+  redirecOnError(){
+    console.log("Error getting param value");
+    this.router.navigate['/dashboard'];
   }
   visible: boolean = true;
   selectable: boolean = true;

@@ -94,7 +94,7 @@ INSERT INTO UsersRoles (UserId, RoleId) VALUES ('810BAD28-CED4-427A-9A88-5A17682
 CREATE TABLE Category (Id int(10) NOT NULL AUTO_INCREMENT, Name varchar(255) NOT NULL, Description varchar(512), PRIMARY KEY (Id));
 CREATE TABLE Category_Problem (CategoryId int(10) NOT NULL, ProblemId int(10) NOT NULL, PRIMARY KEY (CategoryId, ProblemId));
 CREATE TABLE Comment (Id int(10) NOT NULL AUTO_INCREMENT, Text varchar(5000) NOT NULL, UserId CHAR(38) NOT NULL, ProblemId int(10) NOT NULL, PRIMARY KEY (Id));
-CREATE TABLE InternetUser (Id int(10) NOT NULL AUTO_INCREMENT, FirstName varchar(255) NOT NULL, LastName int(10) NOT NULL, Description varchar(512), Location varchar(255), IpAddress varchar(255), PRIMARY KEY (Id));
+CREATE TABLE InternetUser (Id int(10) NOT NULL AUTO_INCREMENT, FirstName varchar(255) NOT NULL, LastName varchar(255) NOT NULL, Description varchar(512), Location varchar(255), IpAddress varchar(255), PRIMARY KEY (Id));
 CREATE TABLE InternetUserDevice (Id int(10) NOT NULL AUTO_INCREMENT, Name varchar(255) NOT NULL, Manufacturer varchar(255), MacAddress varchar(255), WarrantyExpiration date, Description varchar(512), InternetUserId int(10) NOT NULL, PRIMARY KEY (Id));
 CREATE TABLE Problem (Id int(10) NOT NULL AUTO_INCREMENT, Name varchar(255) NOT NULL, Description varchar(9000) NOT NULL, Location varchar(512), Created datetime NOT NULL, AssignedUser CHAR(38), StatusId int(10) NOT NULL, InternetUserId int(10), CONSTRAINT Id PRIMARY KEY (Id));
 CREATE TABLE Problem_Tag (TagId int(10) NOT NULL, ProblemId int(10) NOT NULL, PRIMARY KEY (TagId, ProblemId));
@@ -115,3 +115,10 @@ ALTER TABLE Problem ADD CONSTRAINT FKProblem951214 FOREIGN KEY (InternetUserId) 
 ALTER TABLE InternetUserDevice ADD CONSTRAINT FKInternetUs985626 FOREIGN KEY (InternetUserId) REFERENCES InternetUser (Id);
 
 alter table problem ADD FULLTEXT INDEX (Name,Description,Location);
+
+ALTER TABLE `bakalaurinis`.`internetuser` 
+ADD COLUMN `InternetPlan` VARCHAR(255) NULL DEFAULT NULL AFTER `IpAddress`,
+ADD COLUMN `Created` DATE NULL DEFAULT NOW() AFTER `InternetPlan`;
+
+ALTER TABLE `bakalaurinis`.`internetuser` 
+CHANGE COLUMN `Description` `Description` NVARCHAR(512) NULL DEFAULT NULL ;

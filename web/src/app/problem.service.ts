@@ -11,6 +11,10 @@ export class ProblemService {
   constructor(private http: HttpClient, private url: UrlService, private login: LoginService) {
   }
 
+  getProblem(id: number) {
+    let baseUrl = this.url.getApiUrl(Endpoints.getProblem(id));
+    return this.http.get<Problem>(baseUrl);
+  }
 
   getPage(page:number, pageSize:number, start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined) : Observable<ProblemPage> {
     let baseUrl = this.url.getApiUrl(Endpoints.problemPage(page,pageSize)) + this.generateArgs(start,end,category,status,search);
@@ -53,4 +57,7 @@ export interface Problem {
   categoryName: string;
   assignedUserEmail: string;
   status: string;
+  internetUserId: number;
+  assignedUserId: string;
+  created: Date;
 }
