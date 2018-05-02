@@ -47,8 +47,11 @@ namespace TinkloProblemos.API.Services
             return new TokenResult
             {
                 Email = user.Email,
+                Id= user.Id,
                 Roles = roles,
-                Token = generatedToken
+                Token = generatedToken,
+                FirstName = user.FirstName,
+                LastName = user.LastName
             };
         }
     }

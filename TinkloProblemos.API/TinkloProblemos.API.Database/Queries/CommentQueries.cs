@@ -7,7 +7,7 @@
         public static string GetAll = @"SELECT comment.Text, users.firstName, users.lastName FROM comment inner join users on comment.userId = users.id;";
 
         public static string GetAllProblemComments = @"SELECT comment.Text, users.firstName, users.lastName FROM comment inner join users on comment.userId = users.id
-                                                WHERE comment.id = @problemId;";
+                                                WHERE comment.problemId = @problemId;";
 
         public static string GetById = @"SELECT comment.Text, users.firstName, users.lastName FROM comment inner join users on comment.userId = users.id
                                          WHERE Id = @Id";

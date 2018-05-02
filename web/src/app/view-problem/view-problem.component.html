@@ -80,38 +80,28 @@
             <mat-card>
               <mat-card-title>Komentarai</mat-card-title>
               <mat-card-content>
-                <mat-card class="no-shadow">
+                <mat-card *ngFor="let comment of comments" class="no-shadow">
                   <mat-card-header>
                     <mat-card-title>
-                      <b>Tomas Valiunas</b>
+                      <b>{{comment.firstName}} {{comment.lastName}}</b>
                     </mat-card-title>
                   </mat-card-header>
                   <mat-card-content>
-                    <p>Reikia kuo skubiau!</p>
+                    <p>{{comment.text}}</p>
                   </mat-card-content>
-                </mat-card>
-                <mat-card class="no-shadow">
-                  <mat-card-header>
-                    <mat-card-title>
-                      <b>Administratorius</b>
-                    </mat-card-title>
-                  </mat-card-header>
-                  <mat-card-content>
-                    <p>Priskirta Deividui</p>
-                  </mat-card-content>
-                </mat-card>
+                </mat-card>              
               </mat-card-content>
             </mat-card>
 
             <mat-card>
-              <form fxLayout="row">
-                <textarea matInput matTextareaAutosize placeholder="Komentuoti" matAutosizeMinRows="6" matAutosizeMaxRows="10"></textarea>
-              </form>
+              <div fxLayout="row">
+                <textarea matInput [(ngModel)]="commentText" matTextareaAutosize placeholder="Komentuoti" matAutosizeMinRows="6" matAutosizeMaxRows="10"></textarea>
+              </div>
               <hr>
               <mat-card-actions>
                 <div fxLayout="row">
                   <span fxFlex></span>
-                  <button mat-raised-button color="primary">Komentuoti</button>
+                  <button mat-raised-button color="primary" (click)="sendComment()">Komentuoti</button>
                 </div>
               </mat-card-actions>
             </mat-card>

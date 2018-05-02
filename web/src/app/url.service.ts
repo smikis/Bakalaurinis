@@ -25,4 +25,7 @@ export class Endpoints {
   static readonly problemPage: (page: number, pageSize: number) => Endpoint = (page, pageSize) => { return { value: `api/Problem/filtered/${page}/${pageSize}` }};
   static readonly getProblem: (id: number) => Endpoint = (id) => { return { value: `api/Problem/${id}/` }};
   static readonly getInternetUser: (id: number) => Endpoint = (id) => { return { value: `api/InternetUser/${id}/` }};
+  static readonly getProblemComments: (problemId: number) => Endpoint = (problemId) => { return { value: `api/Comment/${problemId}/` }};
+  static readonly comment: Endpoint = { value: 'api/Comment' };
+
 }
