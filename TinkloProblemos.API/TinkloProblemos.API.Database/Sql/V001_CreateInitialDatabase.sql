@@ -122,3 +122,6 @@ ADD COLUMN `Created` DATE NULL DEFAULT NOW() AFTER `InternetPlan`;
 
 ALTER TABLE `bakalaurinis`.`internetuser` 
 CHANGE COLUMN `Description` `Description` NVARCHAR(512) NULL DEFAULT NULL ;
+
+ALTER TABLE `bakalaurinis`.`timespent` 
+CHANGE COLUMN `Description` `Description` NVARCHAR(512) NULL DEFAULT NULL ;
