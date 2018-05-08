@@ -6,6 +6,7 @@ namespace TinkloProblemos.API.Contracts.TimeSpent
 {
     public class GetTimeSpent
     {
+        public int Id { get; set; }
         public decimal HoursSpent { get; set; }
         public string Description { get; set; }
         public string UserId { get; set; }

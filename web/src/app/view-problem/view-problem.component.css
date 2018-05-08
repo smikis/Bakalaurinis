@@ -51,6 +51,36 @@ mat-list-item:hover {
     background-color: rgba(0, 0, 0, 0.075);
 }
 
+.mat-table {
+    display: table;
+    width: 100%;
+}
+
+.mat-table > .mat-header-row, .mat-table > .mat-row {
+  display: table-row;
+  padding: 0;
+  border: none;
+}
+
+.mat-table > .mat-header-row > .mat-header-cell, 
+.mat-table > .mat-row > .mat-cell {
+    display: table-cell;
+    height: 48px;
+    vertical-align: middle;
+    padding: 0 0.5em;
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+mat-header-cell {
+    display:flex;
+    justify-content:flex-start;
+  }
+.justify-end {
+    display:flex;
+    justify-content:flex-end;
+  }
+
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 700px) {
     .row, .navbar {   

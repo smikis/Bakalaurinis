@@ -27,7 +27,7 @@ namespace TinkloProblemos.API.Database.Queries
  FROM timespent inner join users on timespent.userId = users.id
 	WHERE userId =@userId";
         public static string Update = @"UPDATE timespent SET Description = @Description,
-                                 HoursSpent = @HoursSpent,
+                                 HoursSpent = @HoursSpent
                                    WHERE Id = @Id";
         public static string Delete = @"DELETE FROM timespent
                                  WHERE Id = @Id";

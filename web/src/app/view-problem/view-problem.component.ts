@@ -6,12 +6,28 @@ import {ProblemService, Problem} from '../problem.service';
 import {InternetUserService, InternetUser} from '../internet.user.service';
 import {CommentService, Comment} from '../comment.service';
 import { LoginService, AuthenticatedUser } from '../login.service';
+import { ValidatorService } from '../cutom-material-table/validator.service';
+import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { TimeSpentTableDataSource } from '../cutom-material-table/timespent-table-data-source';
+import { TimeSpentService, TimeSpent, CreateTimeSpent } from '../timespent.service';
+
+class TimeSpentValidatorService implements ValidatorService {
+  getRowValidator(): FormGroup {
+    return new FormGroup({
+      'hoursSpent': new FormControl(null, Validators.required),
+      'description': new FormControl(null, Validators.required),
+      'firstName': new FormControl(null),
+      'lastName': new FormControl(null)         
+      });
+  }
+}
 
 @Component({
   selector: 'app-view-problem',
   templateUrl: './view-problem.component.html',
   styleUrls: ['./view-problem.component.css'],
-  providers:[ProblemService,InternetUserService, CommentService]
+  providers:[ProblemService,InternetUserService, CommentService,TimeSpentService,
+    {provide: ValidatorService, useClass:TimeSpentValidatorService}]
 })
 export class ViewProblemComponent implements OnInit {
   problemId : number;
@@ -24,15 +40,20 @@ export class ViewProblemComponent implements OnInit {
   comments: Array<Comment>;
   commentText: string = null;
 
-  displayedColumns = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<Element>(ELEMENT_DATA);
+  timeSpent: TimeSpent[];
+  displayedColumns = ['firstName', 'lastName', 'hoursSpent', 'description', 'actionsColumn'];
+  dataSource: TimeSpentTableDataSource;
   constructor(private route:ActivatedRoute, private problemService: ProblemService, 
-    private commentService: CommentService, private internetUserService: InternetUserService,  private router: Router,private login: LoginService) { }
+    private commentService: CommentService, private internetUserService: InternetUserService,  
+    private router: Router,private login: LoginService,private sourcesValidator: ValidatorService,
+    private timeSpentService: TimeSpentService) { }
 
   ngOnInit() {
     this.route.params.subscribe( params => {
       this.problemId = params['id'];
 
+
+      //Get problem data
         this.problemService.getProblem(this.problemId).subscribe(data=> {
             this.problem = data;
             
@@ -47,10 +68,17 @@ export class ViewProblemComponent implements OnInit {
         this.redirecOnError();
       });
 
+      //Get problem comments
       this.commentService.getProblemComments(this.problemId).subscribe(commentData=> {
           this.comments = commentData;
-          console.log(this.comments);
       });
+
+      //Get problem time spent
+      this.timeSpentService.getProblemTimeSpent(this.problemId).subscribe(data=> {
+        this.timeSpent = data;
+        console.log(data);
+        this.dataSource = new TimeSpentTableDataSource(data,this.timeSpentService,this.login, this.problemId, TimeSpent, this.sourcesValidator)
+      })
 
     },
     error=> {
@@ -122,16 +150,3 @@ export class ViewProblemComponent implements OnInit {
 
 }
 
-export interface Element {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: Element[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'}
-];

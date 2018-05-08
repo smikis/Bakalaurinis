@@ -64,7 +64,7 @@ namespace TinkloProblemos.API.Database
         {
             using (IDbConnection dbConnection = Connection)
             {
-                return dbConnection.Execute(TimeSpentQueries.Update, new { prod, id });
+                return dbConnection.Execute(TimeSpentQueries.Update, new { prod.Description, id, prod.HoursSpent });
             }
         }
 

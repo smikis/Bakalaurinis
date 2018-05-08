@@ -27,5 +27,8 @@ export class Endpoints {
   static readonly getInternetUser: (id: number) => Endpoint = (id) => { return { value: `api/InternetUser/${id}/` }};
   static readonly getProblemComments: (problemId: number) => Endpoint = (problemId) => { return { value: `api/Comment/${problemId}/` }};
   static readonly comment: Endpoint = { value: 'api/Comment' };
-
+  static readonly getProblemTimeSpent: (id: number) => Endpoint = (id) => { return { value: `/api/TimeSpent/problem/${id}/` }};
+  static readonly getUserTimeSpent: (userId: string) => Endpoint = (userId) => { return { value: `/api/TimeSpent/user/${userId}/` }};
+  static readonly getTimeSpent: (id: number) => Endpoint = (id) => { return { value: `/api/TimeSpent/${id}/` }};
+  static readonly timeSpent: Endpoint = { value: 'api/TimeSpent' };
 }

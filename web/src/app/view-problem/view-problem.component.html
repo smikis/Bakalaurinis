@@ -19,8 +19,8 @@
                     <i class="material-icons">comment</i>Komentuoti</button>
                   <button mat-button routerLink="/login" routerLinkActive="active">
                     <i class="material-icons">lock_outline</i>Uždaryti</button>
-                    <button mat-button routerLink="/login" routerLinkActive="active">
-                      <i class="material-icons">lock_open</i>Atidaryti</button>
+                  <button mat-button routerLink="/login" routerLinkActive="active">
+                    <i class="material-icons">lock_open</i>Atidaryti</button>
                 </div>
               </mat-card-content>
             </mat-card>
@@ -30,8 +30,7 @@
               <mat-card-title>Problemos aprašymas</mat-card-title>
               <mat-card-content>
                 <mat-form-field class="example-full-width editable">
-                  <textarea matInput matTextareaAutosize matAutosizeMinRows="4" [value]="problem?.description"
-                    matAutosizeMaxRows="10"></textarea>
+                  <textarea matInput matTextareaAutosize matAutosizeMinRows="4" [value]="problem?.description" matAutosizeMaxRows="10"></textarea>
                   <span matSuffix>
                     <i class="material-icons">edit</i>
                   </span>
@@ -45,28 +44,55 @@
               <mat-card-title>Registruotas laikas</mat-card-title>
               <mat-card-content>
                 <mat-table #table [dataSource]="dataSource">
-                  <!-- Position Column -->
-                  <ng-container matColumnDef="position">
-                    <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-                    <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+                  <ng-container matColumnDef="firstName">
+                    <mat-header-cell *matHeaderCellDef> Vardas </mat-header-cell>
+                    <mat-cell style="color:black;" *matCellDef="let row">
+                      <mat-form-field floatPlaceholder="{{ row.editing ? 'float' : 'never'}}">
+                        <input matInput [formControl]="row.validator.controls['firstName']" type="text" placeholder="Vardas" [(ngModel)]="row.currentData.firstName">
+                      </mat-form-field>
+                    </mat-cell>
                   </ng-container>
-
-                  <!-- Name Column -->
-                  <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-                    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                  <ng-container matColumnDef="lastName">
+                    <mat-header-cell *matHeaderCellDef> Pavardė </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      <mat-form-field floatPlaceholder="{{ row.editing ? 'float' : 'never'}}">
+                        <input matInput [formControl]="row.validator.controls['lastName']" type="text" placeholder="Pavardė" [(ngModel)]="row.currentData.lastName">
+                      </mat-form-field>
+                    </mat-cell>
                   </ng-container>
-
-                  <!-- Weight Column -->
-                  <ng-container matColumnDef="weight">
-                    <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-                    <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+                  <ng-container matColumnDef="hoursSpent">
+                    <mat-header-cell *matHeaderCellDef> Valandos </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      <mat-form-field floatPlaceholder="{{ row.editing ? 'float' : 'never'}}">
+                        <input matInput [formControl]="row.validator.controls['hoursSpent']" type="number" placeholder="Valandos" [(ngModel)]="row.currentData.hoursSpent">
+                      </mat-form-field>
+                    </mat-cell>
                   </ng-container>
-
-                  <!-- Symbol Column -->
-                  <ng-container matColumnDef="symbol">
-                    <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-                    <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+                  <ng-container matColumnDef="description">
+                    <mat-header-cell *matHeaderCellDef> Atlikti darbai </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      <mat-form-field floatPlaceholder="{{ row.editing ? 'float' : 'never'}}">
+                        <input matInput [formControl]="row.validator.controls['description']" type="text" placeholder="Atlikti darbai" [(ngModel)]="row.currentData.description">
+                      </mat-form-field>
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="actionsColumn">
+                    <mat-header-cell class="justify-end" *matHeaderCellDef>
+                      <button mat-icon-button color="accent" (click)="dataSource.createNew()">
+                          <i class="material-icons">add</i>
+                      </button>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      <button *ngIf="!row.editing" mat-icon-button focusable="false" (click)="row.startEdit()">
+                          <i class="material-icons">mode_edit</i>
+                      </button>
+                      <button *ngIf="row.editing" mat-icon-button focusable="false" (click)="row.confirmEditCreate()">
+                          <i class="material-icons">check</i>
+                      </button>
+                      <button mat-icon-button focusable="false" (click)="row.cancelOrDelete()">
+                          <i class="material-icons">cancel</i>
+                      </button>
+                    </mat-cell>
                   </ng-container>
 
                   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -89,7 +115,7 @@
                   <mat-card-content>
                     <p>{{comment.text}}</p>
                   </mat-card-content>
-                </mat-card>              
+                </mat-card>
               </mat-card-content>
             </mat-card>
 
@@ -138,9 +164,9 @@
                   </div>
 
                   <div fxLayout="column">
-                      <span>Turimas planas</span>
-                      <strong>{{internetUser?.internetPlan}}</strong>
-                    </div>
+                    <span>Turimas planas</span>
+                    <strong>{{internetUser?.internetPlan}}</strong>
+                  </div>
                   <div fxLayout="column">
                     <span>IP Adresas</span>
                     <strong>{{internetUser?.ipAddress}}</strong>
@@ -150,60 +176,33 @@
               </div>
             </mat-card-content>
             <mat-card>
-                <mat-card-header>
-                  <mat-card-title>
-                    <b>Aprašymas</b>
-                  </mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <p>{{internetUser?.description}}</p>
-                </mat-card-content>
-              </mat-card>
-              <mat-card>
-                  <mat-card-header>
-                    <mat-card-title>
-                      <b>Vartotojo turimi įrenginiai</b>
-                    </mat-card-title>
-                  </mat-card-header>
-                  <mat-card-content>
-                      <mat-list role="list">
-                          <mat-list-item role="listitem">Belkin HDX 3000</mat-list-item>
-                          <mat-list-item role="listitem">Mat-Receiver 6300</mat-list-item>
-                          <mat-list-item role="listitem">D-Link Super Model</mat-list-item>
-                        </mat-list>
-                  </mat-card-content>
-                </mat-card>
+              <mat-card-header>
+                <mat-card-title>
+                  <b>Aprašymas</b>
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>{{internetUser?.description}}</p>
+              </mat-card-content>
+            </mat-card>
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>
+                  <b>Vartotojo turimi įrenginiai</b>
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-list role="list">
+                  <mat-list-item role="listitem">Belkin HDX 3000</mat-list-item>
+                  <mat-list-item role="listitem">Mat-Receiver 6300</mat-list-item>
+                  <mat-list-item role="listitem">D-Link Super Model</mat-list-item>
+                </mat-list>
+              </mat-card-content>
+            </mat-card>
           </mat-tab>
 
           <mat-tab label="Susiję problemos">
-            <mat-table #table [dataSource]="dataSource">
-              <!-- Position Column -->
-              <ng-container matColumnDef="position">
-                <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-              </ng-container>
-
-              <!-- Name Column -->
-              <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-              </ng-container>
-
-              <!-- Weight Column -->
-              <ng-container matColumnDef="weight">
-                <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
-              </ng-container>
-
-              <!-- Symbol Column -->
-              <ng-container matColumnDef="symbol">
-                <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
-              </ng-container>
-
-              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            </mat-table>
+           Problemos
           </mat-tab>
         </mat-tab-group>
       </mat-card-content>
@@ -214,42 +213,42 @@
   <div class="side">
     <mat-card>
       <mat-card-content>
-          <div fxLayout="row">
-              <strong>Priskirtas vartotojas: </strong>
-              <span fxFlex></span>
-              <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never"  (click)="editAssignedUser = true">
-                  <input matInput [value]="problem?.assignedUserEmail" [disabled] ="!editAssignedUser">
-                  <span matSuffix>
-                    <i class="material-icons" *ngIf="!editAssignedUser">edit</i>                                    
-                  </span>
-                </mat-form-field>
-               <i class="hover" *ngIf="editAssignedUser" (click)="editAssignedUser = false" class="material-icons">done</i>
-            </div>
-            <div fxLayout="row">
-                <strong>Priskirtas klientas: </strong>
-                <span fxFlex></span>
-                <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never" (click)="editInternetUser = true">
-                    <input matInput value="Tomas" [disabled] ="!editInternetUser" >
-                    <span matSuffix>
-                      <i class="material-icons">edit</i>
-                    </span>
-                  </mat-form-field>
-              </div>
-              <div fxLayout="row">
-                  <strong>Statusas: </strong>
-                  <span fxFlex></span>
-                  <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never" (click)="editStatus = true">
-                      <input matInput [value]="problem?.status" [disabled] ="!editStatus" >
-                      <span matSuffix>
-                        <i class="material-icons">edit</i>
-                      </span>
-                    </mat-form-field>
-                </div>
-                <div fxLayout="row">
-                    <strong>Užduotis sukurta: </strong>
-                    <span fxFlex></span>
-                    <span class="float-right" matInput>{{problem?.created}}</span>
-                  </div>
+        <div fxLayout="row">
+          <strong>Priskirtas vartotojas: </strong>
+          <span fxFlex></span>
+          <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never" (click)="editAssignedUser = true">
+            <input matInput [value]="problem?.assignedUserEmail" [disabled]="!editAssignedUser">
+            <span matSuffix>
+              <i class="material-icons" *ngIf="!editAssignedUser">edit</i>
+            </span>
+          </mat-form-field>
+          <i class="hover" *ngIf="editAssignedUser" (click)="editAssignedUser = false" class="material-icons">done</i>
+        </div>
+        <div fxLayout="row">
+          <strong>Priskirtas klientas: </strong>
+          <span fxFlex></span>
+          <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never" (click)="editInternetUser = true">
+            <input matInput value="Tomas" [disabled]="!editInternetUser">
+            <span matSuffix>
+              <i class="material-icons">edit</i>
+            </span>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row">
+          <strong>Statusas: </strong>
+          <span fxFlex></span>
+          <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never" (click)="editStatus = true">
+            <input matInput [value]="problem?.status" [disabled]="!editStatus">
+            <span matSuffix>
+              <i class="material-icons">edit</i>
+            </span>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row">
+          <strong>Užduotis sukurta: </strong>
+          <span fxFlex></span>
+          <span class="float-right" matInput>{{problem?.created}}</span>
+        </div>
 
       </mat-card-content>
     </mat-card>
