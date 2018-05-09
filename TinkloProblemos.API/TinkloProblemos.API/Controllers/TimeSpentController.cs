@@ -39,9 +39,10 @@ namespace TinkloProblemos.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_timeSpentService.Add(value))
+                var result = _timeSpentService.Add(value);
+                if (result.Success)
                 {
-                    return Ok();
+                    return Ok(result);
                 }
             }
             return BadRequest();

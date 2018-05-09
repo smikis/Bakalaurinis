@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TinkloProblemos.API.Contracts.Models;
 using TinkloProblemos.API.Contracts.TimeSpent;
 using TinkloProblemos.API.Interfaces.Repositories;
 using TinkloProblemos.API.Interfaces.Services;
@@ -14,13 +15,20 @@ namespace TinkloProblemos.API.Services
         {
             _timeSpentRepository = timeSpentRepository;
         }
-        public bool Add(CreateTimeSpent timeSpent)
+        public DatabaseResult Add(CreateTimeSpent timeSpent)
         {
-            if (_timeSpentRepository.CreateTimeSpent(timeSpent) != 0)
+            var result = _timeSpentRepository.CreateTimeSpent(timeSpent);
+            var databaseResult = new DatabaseResult
             {
-                return true;
+                Success = false
+            };
+            if (result != 0)
+            {
+                databaseResult.Key = result;
+                databaseResult.Success = true;
+                return databaseResult;
             }
-            return false;
+            return databaseResult;
         }
 
         public IEnumerable<GetTimeSpent> GetProblemTimeSpent(int problemId)

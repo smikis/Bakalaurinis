@@ -10,5 +10,6 @@ namespace TinkloProblemos.API.Contracts.TimeSpent
         public string Description { get; set; }
         public string UserId { get; set; }
         public int ProblemId { get; set; }
+        public DateTime DateRecorded { get; set; }
     }
 }

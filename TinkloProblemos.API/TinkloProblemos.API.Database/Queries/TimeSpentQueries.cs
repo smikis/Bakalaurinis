@@ -7,7 +7,8 @@ namespace TinkloProblemos.API.Database.Queries
     public static class TimeSpentQueries
     {
         public static string Add = @"INSERT INTO timespent (HoursSpent, Description, DateRecorded, UserId, ProblemId) 
-                                    VALUES(@HoursSpent, @Description, NOW(), @UserId, @ProblemId)";
+                                    VALUES(@HoursSpent, @Description, @DateRecorded, @UserId, @ProblemId);
+                                    SELECT LAST_INSERT_ID();";
         public static string GetAll = @"SELECT * FROM timespent";
 
         public static string GetPage = @"SELECT * FROM timespent LIMIT @skip, @take";
@@ -27,6 +28,7 @@ namespace TinkloProblemos.API.Database.Queries
  FROM timespent inner join users on timespent.userId = users.id
 	WHERE userId =@userId";
         public static string Update = @"UPDATE timespent SET Description = @Description,
+                                 DateRecorded = @DateRecorded,
                                  HoursSpent = @HoursSpent
                                    WHERE Id = @Id";
         public static string Delete = @"DELETE FROM timespent

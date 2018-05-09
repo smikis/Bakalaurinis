@@ -17,7 +17,7 @@ class TimeSpentValidatorService implements ValidatorService {
       'hoursSpent': new FormControl(null, Validators.required),
       'description': new FormControl(null, Validators.required),
       'firstName': new FormControl(null),
-      'lastName': new FormControl(null)         
+      'created': new FormControl(null)         
       });
   }
 }
@@ -41,7 +41,7 @@ export class ViewProblemComponent implements OnInit {
   commentText: string = null;
 
   timeSpent: TimeSpent[];
-  displayedColumns = ['firstName', 'lastName', 'hoursSpent', 'description', 'actionsColumn'];
+  displayedColumns = ['firstName', 'hoursSpent',  'created', 'description', 'actionsColumn'];
   dataSource: TimeSpentTableDataSource;
   constructor(private route:ActivatedRoute, private problemService: ProblemService, 
     private commentService: CommentService, private internetUserService: InternetUserService,  

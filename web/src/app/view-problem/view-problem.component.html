@@ -52,14 +52,6 @@
                       </mat-form-field>
                     </mat-cell>
                   </ng-container>
-                  <ng-container matColumnDef="lastName">
-                    <mat-header-cell *matHeaderCellDef> Pavardė </mat-header-cell>
-                    <mat-cell *matCellDef="let row">
-                      <mat-form-field floatPlaceholder="{{ row.editing ? 'float' : 'never'}}">
-                        <input matInput [formControl]="row.validator.controls['lastName']" type="text" placeholder="Pavardė" [(ngModel)]="row.currentData.lastName">
-                      </mat-form-field>
-                    </mat-cell>
-                  </ng-container>
                   <ng-container matColumnDef="hoursSpent">
                     <mat-header-cell *matHeaderCellDef> Valandos </mat-header-cell>
                     <mat-cell *matCellDef="let row">
@@ -76,6 +68,16 @@
                       </mat-form-field>
                     </mat-cell>
                   </ng-container>
+                  <ng-container matColumnDef="created">
+                      <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
+                      <mat-cell *matCellDef="let row">
+                        <mat-form-field floatPlaceholder="{{ row.editing ? 'float' : 'never'}}">
+                            <input matInput [matDatepicker]="datePickerFrom" placeholder="Data" [formControl]="row.validator.controls['created']" [(ngModel)]="row.currentData.dateRecorded">
+                            <mat-datepicker-toggle matSuffix [for]="datePickerFrom"></mat-datepicker-toggle>
+                            <mat-datepicker #datePickerFrom></mat-datepicker>
+                          </mat-form-field>
+                      </mat-cell>
+                    </ng-container>
                   <ng-container matColumnDef="actionsColumn">
                     <mat-header-cell class="justify-end" *matHeaderCellDef>
                       <button mat-icon-button color="accent" (click)="dataSource.createNew()">

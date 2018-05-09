@@ -8,5 +8,6 @@ namespace TinkloProblemos.API.Contracts.TimeSpent
     {
         public string Description { get; set; }
         public decimal HoursSpent { get; set; }
+        public DateTime DateRecorded { get; set; }
     }
 }

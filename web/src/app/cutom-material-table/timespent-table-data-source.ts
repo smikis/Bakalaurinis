@@ -97,7 +97,7 @@ export class TimeSpentTableDataSource extends DataSource<TimeSpentTableElement> 
     timeSpent.userId = userId;
     timeSpent.problemId = this.problemId; 
     this.timeSpentService.createTimeSpent(timeSpent).subscribe(data => {
-      row.currentData.id = data.id;
+      row.currentData.id = data.key;
       console.log(row.currentData);
     });
 

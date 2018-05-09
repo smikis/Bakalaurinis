@@ -16,14 +16,24 @@ export class TimeSpentService {
     return this.http.get<TimeSpent[]>(baseUrl);
   }
 
-  createTimeSpent(model: CreateTimeSpent) : Observable<TimeSpent> {
+  createTimeSpent(model: TimeSpent) : Observable<TimeSpent> {
     let baseUrl = this.url.getApiUrl(Endpoints.timeSpent);
-    return this.http.post<TimeSpent>(baseUrl, model);
+    var createTimeSpent = new CreateTimeSpent();
+    createTimeSpent.problemId = model.problemId;
+    createTimeSpent.userId = model.userId;
+    createTimeSpent.description = model.description;
+    createTimeSpent.hoursSpent = model.hoursSpent;
+    createTimeSpent.dateRecorded = model.dateRecorded.toISOString();
+    return this.http.post<TimeSpent>(baseUrl, createTimeSpent);
   }
 
   update(model: TimeSpent, timeSpentId: number) : Observable<TimeSpent> {
     let baseUrl = this.url.getApiUrl(Endpoints.getTimeSpent(timeSpentId));
-    return this.http.put<TimeSpent>(baseUrl, model);
+    var createTimeSpent = new UpdateTimeSpent();
+    createTimeSpent.description = model.description;
+    createTimeSpent.hoursSpent = model.hoursSpent;
+    createTimeSpent.dateRecorded = model.dateRecorded.toISOString();
+    return this.http.put<TimeSpent>(baseUrl, createTimeSpent);
   }
 
   delete(timeSpentId: number) {
@@ -45,9 +55,16 @@ export class TimeSpent {
   dateRecorded: Date;
 }
 
+export class UpdateTimeSpent {
+  hoursSpent: number;
+  description: string;
+  dateRecorded: string;  
+}
+
 export class CreateTimeSpent {
     hoursSpent: number;
     description: string;
     userId: string;
-    problemId: number;  
+    problemId: number;
+    dateRecorded: string;  
 }
