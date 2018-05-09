@@ -7,7 +7,8 @@ namespace TinkloProblemos.API.Database.Queries
     public static class TagQueries
     {
         public static string Add = @"INSERT INTO tag(Name)
-                                        VALUES(@Name);";
+                                        VALUES(@Name);
+SELECT LAST_INSERT_ID();";
         public static string GetAll = @"SELECT * FROM tag";
 
         public static string GetProblemTags = @"SELECT tag.id,tag.name FROM 

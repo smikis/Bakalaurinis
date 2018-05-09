@@ -58,8 +58,23 @@ namespace TinkloProblemos.API.Controllers
         }
 
         // POST: api/Tag
+        [HttpPost("problem/{problemId}")]
+        public IActionResult Post(int problemId, [FromBody]CreateTagDto value)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _tagService.AddProblemTag(value, problemId);
+                if (result!= null)
+                {
+                    return Ok(result);
+                }
+            }
+            return BadRequest();
+        }
+
+        // POST: api/Tag
         [HttpPost]
-        public IActionResult Post([FromBody]CreateTagDto value)
+        public IActionResult AddProblemTag([FromBody]CreateTagDto value)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +85,7 @@ namespace TinkloProblemos.API.Controllers
             }
             return BadRequest();
         }
-        
+
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]

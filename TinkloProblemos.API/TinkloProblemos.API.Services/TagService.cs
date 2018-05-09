@@ -29,6 +29,22 @@ namespace TinkloProblemos.API.Services
             return false;
         }
 
+        public TagDto AddProblemTag(CreateTagDto tag, int problemId)
+        {
+            var result = _tagRepository.Add(tag);
+            if (result != 0)
+            {
+                var problemTag = new TagDto
+                {
+                    Name = tag.Name,
+                    Id = result
+                };
+                AddToProblem(result, problemId);
+                return problemTag;
+            }
+            return null;
+        }
+
         public IEnumerable<TagDto> GetProblemTags(int problemId)
         {
             return _tagRepository.GetProblemTags(problemId);

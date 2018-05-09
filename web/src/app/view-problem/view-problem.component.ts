@@ -10,6 +10,7 @@ import { ValidatorService } from '../cutom-material-table/validator.service';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { TimeSpentTableDataSource } from '../cutom-material-table/timespent-table-data-source';
 import { TimeSpentService, TimeSpent, CreateTimeSpent } from '../timespent.service';
+import { TagService, Tag} from '../tag.service';
 
 class TimeSpentValidatorService implements ValidatorService {
   getRowValidator(): FormGroup {
@@ -26,7 +27,7 @@ class TimeSpentValidatorService implements ValidatorService {
   selector: 'app-view-problem',
   templateUrl: './view-problem.component.html',
   styleUrls: ['./view-problem.component.css'],
-  providers:[ProblemService,InternetUserService, CommentService,TimeSpentService,
+  providers:[ProblemService,InternetUserService, CommentService,TimeSpentService,TagService,
     {provide: ValidatorService, useClass:TimeSpentValidatorService}]
 })
 export class ViewProblemComponent implements OnInit {
@@ -43,9 +44,17 @@ export class ViewProblemComponent implements OnInit {
   timeSpent: TimeSpent[];
   displayedColumns = ['firstName', 'hoursSpent',  'created', 'description', 'actionsColumn'];
   dataSource: TimeSpentTableDataSource;
-  constructor(private route:ActivatedRoute, private problemService: ProblemService, 
-    private commentService: CommentService, private internetUserService: InternetUserService,  
-    private router: Router,private login: LoginService,private sourcesValidator: ValidatorService,
+
+  tags: Tag[];
+
+  constructor(private route:ActivatedRoute, 
+    private problemService: ProblemService, 
+    private commentService: CommentService, 
+    private internetUserService: InternetUserService,  
+    private router: Router,
+    private login: LoginService,
+    private sourcesValidator: ValidatorService,
+    private tagService: TagService,
     private timeSpentService: TimeSpentService) { }
 
   ngOnInit() {
@@ -76,10 +85,13 @@ export class ViewProblemComponent implements OnInit {
       //Get problem time spent
       this.timeSpentService.getProblemTimeSpent(this.problemId).subscribe(data=> {
         this.timeSpent = data;
-        console.log(data);
         this.dataSource = new TimeSpentTableDataSource(data,this.timeSpentService,this.login, this.problemId, TimeSpent, this.sourcesValidator)
-      })
+      });
 
+      //Get tags
+      this.tagService.getProblemTags(this.problemId).subscribe(data=> {
+        this.tags = data;
+      });
     },
     error=> {
       this.redirecOnError();
@@ -117,21 +129,16 @@ export class ViewProblemComponent implements OnInit {
   // Enter, comma
   separatorKeysCodes = [ENTER, COMMA];
 
-
-  fruits = [
-    { name: 'Lemon' },
-    { name: 'Lime' },
-    { name: 'Apple' },
-  ];
-
-
   add(event: MatChipInputEvent): void {
+    console.log('added');
     let input = event.input;
     let value = event.value;
 
-    // Add our fruit
     if ((value || '').trim()) {
-      this.fruits.push({ name: value.trim() });
+      
+      this.tagService.createProblemTag(value, this.problemId).subscribe(result=> {
+        this.tags.push(result);
+      });
     }
 
     // Reset the input value
@@ -140,11 +147,13 @@ export class ViewProblemComponent implements OnInit {
     }
   }
 
-  remove(fruit: any): void {
-    let index = this.fruits.indexOf(fruit);
+  remove(tag: Tag): void {
+    let index = this.tags.indexOf(tag);
 
     if (index >= 0) {
-      this.fruits.splice(index, 1);
+      this.tagService.delete(tag.id).subscribe(result=> {
+      });
+      this.tags.splice(index, 1);
     }
   }
 

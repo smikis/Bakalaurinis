@@ -23,7 +23,7 @@ namespace TinkloProblemos.API.Database
         {
             using (IDbConnection dbConnection = Connection)
             {
-                return dbConnection.Execute(TagQueries.Add, prod);
+                return dbConnection.ExecuteScalar<int>(TagQueries.Add, prod);
             }
         }
 

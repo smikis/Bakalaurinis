@@ -13,5 +13,6 @@ namespace TinkloProblemos.API.Interfaces.Services
         bool RemoveFromProblem(ProblemTagDto problemTag);
         bool Delete(int id);
         IEnumerable<TagDto> GetAll();
+        TagDto AddProblemTag(CreateTagDto tag, int problemId);
     }
 }
