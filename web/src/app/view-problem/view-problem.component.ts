@@ -130,7 +130,6 @@ export class ViewProblemComponent implements OnInit {
   separatorKeysCodes = [ENTER, COMMA];
 
   add(event: MatChipInputEvent): void {
-    console.log('added');
     let input = event.input;
     let value = event.value;
 

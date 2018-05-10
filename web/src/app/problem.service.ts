@@ -11,6 +11,11 @@ export class ProblemService {
   constructor(private http: HttpClient, private url: UrlService, private login: LoginService) {
   }
 
+  createProblem(problem: CreateProblem) {
+    let baseUrl = this.url.getApiUrl(Endpoints.problem);
+    return this.http.post<number>(baseUrl, problem);
+  }
+
   getProblem(id: number) {
     let baseUrl = this.url.getApiUrl(Endpoints.getProblem(id));
     return this.http.get<Problem>(baseUrl);
@@ -47,7 +52,17 @@ export interface ProblemPage {
     total : number;
     data : Problem[];
    }
-   
+
+export class CreateProblem {
+  name: string;
+  description: string;
+  location: string;
+  assignedUser: string| null;
+  statusId: number;
+  internetUserId: number| null;
+  category: number;
+  tags: string[];
+}
 
 export interface Problem {
   id: number;

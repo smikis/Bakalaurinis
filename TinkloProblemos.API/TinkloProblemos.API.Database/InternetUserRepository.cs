@@ -36,6 +36,14 @@ namespace TinkloProblemos.API.Database
             }
         }
 
+        public IEnumerable<InternetUserDto> Search(string searchQuery)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                return dbConnection.Query<InternetUserDto>(InternetUserQueries.Search, new { searchQuery });
+            }
+        }
+
         public IEnumerable<InternetUserDto> GetAll(int skip, int take)
         {         
             using (IDbConnection dbConnection = Connection)

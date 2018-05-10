@@ -32,6 +32,12 @@ namespace TinkloProblemos.API.Controllers
         }
 
 
+        [HttpGet("search/{searchTerm}")]
+        public IActionResult Get(string searchTerm)
+        {
+            return Ok(_userService.SearchUsers(searchTerm));
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Register registerModel)
         {

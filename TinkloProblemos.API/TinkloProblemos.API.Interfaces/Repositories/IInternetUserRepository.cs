@@ -11,5 +11,6 @@ namespace TinkloProblemos.API.Interfaces.Repositories
         InternetUserDto GetById(int id);
         int Delete(int id);
         int Update(InternetUserUpdateDto prod, int categoryId);
+        IEnumerable<InternetUserDto> Search(string searchQuery);
     }
 }

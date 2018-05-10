@@ -26,6 +26,12 @@ namespace TinkloProblemos.API.Services
             return _internetUserRepository.GetAll();
         }
 
+        public IEnumerable<InternetUserDto> Search(string searchQuery)
+        {
+            var sqlSearchQuery = SqlQueryHelper.ConvertToSqlSearchQuery(searchQuery);
+            return _internetUserRepository.Search(sqlSearchQuery);
+        }
+
         public IEnumerable<InternetUserDto> GetAll(int page, int pageSize)
         {
             int skip = (page - 1) * pageSize;

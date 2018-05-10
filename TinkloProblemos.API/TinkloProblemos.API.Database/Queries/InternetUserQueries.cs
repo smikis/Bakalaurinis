@@ -8,6 +8,9 @@
 
         public static string GetPage = @"SELECT * FROM InternetUser LIMIT @skip, @take";
 
+        public static string Search = @"SELECT * FROM internetuser
+WHERE MATCH(FirstName, LastName) AGAINST(@searchQuery IN BOOLEAN MODE);";
+
         public static string GetById = @"SELECT * FROM internetuser
                                  WHERE Id = @Id";
         public static string Update = @"UPDATE internetuser SET FirstName = @FirstName,

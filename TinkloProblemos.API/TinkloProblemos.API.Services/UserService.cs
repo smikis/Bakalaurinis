@@ -41,6 +41,19 @@ namespace TinkloProblemos.API.Services
             });
         }
 
+        public IEnumerable<GetUser> SearchUsers(string searchTerm)
+        {
+            return _userManager.Users.Where(x=> x.FirstName.ToLower().Contains(searchTerm.ToLower()) 
+                                                || x.LastName.ToLower().Contains(searchTerm.ToLower()) 
+                                                || x.Email.ToLower().Contains(searchTerm.ToLower())).Select(x => new GetUser
+            {
+                Email = x.Email,
+                Id = x.Id,
+                LastName = x.LastName,
+                Name = x.FirstName
+            });
+        }
+
         public async Task<bool> CreateUserAsync(Register registerModel)
         {
             var applicationUser = new ApplicationUser

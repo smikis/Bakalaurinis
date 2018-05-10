@@ -11,6 +11,16 @@ export class InternetUserService {
   constructor(private http: HttpClient, private url: UrlService, private login: LoginService) {
   }
 
+  getAllInternetUsers() {
+    let baseUrl = this.url.getApiUrl(Endpoints.internetUser);
+    return this.http.get<InternetUser[]>(baseUrl);
+  }
+
+  searchInternetUsers(searchQuery: string) {
+    let baseUrl = this.url.getApiUrl(Endpoints.searchInternetUsers(searchQuery));
+    return this.http.get<InternetUser[]>(baseUrl);
+  }
+
   getInternetUser(id: number) {
     let baseUrl = this.url.getApiUrl(Endpoints.getInternetUser(id));
     return this.http.get<InternetUser>(baseUrl);

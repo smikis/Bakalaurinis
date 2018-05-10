@@ -125,3 +125,5 @@ CHANGE COLUMN `Description` `Description` NVARCHAR(512) NULL DEFAULT NULL ;
 
 ALTER TABLE `bakalaurinis`.`timespent` 
 CHANGE COLUMN `Description` `Description` NVARCHAR(512) NULL DEFAULT NULL ;
+
+alter table internetuser ADD FULLTEXT INDEX (FirstName,LastName);

@@ -59,6 +59,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'problemList', component: ProblemListComponent },
+  { path: 'createProblem', component: CreateProblemComponent },
   { path: 'problem/:id', component: ViewProblemComponent }
 ];
 

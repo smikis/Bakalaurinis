@@ -24,7 +24,10 @@ export class Endpoints {
   static readonly login: Endpoint = { value: 'api/Login' };
   static readonly problemPage: (page: number, pageSize: number) => Endpoint = (page, pageSize) => { return { value: `api/Problem/filtered/${page}/${pageSize}` }};
   static readonly getProblem: (id: number) => Endpoint = (id) => { return { value: `api/Problem/${id}/` }};
+  static readonly problem: Endpoint = { value: 'api/Problem' };
+  static readonly internetUser: Endpoint = { value: 'api/InternetUser' };
   static readonly getInternetUser: (id: number) => Endpoint = (id) => { return { value: `api/InternetUser/${id}/` }};
+  static readonly searchInternetUsers: (searchQuery: string) => Endpoint = (searchQuery) => { return { value: `api/InternetUser/search/${searchQuery}/` }};
   static readonly getProblemComments: (problemId: number) => Endpoint = (problemId) => { return { value: `api/Comment/${problemId}/` }};
   static readonly comment: Endpoint = { value: 'api/Comment' };
   static readonly getProblemTimeSpent: (id: number) => Endpoint = (id) => { return { value: `/api/TimeSpent/problem/${id}/` }};
@@ -34,4 +37,5 @@ export class Endpoints {
   static readonly getProblemTags: (id: number) => Endpoint = (id) => { return { value: `/api/Tag/problem/${id}/` }};
   static readonly getTag: (id: number) => Endpoint = (id) => { return { value: `/api/Tag/${id}/` }};
   static readonly tags: Endpoint = { value: 'api/Tag' };
+  static readonly searchUsers: (searchQuery: string) => Endpoint = (searchQuery) => { return { value: `api/User/search/${searchQuery}/` }};
 }

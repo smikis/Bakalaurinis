@@ -17,6 +17,6 @@ namespace TinkloProblemos.API.Contracts.Problem
         public int? InternetUserId { get; set; }
         [Required]
         public int Category { get; set; }
-        public List<int> Tags { get; set; }
+        public List<string> Tags { get; set; }
     }
 }

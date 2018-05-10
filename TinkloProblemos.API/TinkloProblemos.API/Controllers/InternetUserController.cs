@@ -41,7 +41,14 @@ namespace TinkloProblemos.API.Controllers
         {
             return _internetUserService.GetById(id);
         }
-        
+
+        // GET: api/InternetUser/5
+        [HttpGet("search/{searchTerm}")]
+        public IEnumerable<InternetUserDto> Search(string searchTerm)
+        {
+            return _internetUserService.Search(searchTerm);
+        }
+
         // POST: api/InternetUser
         [HttpPost]
         public IActionResult Post([FromBody]InternetUserDto value)
