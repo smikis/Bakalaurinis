@@ -23,7 +23,7 @@ export class ProblemListComponent implements OnInit {
   isLoadingResults = true;
   resultsLength = 0;
   pageSize = 10;
-  displayedColumns = ['id', 'name', 'description', 'location', 'categoryName', 'assignedUserEmail', 'status'];
+  displayedColumns = ['id', 'name', 'location', 'categoryName', 'assignedUserEmail', 'status'];
   dataSource : ProblemsDataSource;
   readonly updateForm : FormGroup;
 
