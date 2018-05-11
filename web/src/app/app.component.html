@@ -28,22 +28,22 @@
                 <mat-list-item (click)="menuExpanded = !menuExpanded">
                     <a class="relative">
                         <mat-icon>assessment</mat-icon>
-                        <span>Problems</span>
+                        <span>Problemos</span>
                         <span flex></span>
                         <mat-icon class="menu-caret">arrow_drop_down</mat-icon>
                     </a>                 
                 </mat-list-item>
                 <mat-list-item routerLinkActive="open" *ngIf="menuExpanded">
-                    <a [routerLink]="['/', 'problemList']" class="relative">Create problem</a>
+                    <a [routerLink]="['/', 'createProblem']" class="relative">Sukurti problemą</a>
                 </mat-list-item>
                 <mat-list-item routerLinkActive="open" *ngIf="menuExpanded">
-                    <a [routerLink]="['/', 'problemList']" class="relative">My problems</a>
+                    <a [routerLink]="['/', 'problemList']" class="relative">Mano problemos</a>
                 </mat-list-item>
                 <mat-list-item routerLinkActive="open" *ngIf="menuExpanded">
-                    <a [routerLink]="['/', 'problemList']" class="relative">All problems</a>
+                    <a [routerLink]="['/', 'problemList']" class="relative">Nepriskirtos problemos</a>
                 </mat-list-item>
                 <mat-list-item routerLinkActive="open" *ngIf="menuExpanded">
-                    <a [routerLink]="['/', 'problemList']" class="relative">Open problems</a>
+                    <a [routerLink]="['/', 'problemList']" class="relative">Visos problemos</a>
                 </mat-list-item>
                 <mat-list-item>
                     <a class="relative" [routerLink]="['/','dashboard']">

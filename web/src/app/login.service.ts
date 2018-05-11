@@ -1,5 +1,6 @@
 import { Injectable, Output, EventEmitter, OnInit } from '@angular/core';
-import { Http, RequestOptionsArgs, Headers } from '@angular/http';
+import { RequestOptionsArgs } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { UrlService, Endpoints } from './url.service';
 import { Subject } from 'rxjs/Subject';
@@ -21,46 +22,46 @@ export class LoginService {
     return this.lastAuthenticatedUser;
   }
 
-  constructor(private http: Http, private url: UrlService, private router : Router) {
+  constructor(private http: HttpClient, private url: UrlService, private router : Router) {
     this.accessToken = localStorage.getItem('accessToken');
-    if(this.accessToken) {
-        this.lastAuthenticatedUser = new AuthenticatedUser('test', '17831a88-17b9-4d81-b9e6-6aac5668e6c1', 'Tomas', 'Existing', ['test', 'Admin']);
-        this.userSubscription.next(this.lastAuthenticatedUser);
-        console.log("Token exists");
-    }
-  }
 
-
-  async login(login: Login) {       
-        var response  = await this.http.post(this.url.getApiUrl(Endpoints.login), login).toPromise();
-        console.log(response);
-        this.lastAuthenticatedUser = new AuthenticatedUser(<string>response.json().email, <string>response.json().id, <string>response.json().firstName, <string>response.json().lastName, <string[]>response.json().roles);
-        console.log(this.lastAuthenticatedUser);
-        this.accessToken = <string>response.json().token;
+    this.getUser().subscribe(data=> {
+      this.lastAuthenticatedUser = new AuthenticatedUser(data.email, data.id,data.firstName, data.lastName,data.roles);
+        this.accessToken = data.token;
         this.userSubscription.next(this.lastAuthenticatedUser);    
         window.localStorage.setItem('accessToken', this.accessToken);
-        return response.ok;
+    },
+  error=> {
+    window.localStorage.removeItem('accessToken');
+    this.router.navigate(['login']);
+  });
+  }
+
+  getUser() {
+    let baseUrl = this.url.getApiUrl(Endpoints.login);
+    return this.http.get<LoginResult>(baseUrl, {headers: this.applyAuthentication()});
+  }
+
+  async login(login: Login) {       
+        var response  = await this.http.post<LoginResult>(this.url.getApiUrl(Endpoints.login), login).toPromise();
+        this.lastAuthenticatedUser = new AuthenticatedUser(response.email, response.id,response.firstName, response.lastName,response.roles);
+        this.accessToken = response.token;
+        this.userSubscription.next(this.lastAuthenticatedUser);    
+        window.localStorage.setItem('accessToken', this.accessToken);
+        return response;
   }
 
   logout(){
   
   }
 
-  applyAuthentication(requestOptions?: RequestOptionsArgs | undefined) : RequestOptionsArgs | undefined {
+  applyAuthentication(requestOptions?: RequestOptionsArgs | undefined) : HttpHeaders | undefined {
 
     if(this.accessToken === null) {
       return void 0;
     } 
     
-    const req : RequestOptionsArgs =
-    requestOptions === void 0 ? {  } :  requestOptions;
-
-    if(!req.headers) {
-      req.headers = new Headers();
-    }
-    req.headers.set('Authorization', 'Bearer ' + this.accessToken);
-
-    return req;
+    return new HttpHeaders().set('authorization', 'Bearer ' + this.accessToken);
   }
 }
 
@@ -80,4 +81,13 @@ export class AuthenticatedUser {
             return false;
         }
     }
+}
+
+export interface LoginResult {
+  token: string;
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  roles: string[];
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -7,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using TinkloProblemos.API.Database;
 using TinkloProblemos.API.Identity;
 using TinkloProblemos.API.Identity.Entities;
@@ -77,6 +81,9 @@ namespace TinkloProblemos.API
             services.AddMvc();
             services.AddSwaggerGen(c =>
             {
+                var applyApiKeySecurity = new ApplyApiKeySecurity();
+                applyApiKeySecurity.Apply(c);
+
                 c.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",
@@ -85,6 +92,15 @@ namespace TinkloProblemos.API
                     TermsOfService = "None",
                     Contact = new Contact { Name = "Tomas", Email = "tomas.valiunas@ktu.edu", Url = "www.bakalaurinis.lt" }
                 });
+
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+                c.DocumentFilter<SecurityRequirementsDocumentFilter>();
             });
 
             services.AddCors(options =>
@@ -95,7 +111,7 @@ namespace TinkloProblemos.API
                         .AllowAnyHeader()
                         .AllowCredentials());
             });
-
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -114,6 +130,92 @@ namespace TinkloProblemos.API
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
             app.UseCors("CorsPolicy");
+        }
+    }
+    public class SecurityRequirementsDocumentFilter : IDocumentFilter
+    {
+        public void Apply(SwaggerDocument document, DocumentFilterContext context)
+        {
+            document.Security = new List<IDictionary<string, IEnumerable<string>>>()
+            {
+                new Dictionary<string, IEnumerable<string>>()
+                {
+                    { "Bearer", new string[]{ } },
+                    { "Basic", new string[]{ } },
+                }
+            };
+        }
+    }
+
+    public class ApplyApiKeySecurity : IDocumentFilter, IOperationFilter
+    {
+        /// <summary>
+        /// Token input boxes in the header
+        /// </summary>
+        /// <param name="swaggerDoc">The swagger document.</param>
+        /// <param name="context">The swagger document.</param>
+        public void Apply(SwaggerDocument swaggerDoc, DocumentFilterContext context)
+        {
+            var tokenParameter = new BodyParameter
+            {
+                Name = "Bearer",
+                Description = "Authorization Token",
+                @In = "header",
+                Required = true
+            };
+
+
+            IList<IDictionary<string, IEnumerable<string>>> security =
+                new List<IDictionary<string, IEnumerable<string>>>();
+            security.Add(new Dictionary<string, IEnumerable<string>>
+            {
+                {tokenParameter.Name, new string[0]}
+            });
+
+            swaggerDoc.Security = security;
+        }
+
+
+        /// <summary>
+        /// Operation-level token input fields
+        /// </summary>
+        /// <param name="operation">The operation.</param>
+        /// <param name="context">The operation.</param>
+        public void Apply(Operation operation, OperationFilterContext context)
+        {
+            operation.Parameters = operation.Parameters ?? new List<IParameter>();
+
+            var tokenAttribute =
+                context.ApiDescription.ActionAttributes().OfType<AuthorizeAttribute>().FirstOrDefault() ??
+                context.ApiDescription.ControllerAttributes().OfType<AuthorizeAttribute>().FirstOrDefault();
+
+            if (tokenAttribute != null)
+            {
+                operation.Responses.Add("401", new Response { Description = "Authorization token required" });
+
+                //var tokenParameter = new BodyParameter()
+                //{
+                //    Name = "Authorization",
+                //    Description = "Authorization token",
+                //    @In = "header",
+                //    Required = false,
+                //    Schema = new Schema()
+                //    {
+                //        Type = "apiKey",
+                //        Description = string.Empty,
+                //    }
+                //};
+
+                //tokenParameter.Extensions.Add("rs-required-operations", tokenAttribute.Roles);
+
+                //operation.Parameters.Add(tokenParameter);
+            }
+        }
+
+        public void Apply(SwaggerGenOptions c)
+        {
+            //c.DocumentFilter<ApplyApiKeySecurity>();
+            c.OperationFilter<ApplyApiKeySecurity>();
         }
     }
 }

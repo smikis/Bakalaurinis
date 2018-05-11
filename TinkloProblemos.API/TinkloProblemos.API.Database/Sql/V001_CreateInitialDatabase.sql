@@ -127,3 +127,19 @@ ALTER TABLE `bakalaurinis`.`timespent`
 CHANGE COLUMN `Description` `Description` NVARCHAR(512) NULL DEFAULT NULL ;
 
 alter table internetuser ADD FULLTEXT INDEX (FirstName,LastName);
+
+ALTER TABLE `bakalaurinis`.`users` 
+CHANGE COLUMN `Address` `Address` NVARCHAR(256) NULL DEFAULT NULL ;
+
+ALTER TABLE `bakalaurinis`.`internetuser` 
+CHANGE COLUMN `FirstName` `FirstName` NVARCHAR(255) NOT NULL ,
+CHANGE COLUMN `LastName` `LastName` NVARCHAR(255) NOT NULL ;
+
+ALTER TABLE `bakalaurinis`.`problem` 
+CHANGE COLUMN `Name` `Name` NVARCHAR(255) NOT NULL ,
+CHANGE COLUMN `Description` `Description` NVARCHAR(9000) NOT NULL ,
+CHANGE COLUMN `Location` `Location` NVARCHAR(512) NULL DEFAULT NULL ;
+
+ALTER TABLE `bakalaurinis`.`category` 
+CHANGE COLUMN `Name` `Name` NVARCHAR(255) NOT NULL ,
+CHANGE COLUMN `Description` `Description` NVARCHAR(512) NULL DEFAULT NULL ;

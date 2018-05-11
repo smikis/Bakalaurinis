@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
@@ -40,6 +41,20 @@ namespace TinkloProblemos.API.Controllers
                     var token = await _authenticationService.GenerateTokenAsync(user);
                     return Ok(token);
                 }
+            }
+            return BadRequest();
+        }
+
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        [HttpGet]
+        public async Task<IActionResult> GetUserData()
+        {
+            var userId = User.Claims.FirstOrDefault(x=> x.Type == "ID")?.Value;
+            if (!string.IsNullOrEmpty(userId))
+            {
+                var user = await _userManager.FindByIdAsync(userId);
+                var token = await _authenticationService.GenerateTokenAsync(user);
+                return Ok(token);
             }
             return BadRequest();
         }

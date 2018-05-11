@@ -16,7 +16,7 @@ export class TimeSpentService {
     return this.http.get<TimeSpent[]>(baseUrl);
   }
 
-  createTimeSpent(model: TimeSpent) : Observable<TimeSpent> {
+  createTimeSpent(model: TimeSpent){
     let baseUrl = this.url.getApiUrl(Endpoints.timeSpent);
     var createTimeSpent = new CreateTimeSpent();
     createTimeSpent.problemId = model.problemId;
@@ -24,7 +24,7 @@ export class TimeSpentService {
     createTimeSpent.description = model.description;
     createTimeSpent.hoursSpent = model.hoursSpent;
     createTimeSpent.dateRecorded = model.dateRecorded.toISOString();
-    return this.http.post<TimeSpent>(baseUrl, createTimeSpent);
+    return this.http.post<any>(baseUrl, createTimeSpent);
   }
 
   update(model: TimeSpent, timeSpentId: number) : Observable<TimeSpent> {
