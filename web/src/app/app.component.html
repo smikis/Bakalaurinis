@@ -5,7 +5,7 @@
         </button>
         <h1 class="example-app-name">Interneto problemos</h1>
         <div class="spacer"></div>
-        <button mat-button routerLink="/login" routerLinkActive="active">
+        <button mat-button (click)="onPlusClick()">
             <i class="material-icons">add</i>
         </button>
     </mat-toolbar>
@@ -27,7 +27,7 @@
                 </mat-list-item>
                 <mat-list-item (click)="menuExpanded = !menuExpanded">
                     <a class="relative">
-                        <mat-icon>assessment</mat-icon>
+                        <mat-icon>inbox</mat-icon>
                         <span>Problemos</span>
                         <span flex></span>
                         <mat-icon class="menu-caret">arrow_drop_down</mat-icon>
@@ -46,9 +46,9 @@
                     <a [routerLink]="['/', 'problemList']" class="relative">Visos problemos</a>
                 </mat-list-item>
                 <mat-list-item>
-                    <a class="relative" [routerLink]="['/','dashboard']">
-                        <mat-icon>assessment</mat-icon>
-                        <span>Dashboard</span>
+                    <a class="relative" [routerLink]="['/','usersList']">
+                        <mat-icon>perm_identity</mat-icon>
+                        <span>Vartotojai</span>
                     </a>
                 </mat-list-item>
             </mat-nav-list>

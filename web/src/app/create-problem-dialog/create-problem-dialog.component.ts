@@ -13,14 +13,16 @@ import {InternetUserService, InternetUser} from '../internet.user.service';
 import {UserService, User} from '../user.service';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
 import {ProblemService, Problem, CreateProblem} from '../problem.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 @Component({
-  selector: 'app-create-problem',
-  templateUrl: './create-problem.component.html',
-  styleUrls: ['./create-problem.component.css'],
+  selector: 'app-create-problem-dialog',
+  templateUrl: './create-problem-dialog.component.html',
+  styleUrls: ['./create-problem-dialog.component.scss'],
   providers: [InternetUserService,UserService, ProblemService]
 })
-export class CreateProblemComponent implements OnInit {
- 
+export class CreateProblemDialogComponent implements OnInit {
+
   myform: FormGroup;
 
   internetUserCtrl: FormControl;
@@ -40,7 +42,8 @@ export class CreateProblemComponent implements OnInit {
   addOnBlur: boolean = true;
   separatorKeysCodes = [ENTER, COMMA];
 
-  constructor(private internetUserService: InternetUserService, private userService: UserService, private problemService: ProblemService) {     
+  constructor(private internetUserService: InternetUserService, private userService: UserService, private problemService: ProblemService,
+    public dialogRef: MatDialogRef<CreateProblemDialogComponent>) {     
     this.internetUserCtrl = new FormControl();
     this.filteredInternetUsers = this.internetUserCtrl.valueChanges
     .startWith(null)
@@ -127,3 +130,4 @@ export class CreateProblemComponent implements OnInit {
   }
 
 }
+
