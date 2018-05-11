@@ -53,12 +53,16 @@ import { ProblemListComponent } from './problem-list/problem-list.component';
 import { CreateProblemComponent } from './create-problem/create-problem.component';
 import { ViewProblemComponent } from './view-problem/view-problem.component';
 import { ChartsModule } from 'ng2-charts';
+import { UsersListComponent } from './users-list/users-list.component';
+import { InternetUserListComponent } from './internet-user-list/internet-user-list.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'problemList', component: ProblemListComponent },
+  { path: 'usersList', component: UsersListComponent },
+  { path: 'internetUsersList', component: InternetUserListComponent },
   { path: 'createProblem', component: CreateProblemComponent },
   { path: 'problem/:id', component: ViewProblemComponent }
 ];
@@ -70,7 +74,9 @@ const appRoutes: Routes = [
     DashboardComponent,
     ProblemListComponent,
     CreateProblemComponent,
-    ViewProblemComponent
+    ViewProblemComponent,
+    UsersListComponent,
+    InternetUserListComponent
   ],
   imports: [
     ChartsModule,

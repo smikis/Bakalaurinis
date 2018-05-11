@@ -16,6 +16,19 @@ export class UserService {
     return this.http.get<User[]>(baseUrl);
   }
 
+  getPage(page:number, pageSize:number, search?: string | undefined) : Observable<UsersPage> {
+    let baseUrl = this.url.getApiUrl(Endpoints.usersPage(page,pageSize)) + this.generateArgs(search);
+    return this.http.get<UsersPage>(baseUrl);
+  }
+
+  generateArgs(search?: string | undefined) : string {
+    let args ="?";
+      if(search !== undefined) {
+        args += "&searchTerm=" + search;
+      }        
+    return args;
+  }
+
 }
 
 export interface UsersPage {

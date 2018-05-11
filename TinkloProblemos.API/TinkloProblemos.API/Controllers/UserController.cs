@@ -31,6 +31,13 @@ namespace TinkloProblemos.API.Controllers
             return  Ok(_userService.GetUsers(page,pageSize));
         }
 
+        // GET: api/Problem
+        [HttpGet("filtered/{page}/{pageSize}")]
+        public UsersPage GetFiltered(int page, int pageSize,  [FromQuery]string searchTerm)
+        {
+            return _userService.SearchUsersPage(page, pageSize, searchTerm);
+        }
+
 
         [HttpGet("search/{searchTerm}")]
         public IActionResult Get(string searchTerm)

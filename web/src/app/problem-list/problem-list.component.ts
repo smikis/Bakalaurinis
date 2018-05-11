@@ -82,7 +82,6 @@ export class ProblemListComponent implements OnInit {
   }
 
   getFilteredData() {
-    console.log(this.updateForm.value);
     var dateFrom = <Date>this.updateForm.controls['selectedDateFrom'].value;
     var dateTo = <Date>this.updateForm.controls['selectedDateTo'].value;
     var category = <string>this.updateForm.controls['category'].value;

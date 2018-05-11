@@ -20,7 +20,7 @@ namespace TinkloProblemos.API.Services
 
         public IEnumerable<GetUser> GetUsers()
         {
-            return _userManager.Users.Select(x=> new GetUser
+            return _userManager.Users.Select(x => new GetUser
             {
                 Email = x.Email,
                 Id = x.Id,
@@ -31,7 +31,7 @@ namespace TinkloProblemos.API.Services
 
         public IEnumerable<GetUser> GetUsers(int page, int pageSize)
         {
-            var skip = (page-1) * pageSize;
+            var skip = (page - 1) * pageSize;
             return _userManager.Users.Skip(skip).Take(pageSize).Select(x => new GetUser
             {
                 Email = x.Email,
@@ -43,15 +43,42 @@ namespace TinkloProblemos.API.Services
 
         public IEnumerable<GetUser> SearchUsers(string searchTerm)
         {
-            return _userManager.Users.Where(x=> x.FirstName.ToLower().Contains(searchTerm.ToLower()) 
-                                                || x.LastName.ToLower().Contains(searchTerm.ToLower()) 
+            return _userManager.Users.Where(x => x.FirstName.ToLower().Contains(searchTerm.ToLower())
+                                                || x.LastName.ToLower().Contains(searchTerm.ToLower())
                                                 || x.Email.ToLower().Contains(searchTerm.ToLower())).Select(x => new GetUser
+                                                {
+                                                    Email = x.Email,
+                                                    Id = x.Id,
+                                                    LastName = x.LastName,
+                                                    Name = x.FirstName
+                                                });
+        }
+
+        public UsersPage SearchUsersPage(int page, int pageSize, string searchTerm)
+        {
+            var skip = page * pageSize;
+            var baseQuery = _userManager.Users;
+            if (searchTerm != null)
+            {
+                baseQuery = baseQuery.Where(x => x.FirstName.ToLower().Contains(searchTerm.ToLower())
+                                                            || x.LastName.ToLower().Contains(searchTerm.ToLower())
+                                                            || x.Email.ToLower().Contains(searchTerm.ToLower()));
+            }
+
+            var result = baseQuery.Skip(skip)
+            .Take(pageSize)
+            .Select(x => new GetUser
             {
                 Email = x.Email,
                 Id = x.Id,
                 LastName = x.LastName,
                 Name = x.FirstName
             });
+            return new UsersPage
+            {
+                Data = result,
+                Total = baseQuery.Count()
+            };
         }
 
         public async Task<bool> CreateUserAsync(Register registerModel)
