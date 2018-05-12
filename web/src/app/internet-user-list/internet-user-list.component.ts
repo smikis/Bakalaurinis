@@ -65,7 +65,6 @@ export class InternetUserListComponent implements OnInit {
 
   onPaginateChange(event : PageEvent){   
     this.dataSource.loadPage(event.pageIndex,event.pageSize);
-   // this.resultsLength = this.dataSource.length;
   }
 
 }
