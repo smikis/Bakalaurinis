@@ -1,3 +1,91 @@
-<p>
-  internet-user-information works!
-</p>
+<mat-card>
+  <mat-card-content>
+    <mat-tab-group>
+      <mat-tab label="Kliento informacija">
+        <mat-card-content>
+          <h4>Informacija</h4>
+          <div fxLayout="row" layout-align="center">
+            <div fxFlex>
+              <div fxLayout="column">
+                <span>Vardas</span>
+                <strong>{{internetUser?.firstName}}</strong>
+              </div>
+
+              <div fxLayout="column">
+                <span>Pavardė</span>
+                <strong>{{internetUser?.lastName}}</strong>
+              </div>
+
+              <div fxLayout="column">
+                <span>Adresas</span>
+                <strong>{{internetUser?.location}}</strong>
+              </div>
+
+
+            </div>
+            <div fxFlex>
+
+              <div fxLayout="column">
+                <span>Vartotojas nuo</span>
+                <strong>{{internetUser?.created}}</strong>
+              </div>
+
+              <div fxLayout="column">
+                <span>Turimas planas</span>
+                <strong>{{internetUser?.internetPlan}}</strong>
+              </div>
+              <div fxLayout="column">
+                <span>IP Adresas</span>
+                <strong>{{internetUser?.ipAddress}}</strong>
+              </div>
+
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              <b>Aprašymas</b>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{internetUser?.description}}</p>
+          </mat-card-content>
+        </mat-card>
+        <div fxFlex fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+            <mat-card fxFlex="50%" >
+                <mat-card-header>
+                  <mat-card-title>
+                    <b>Vartotojo vieta</b>
+                  </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div #gmap style="width:100%;height:400px"></div>
+                </mat-card-content>
+              </mat-card>
+            <mat-card fxFlex="50%">
+              <mat-card-header>
+                <mat-card-title>
+                  <b>Vartotojo turimi įrenginiai</b>
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-list role="list">
+                  <mat-list-item class="editable" role="listitem">Belkin HDX 3000</mat-list-item>
+                  <mat-list-item class="editable" role="listitem">Mat-Receiver 6300</mat-list-item>
+                  <mat-list-item class="editable" role="listitem">D-Link Super Model</mat-list-item>
+                </mat-list>
+              </mat-card-content>
+            </mat-card>
+        </div>
+ 
+      </mat-tab>
+      <mat-tab label="Kliento statusas">
+        Statusas
+      </mat-tab>
+      <mat-tab label="Kliento problemos">
+        Kliento problemos
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>

@@ -157,3 +157,6 @@ CREATE TABLE `bakalaurinis`.`ping_results` (
     REFERENCES `bakalaurinis`.`internetuser` (`Id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+	ALTER TABLE `bakalaurinis`.`internetuser` 
+CHANGE COLUMN `Location` `Location` NVARCHAR(255) NULL DEFAULT NULL ;

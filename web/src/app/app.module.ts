@@ -66,7 +66,8 @@ const appRoutes: Routes = [
   { path: 'usersList', component: UsersListComponent },
   { path: 'internetUsersList', component: InternetUserListComponent },
   { path: 'createProblem', component: CreateProblemComponent },
-  { path: 'problem/:id', component: ViewProblemComponent }
+  { path: 'problem/:id', component: ViewProblemComponent },
+  { path: 'internetUser/:id', component: InternetUserInformationComponent }
 ];
 
 @NgModule({

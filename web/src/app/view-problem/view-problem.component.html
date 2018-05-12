@@ -69,30 +69,30 @@
                     </mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="created">
-                      <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
-                      <mat-cell *matCellDef="let row">
-                        <mat-form-field floatPlaceholder="{{ row.editing ? 'float' : 'never'}}">
-                            <input matInput [matDatepicker]="datePickerFrom" placeholder="Data" [formControl]="row.validator.controls['created']" [(ngModel)]="row.currentData.dateRecorded">
-                            <mat-datepicker-toggle matSuffix [for]="datePickerFrom"></mat-datepicker-toggle>
-                            <mat-datepicker #datePickerFrom></mat-datepicker>
-                          </mat-form-field>
-                      </mat-cell>
-                    </ng-container>
+                    <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      <mat-form-field floatPlaceholder="{{ row.editing ? 'float' : 'never'}}">
+                        <input matInput [matDatepicker]="datePickerFrom" placeholder="Data" [formControl]="row.validator.controls['created']" [(ngModel)]="row.currentData.dateRecorded">
+                        <mat-datepicker-toggle matSuffix [for]="datePickerFrom"></mat-datepicker-toggle>
+                        <mat-datepicker #datePickerFrom></mat-datepicker>
+                      </mat-form-field>
+                    </mat-cell>
+                  </ng-container>
                   <ng-container matColumnDef="actionsColumn">
                     <mat-header-cell class="justify-end" *matHeaderCellDef>
                       <button mat-icon-button color="accent" (click)="dataSource.createNew()">
-                          <i class="material-icons">add</i>
+                        <i class="material-icons">add</i>
                       </button>
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row">
                       <button *ngIf="!row.editing" mat-icon-button focusable="false" (click)="row.startEdit()">
-                          <i class="material-icons">mode_edit</i>
+                        <i class="material-icons">mode_edit</i>
                       </button>
                       <button *ngIf="row.editing" mat-icon-button focusable="false" (click)="row.confirmEditCreate()">
-                          <i class="material-icons">check</i>
+                        <i class="material-icons">check</i>
                       </button>
                       <button mat-icon-button focusable="false" (click)="row.cancelOrDelete()">
-                          <i class="material-icons">cancel</i>
+                        <i class="material-icons">cancel</i>
                       </button>
                     </mat-cell>
                   </ng-container>
@@ -137,46 +137,54 @@
           </mat-tab>
 
           <mat-tab label="Kliento informacija">
-            <mat-card-content>
-              <h4>Informacija</h4>
-              <div fxLayout="row" layout-align="center">
-                <div fxFlex>
-                  <div fxLayout="column">
-                    <span>Vardas</span>
-                    <strong>{{internetUser?.firstName}}</strong>
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>
+                  <b>Informacija</b>
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-card-content>
+                  <div fxLayout="row" layout-align="center">
+                    <div fxFlex>
+                      <div fxLayout="column">
+                        <span>Vardas</span>
+                        <strong>{{internetUser?.firstName}}</strong>
+                      </div>
+
+                      <div fxLayout="column">
+                        <span>Pavardė</span>
+                        <strong>{{internetUser?.lastName}}</strong>
+                      </div>
+
+                      <div fxLayout="column">
+                        <span>Adresas</span>
+                        <strong>{{internetUser?.location}}</strong>
+                      </div>
+
+
+                    </div>
+                    <div fxFlex>
+
+                      <div fxLayout="column">
+                        <span>Vartotojas nuo</span>
+                        <strong>{{internetUser?.created}}</strong>
+                      </div>
+
+                      <div fxLayout="column">
+                        <span>Turimas planas</span>
+                        <strong>{{internetUser?.internetPlan}}</strong>
+                      </div>
+                      <div fxLayout="column">
+                        <span>IP Adresas</span>
+                        <strong>{{internetUser?.ipAddress}}</strong>
+                      </div>
+
+                    </div>
                   </div>
-
-                  <div fxLayout="column">
-                    <span>Pavardė</span>
-                    <strong>{{internetUser?.lastName}}</strong>
-                  </div>
-
-                  <div fxLayout="column">
-                    <span>Adresas</span>
-                    <strong>{{internetUser?.location}}</strong>
-                  </div>
-
-
-                </div>
-                <div fxFlex>
-
-                  <div fxLayout="column">
-                    <span>Vartotojas nuo</span>
-                    <strong>{{internetUser?.created}}</strong>
-                  </div>
-
-                  <div fxLayout="column">
-                    <span>Turimas planas</span>
-                    <strong>{{internetUser?.internetPlan}}</strong>
-                  </div>
-                  <div fxLayout="column">
-                    <span>IP Adresas</span>
-                    <strong>{{internetUser?.ipAddress}}</strong>
-                  </div>
-
-                </div>
-              </div>
-            </mat-card-content>
+                </mat-card-content>
+              </mat-card-content>
+            </mat-card>
             <mat-card>
               <mat-card-header>
                 <mat-card-title>
@@ -204,7 +212,7 @@
           </mat-tab>
 
           <mat-tab label="Susiję problemos">
-           Problemos
+            Problemos
           </mat-tab>
         </mat-tab-group>
       </mat-card-content>
