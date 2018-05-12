@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ping", "Ping\Ping.csproj", "{44F05F75-13EE-4099-BAF7-E2E3814309E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ping.Database", "Ping.Database\Ping.Database.csproj", "{A585DE85-94B0-4401-81D6-E1A52BEAA778}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{44F05F75-13EE-4099-BAF7-E2E3814309E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44F05F75-13EE-4099-BAF7-E2E3814309E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44F05F75-13EE-4099-BAF7-E2E3814309E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A585DE85-94B0-4401-81D6-E1A52BEAA778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A585DE85-94B0-4401-81D6-E1A52BEAA778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A585DE85-94B0-4401-81D6-E1A52BEAA778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A585DE85-94B0-4401-81D6-E1A52BEAA778}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

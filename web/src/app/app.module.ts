@@ -56,6 +56,7 @@ import { ChartsModule } from 'ng2-charts';
 import { UsersListComponent } from './users-list/users-list.component';
 import { InternetUserListComponent } from './internet-user-list/internet-user-list.component';
 import { CreateProblemDialogComponent } from './create-problem-dialog/create-problem-dialog.component';
+import { InternetUserInformationComponent } from './internet-user-information/internet-user-information.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -78,7 +79,8 @@ const appRoutes: Routes = [
     ViewProblemComponent,
     UsersListComponent,
     InternetUserListComponent,
-    CreateProblemDialogComponent
+    CreateProblemDialogComponent,
+    InternetUserInformationComponent
   ],
   imports: [
     ChartsModule,

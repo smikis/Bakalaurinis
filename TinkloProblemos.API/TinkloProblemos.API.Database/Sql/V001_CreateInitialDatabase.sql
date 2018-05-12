@@ -143,3 +143,17 @@ CHANGE COLUMN `Location` `Location` NVARCHAR(512) NULL DEFAULT NULL ;
 ALTER TABLE `bakalaurinis`.`category` 
 CHANGE COLUMN `Name` `Name` NVARCHAR(255) NOT NULL ,
 CHANGE COLUMN `Description` `Description` NVARCHAR(512) NULL DEFAULT NULL ;
+
+CREATE TABLE `bakalaurinis`.`ping_results` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `internetUserId` INT NOT NULL,
+  `ipAddress` VARCHAR(255) NOT NULL,
+  `time` BIGINT NULL,
+  `recorded` DATETIME NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  CONSTRAINT `fk_ping_internetuser`
+    FOREIGN KEY (`internetUserId`)
+    REFERENCES `bakalaurinis`.`internetuser` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);

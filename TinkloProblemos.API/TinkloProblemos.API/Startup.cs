@@ -192,29 +192,11 @@ namespace TinkloProblemos.API
             if (tokenAttribute != null)
             {
                 operation.Responses.Add("401", new Response { Description = "Authorization token required" });
-
-                //var tokenParameter = new BodyParameter()
-                //{
-                //    Name = "Authorization",
-                //    Description = "Authorization token",
-                //    @In = "header",
-                //    Required = false,
-                //    Schema = new Schema()
-                //    {
-                //        Type = "apiKey",
-                //        Description = string.Empty,
-                //    }
-                //};
-
-                //tokenParameter.Extensions.Add("rs-required-operations", tokenAttribute.Roles);
-
-                //operation.Parameters.Add(tokenParameter);
             }
         }
 
         public void Apply(SwaggerGenOptions c)
         {
-            //c.DocumentFilter<ApplyApiKeySecurity>();
             c.OperationFilter<ApplyApiKeySecurity>();
         }
     }
