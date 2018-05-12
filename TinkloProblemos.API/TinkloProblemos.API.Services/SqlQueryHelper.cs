@@ -6,6 +6,7 @@ namespace TinkloProblemos.API.Services
     {
         public static string ConvertToSqlSearchQuery(string searchTerm)
         {
+            if (searchTerm == null) return "";
             var words = searchTerm.Split(' ');
             if (words.Length == 1)
             {

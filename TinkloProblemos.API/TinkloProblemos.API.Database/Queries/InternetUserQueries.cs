@@ -7,9 +7,17 @@
         public static string GetAll = @"SELECT * FROM InternetUser";
 
         public static string GetPage = @"SELECT * FROM InternetUser LIMIT @skip, @take";
+        public static string GetPageCount = @"SELECT COUNT(*) FROM InternetUser";
 
         public static string Search = @"SELECT * FROM internetuser
 WHERE MATCH(FirstName, LastName) AGAINST(@searchQuery IN BOOLEAN MODE);";
+        
+        public static string SearchPage = @"SELECT * FROM internetuser
+WHERE MATCH(FirstName, LastName) AGAINST(@searchQuery IN BOOLEAN MODE)
+LIMIT @skip, @take;";
+        public static string SearchCount = @"SELECT COUNT(*) FROM internetuser
+WHERE MATCH(FirstName, LastName) AGAINST(@searchQuery IN BOOLEAN MODE)
+LIMIT @skip, @take;";
 
         public static string GetById = @"SELECT * FROM internetuser
                                  WHERE Id = @Id";

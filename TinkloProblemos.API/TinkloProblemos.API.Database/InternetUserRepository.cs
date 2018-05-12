@@ -44,11 +44,33 @@ namespace TinkloProblemos.API.Database
             }
         }
 
-        public IEnumerable<InternetUserDto> GetAll(int skip, int take)
+        public InternetUserPage SearchPage(int skip, int take,string searchQuery)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                var count = dbConnection.ExecuteScalar<int>(InternetUserQueries.SearchCount,
+                    new { searchQuery, skip, take });
+                var data =  dbConnection.Query<InternetUserDto>(InternetUserQueries.SearchPage, new { searchQuery, skip,take });
+                return new InternetUserPage
+                {
+                    Data = data,
+                    Total = count
+                };
+            }
+        }
+
+        public InternetUserPage GetPage(int skip, int take)
         {         
             using (IDbConnection dbConnection = Connection)
             {
-                return dbConnection.Query<InternetUserDto>(InternetUserQueries.GetPage, new { skip, take } );
+                var count = dbConnection.ExecuteScalar<int>(InternetUserQueries.GetPageCount,
+                    new { skip, take });
+                var data =  dbConnection.Query<InternetUserDto>(InternetUserQueries.GetPage, new { skip, take } );
+                return new InternetUserPage
+                {
+                    Data = data,
+                    Total = count
+                };
             }
         }
 

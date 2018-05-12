@@ -63,6 +63,12 @@ export class UsersListComponent implements OnInit {
     this.searchUpdated.next(value);
   }
 
+  onPaginateChange(event : PageEvent){
+   
+    this.dataSource.loadPage(event.pageIndex,event.pageSize);
+    this.resultsLength = this.dataSource.length;
+  }
+
 }
 
 export class UserDataSource extends DataSource<any> {

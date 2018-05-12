@@ -7,10 +7,11 @@ namespace TinkloProblemos.API.Interfaces.Services
     {
         bool Add(InternetUserDto internetUser);
         IEnumerable<InternetUserDto> GetAll();
-        IEnumerable<InternetUserDto> GetAll(int page, int pageSize);
+        InternetUserPage GetAll(int page, int pageSize);
         InternetUserDto GetById(int id);
         bool Delete(int id);
         bool Update(InternetUserUpdateDto internetUser, int internetUserId);
         IEnumerable<InternetUserDto> Search(string searchQuery);
+        InternetUserPage GetInternetUsers(int page, int pageSize, string searchQuery);
     }
 }

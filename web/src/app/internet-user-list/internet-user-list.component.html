@@ -1,3 +1,51 @@
-<p>
-  internet-user-list works!
-</p>
+<div class="example-loading-shade" *ngIf="isLoadingResults">
+  <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+</div>
+
+
+<mat-card>
+<mat-card-title>Interneto Vartotojai</mat-card-title>
+    <form fxLayout="row"  fxLayout.xs="column" fxLayoutGap="1.5em" [formGroup]="updateForm">
+            <mat-form-field fxFlex="1 1 auto">
+                <input #search matInput (keyup)="applyFilter($event.target.value)" placeholder="Paieška" formControlName="search">
+            </mat-form-field>
+      </form>
+     
+  <mat-table fxLayout="column" #table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="id" class="mat-column-id">
+      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef> Vardas</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef> Pavardė </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="location">
+      <mat-header-cell *matHeaderCellDef> Adresas </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.location}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ipAddress">
+      <mat-header-cell *matHeaderCellDef> IP Adresas </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.ipAddress}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="internetPlan">
+      <mat-header-cell *matHeaderCellDef> Interneto planas </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.internetPlan}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"  (click)="selectRow(row)"></mat-row>
+  </mat-table>
+  <mat-paginator [length]="dataSource?.length" hidePageSize="true" [pageSize]="pageSize" (page)="onPaginateChange($event)">
+  </mat-paginator>
+</mat-card>

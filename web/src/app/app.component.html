@@ -47,8 +47,32 @@
                 </mat-list-item>
                 <mat-list-item>
                     <a class="relative" [routerLink]="['/','usersList']">
+                        <mat-icon>calendar_today</mat-icon>
+                        <span>Atlikti darbai</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a class="relative" [routerLink]="['/','usersList']">
+                        <mat-icon>access_time</mat-icon>
+                        <span>Laiko ataskaitos</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a class="relative" [routerLink]="['/','internetUsersList']">
+                        <mat-icon>perm_identity</mat-icon>
+                        <span>Interneto vartotojai</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a class="relative" [routerLink]="['/','usersList']">
                         <mat-icon>perm_identity</mat-icon>
                         <span>Vartotojai</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a class="relative" [routerLink]="['/', 'login']">
+                        <mat-icon>lock_open</mat-icon>
+                        <span>Atsijungti</span>
                     </a>
                 </mat-list-item>
             </mat-nav-list>

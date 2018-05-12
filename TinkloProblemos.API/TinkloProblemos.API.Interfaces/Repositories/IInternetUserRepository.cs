@@ -7,10 +7,11 @@ namespace TinkloProblemos.API.Interfaces.Repositories
     {
         int Add(InternetUserDto prod);
         IEnumerable<InternetUserDto> GetAll();
-        IEnumerable<InternetUserDto> GetAll(int skip, int take);
+        InternetUserPage GetPage(int skip, int take);
         InternetUserDto GetById(int id);
         int Delete(int id);
         int Update(InternetUserUpdateDto prod, int categoryId);
         IEnumerable<InternetUserDto> Search(string searchQuery);
+        InternetUserPage SearchPage(int skip, int take,string searchQuery);
     }
 }

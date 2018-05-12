@@ -16,6 +16,11 @@ export class InternetUserService {
     return this.http.get<InternetUser[]>(baseUrl);
   }
 
+  getPage(page:number, pageSize:number, search?: string | undefined) : Observable<InternetUserPage> {
+    let baseUrl = this.url.getApiUrl(Endpoints.internetUsersPage(page,pageSize)) + this.generateArgs(search);
+    return this.http.get<InternetUserPage>(baseUrl);
+  }
+
   searchInternetUsers(searchQuery: string) {
     let baseUrl = this.url.getApiUrl(Endpoints.searchInternetUsers(searchQuery));
     return this.http.get<InternetUser[]>(baseUrl);
@@ -24,6 +29,14 @@ export class InternetUserService {
   getInternetUser(id: number) {
     let baseUrl = this.url.getApiUrl(Endpoints.getInternetUser(id));
     return this.http.get<InternetUser>(baseUrl);
+  }
+
+  generateArgs(search?: string | undefined) : string {
+    let args ="?";
+      if(search !== undefined) {
+        args += "&searchTerm=" + search;
+      }        
+    return args;
   }
 
 }

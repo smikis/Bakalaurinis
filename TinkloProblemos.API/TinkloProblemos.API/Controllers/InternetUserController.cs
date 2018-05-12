@@ -30,7 +30,7 @@ namespace TinkloProblemos.API.Controllers
 
         // GET: api/InternetUser
         [HttpGet("{page}/{pageSize}")]
-        public IEnumerable<InternetUserDto> Get(int page, int pageSize)
+        public InternetUserPage Get(int page, int pageSize)
         {
             return _internetUserService.GetAll(page, pageSize);
         }
@@ -47,6 +47,13 @@ namespace TinkloProblemos.API.Controllers
         public IEnumerable<InternetUserDto> Search(string searchTerm)
         {
             return _internetUserService.Search(searchTerm);
+        }
+
+        // GET: api/Problem
+        [HttpGet("filtered/{page}/{pageSize}")]
+        public InternetUserPage GetFiltered(int page, int pageSize, [FromQuery]string searchTerm)
+        {
+            return _internetUserService.GetInternetUsers(page, pageSize, searchTerm);
         }
 
         // POST: api/InternetUser
