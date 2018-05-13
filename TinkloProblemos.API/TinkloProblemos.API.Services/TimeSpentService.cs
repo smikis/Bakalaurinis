@@ -41,6 +41,13 @@ namespace TinkloProblemos.API.Services
             return _timeSpentRepository.GetUserTimeSpent(userId);
         }
 
+        public IEnumerable<GetTimeSpentCalendar> GetUserTimeSpentForSpecifiedDate(string userId, DateTime date)
+        {
+            var firstDayofMonth = new DateTime(date.Year, date.Month, 1);
+            var lastDayOfMonth = firstDayofMonth.AddMonths(1);
+            return _timeSpentRepository.GetUserTimeSpentDuringTime(userId, firstDayofMonth, lastDayOfMonth);
+        }
+
         public bool Delete(int id)
         {
             if (_timeSpentRepository.Delete(id) != 0)

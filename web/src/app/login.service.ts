@@ -18,7 +18,8 @@ export class LoginService {
     return this.accessToken;
   }
 
-  getAuthenticatedUser?(): AuthenticatedUser | null {
+  getAuthenticatedUser(): AuthenticatedUser | null {
+    console.log(this.lastAuthenticatedUser);
     return this.lastAuthenticatedUser;
   }
 
@@ -27,7 +28,8 @@ export class LoginService {
 
     this.getUser().subscribe(data=> {
       this.lastAuthenticatedUser = new AuthenticatedUser(data.email, data.id,data.firstName, data.lastName,data.roles);
-        this.accessToken = data.token;
+      console.log(this.lastAuthenticatedUser);  
+      this.accessToken = data.token;
         this.userSubscription.next(this.lastAuthenticatedUser);    
         window.localStorage.setItem('accessToken', this.accessToken);
     },

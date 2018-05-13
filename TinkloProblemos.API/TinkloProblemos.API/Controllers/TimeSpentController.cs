@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +32,13 @@ namespace TinkloProblemos.API.Controllers
         public IEnumerable<GetTimeSpent> GetUserTimeSpent(string userId)
         {
             return _timeSpentService.GetUserTimeSpent(userId);
+        }
+
+        // GET: api/problem/TimeSpent/
+        [HttpGet("user/{userId}/{date}")]
+        public IEnumerable<GetTimeSpentCalendar> GetUserTimeSpent(string userId, DateTime date)
+        {
+            return _timeSpentService.GetUserTimeSpentForSpecifiedDate(userId, date);
         }
 
         // POST: api/TimeSpent

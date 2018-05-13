@@ -10,7 +10,7 @@ import { LoginComponent } from './login-component/login.component';
 
 import { LoginService } from './login.service';
 import { UrlService } from './url.service';
-
+import { CalendarModule } from 'angular-calendar';
 import {CdkTableModule} from '@angular/cdk/table';
 import {
   MatAutocompleteModule,
@@ -57,6 +57,7 @@ import { UsersListComponent } from './users-list/users-list.component';
 import { InternetUserListComponent } from './internet-user-list/internet-user-list.component';
 import { CreateProblemDialogComponent } from './create-problem-dialog/create-problem-dialog.component';
 import { InternetUserInformationComponent } from './internet-user-information/internet-user-information.component';
+import { UserCompletedTasksComponent } from './user-completed-tasks/user-completed-tasks.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -66,6 +67,7 @@ const appRoutes: Routes = [
   { path: 'usersList', component: UsersListComponent },
   { path: 'internetUsersList', component: InternetUserListComponent },
   { path: 'createProblem', component: CreateProblemComponent },
+  { path: 'userTasks', component: UserCompletedTasksComponent },
   { path: 'problem/:id', component: ViewProblemComponent },
   { path: 'internetUser/:id', component: InternetUserInformationComponent }
 ];
@@ -81,7 +83,8 @@ const appRoutes: Routes = [
     UsersListComponent,
     InternetUserListComponent,
     CreateProblemDialogComponent,
-    InternetUserInformationComponent
+    InternetUserInformationComponent,
+    UserCompletedTasksComponent
   ],
   imports: [
     ChartsModule,
@@ -126,6 +129,7 @@ const appRoutes: Routes = [
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    CalendarModule.forRoot()
   ],
   providers: [UrlService, LoginService],
   entryComponents: [

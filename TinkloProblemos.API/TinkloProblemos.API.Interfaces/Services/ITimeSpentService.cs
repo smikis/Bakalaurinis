@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TinkloProblemos.API.Contracts.Models;
 using TinkloProblemos.API.Contracts.TimeSpent;
 
@@ -11,5 +12,6 @@ namespace TinkloProblemos.API.Interfaces.Services
         IEnumerable<GetTimeSpent> GetUserTimeSpent(string userId);
         bool Delete(int id);
         bool Update(UpdateTimeSpent timeSpent, int id);
+        IEnumerable<GetTimeSpentCalendar> GetUserTimeSpentForSpecifiedDate(string userId, DateTime date);
     }
 }

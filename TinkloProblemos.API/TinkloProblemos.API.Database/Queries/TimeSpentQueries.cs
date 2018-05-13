@@ -13,6 +13,11 @@ namespace TinkloProblemos.API.Database.Queries
 
         public static string GetPage = @"SELECT * FROM timespent LIMIT @skip, @take";
 
+        public static string GetUserTimeSpentInTimeframe = @"SELECT * FROM bakalaurinis.timespent
+WHERE userId=@userId
+ && DateRecorded >= @dateFrom 
+ && DateRecorded <= @dateTo;";
+
         public static string GetById = @"SELECT * FROM timespent
                                  WHERE Id = @Id";
 

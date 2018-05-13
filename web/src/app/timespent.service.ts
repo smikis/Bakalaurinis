@@ -16,6 +16,11 @@ export class TimeSpentService {
     return this.http.get<TimeSpent[]>(baseUrl);
   }
 
+  getUserTimeSpentPeriod(userId: string, date:string) : Observable<TimeSpent[]> {
+    let baseUrl = this.url.getApiUrl(Endpoints.getUserTimeSpentPeriod(userId, date));
+    return this.http.get<TimeSpent[]>(baseUrl);
+  }
+
   createTimeSpent(model: TimeSpent){
     let baseUrl = this.url.getApiUrl(Endpoints.timeSpent);
     var createTimeSpent = new CreateTimeSpent();

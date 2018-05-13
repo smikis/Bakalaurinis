@@ -1,0 +1,46 @@
+<mat-card>
+    <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <button
+            mat-raised-button
+              mwlCalendarPreviousView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="changedMonth()">
+              Ankstesnis mėnuo
+            </button>
+            <button
+            mat-raised-button
+              class="btn btn-primary"
+              mwlCalendarNextView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="changedMonth()">
+              Kitas mėnuo
+            </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <b>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</b>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <div [ngSwitch]="view">
+              <mwl-calendar-month-view
+              *ngSwitchCase="'month'"
+              [viewDate]="viewDate"
+              [weekStartsOn]="weekStartsOn"
+              [events]="events"
+              [activeDayIsOpen]="activeDayIsOpen"
+              (eventClicked)="handleEvent($event.event)"
+              (dayClicked)="dayClicked($event.day)">
+              </mwl-calendar-month-view>
+            </div>
+      </mat-card-content>
+  </mat-card>
+     
+

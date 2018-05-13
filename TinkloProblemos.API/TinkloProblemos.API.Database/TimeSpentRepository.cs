@@ -52,6 +52,14 @@ namespace TinkloProblemos.API.Database
             }
         }
 
+        public IEnumerable<GetTimeSpentCalendar> GetUserTimeSpentDuringTime(string userId, DateTime dateFrom, DateTime dateTo)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                return dbConnection.Query<GetTimeSpentCalendar>(TimeSpentQueries.GetUserTimeSpentInTimeframe, new { userId, dateFrom, dateTo });
+            }
+        }
+
         public int Delete(int id)
         {
             using (IDbConnection dbConnection = Connection)
