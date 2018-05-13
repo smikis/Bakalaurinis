@@ -28,6 +28,7 @@ export class Endpoints {
   static readonly internetUser: Endpoint = { value: 'api/InternetUser' };
   static readonly getInternetUser: (id: number) => Endpoint = (id) => { return { value: `api/InternetUser/${id}/` }};
   static readonly searchInternetUsers: (searchQuery: string) => Endpoint = (searchQuery) => { return { value: `api/InternetUser/search/${searchQuery}/` }};
+  static readonly internetUsersPage: (page: number, pageSize: number) => Endpoint = (page, pageSize) => { return { value: `api/InternetUser/filtered/${page}/${pageSize}` }};
   static readonly getProblemComments: (problemId: number) => Endpoint = (problemId) => { return { value: `api/Comment/${problemId}/` }};
   static readonly comment: Endpoint = { value: 'api/Comment' };
   static readonly getProblemTimeSpent: (id: number) => Endpoint = (id) => { return { value: `/api/TimeSpent/problem/${id}/` }};
@@ -38,4 +39,8 @@ export class Endpoints {
   static readonly getTag: (id: number) => Endpoint = (id) => { return { value: `/api/Tag/${id}/` }};
   static readonly tags: Endpoint = { value: 'api/Tag' };
   static readonly searchUsers: (searchQuery: string) => Endpoint = (searchQuery) => { return { value: `api/User/search/${searchQuery}/` }};
+  static readonly usersPage: (page: number, pageSize: number) => Endpoint = (page, pageSize) => { return { value: `api/User/filtered/${page}/${pageSize}` }};
+  static readonly getInternetUserPings: (internetUserId: number) => Endpoint = (internetUserId) => { return { value: `/api/Ping/${internetUserId}/` }};
+  static readonly getInternetUserPingInformation: (internetUserId: number) => Endpoint = (internetUserId) => { return { value: `/api/Ping/information/${internetUserId}/` }};
+  static readonly getInternetUserPingResponseTime: (internetUserId: number) => Endpoint = (internetUserId) => { return { value: `/api/Ping/response/${internetUserId}/` }};
 }

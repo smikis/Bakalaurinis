@@ -160,3 +160,6 @@ CREATE TABLE `bakalaurinis`.`ping_results` (
 
 	ALTER TABLE `bakalaurinis`.`internetuser` 
 CHANGE COLUMN `Location` `Location` NVARCHAR(255) NULL DEFAULT NULL ;
+
+ALTER TABLE `bakalaurinis`.`ping_results` 
+ADD COLUMN `status` VARCHAR(45) NOT NULL AFTER `recorded`;

@@ -67,6 +67,10 @@ export class InternetUserListComponent implements OnInit {
     this.dataSource.loadPage(event.pageIndex,event.pageSize);
   }
 
+  selectRow(row: InternetUser) {
+    this.router.navigate(['/internetUser', row.id]);
+  }
+
 }
 
 export class UserDataSource extends DataSource<any> {

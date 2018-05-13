@@ -53,35 +53,108 @@
           </mat-card-content>
         </mat-card>
         <div fxFlex fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
-            <mat-card fxFlex="50%" >
-                <mat-card-header>
-                  <mat-card-title>
-                    <b>Vartotojo vieta</b>
-                  </mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <div #gmap style="width:100%;height:400px"></div>
-                </mat-card-content>
-              </mat-card>
-            <mat-card fxFlex="50%">
-              <mat-card-header>
-                <mat-card-title>
-                  <b>Vartotojo turimi įrenginiai</b>
-                </mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <mat-list role="list">
-                  <mat-list-item class="editable" role="listitem">Belkin HDX 3000</mat-list-item>
-                  <mat-list-item class="editable" role="listitem">Mat-Receiver 6300</mat-list-item>
-                  <mat-list-item class="editable" role="listitem">D-Link Super Model</mat-list-item>
-                </mat-list>
-              </mat-card-content>
-            </mat-card>
+          <mat-card fxFlex="50%">
+            <mat-card-header>
+              <mat-card-title>
+                <b>Vartotojo vieta</b>
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div #gmap style="width:100%;height:400px"></div>
+            </mat-card-content>
+          </mat-card>
+          <mat-card fxFlex="50%">
+            <mat-card-header>
+              <mat-card-title>
+                <b>Vartotojo turimi įrenginiai</b>
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-list role="list">
+                <mat-list-item class="editable" role="listitem">Belkin HDX 3000</mat-list-item>
+                <mat-list-item class="editable" role="listitem">Mat-Receiver 6300</mat-list-item>
+                <mat-list-item class="editable" role="listitem">D-Link Super Model</mat-list-item>
+              </mat-list>
+            </mat-card-content>
+          </mat-card>
         </div>
- 
+
       </mat-tab>
       <mat-tab label="Kliento statusas">
-        Statusas
+        <div fxLayout="row" layout-align="center" fxLayout.sm="column" fxLayout.xs="column">
+            <div class="example-loading-shade" *ngIf="isLoadingResults">
+                <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+              </div>
+                           
+              <mat-card fxFlex="70%">
+              <mat-card-title>Ping rezultatai</mat-card-title>                  
+                <mat-table fxLayout="column" #table [dataSource]="dataSource">
+              
+                  <ng-container matColumnDef="ipAddress" class="mat-column-id">
+                    <mat-header-cell *matHeaderCellDef> IP adresas </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.ipAddress}} </mat-cell>
+                  </ng-container>
+              
+                  <ng-container matColumnDef="time">
+                    <mat-header-cell *matHeaderCellDef> Atsako laikas</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.time}} </mat-cell>
+                  </ng-container>
+              
+                  <ng-container matColumnDef="recorded">
+                    <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.recorded}} </mat-cell>
+                  </ng-container>
+              
+                  <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef> Atsako statusas </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+                  </ng-container>
+              
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"  (click)="selectRow(row)"></mat-row>
+                </mat-table>
+            </mat-card>
+          <div fxFlex="30%">
+              <div fxLayout="column">
+                  <mat-card >
+                      <mat-card-header>
+                        <mat-card-title>
+                          <b>Pasiekiamumo informacija</b>
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <div fxLayout="row">
+                          <strong>Paskutinis nesėkmingas sujungimas: </strong>
+                          <span fxFlex></span>
+                          <span>{{pingInformation?.lastFailDate}}</span>
+                        </div>
+                        <div fxLayout="row">
+                          <strong>Sėkimngai veikia: </strong>
+                          <span fxFlex></span>
+                          <span>{{pingInformation?.uptime}} ms</span>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  <mat-card>
+                      <mat-card-header>
+                        <mat-card-title>
+                          <b>Atsako laikas</b>
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <mat-card>
+                          <mat-card-content>
+                            <canvas baseChart class="chart" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                              [colors]="chartColors" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+                          </mat-card-content>
+                        </mat-card>
+                      </mat-card-content>
+                    </mat-card>                  
+              </div>
+            
+          </div>
+
+        </div>
       </mat-tab>
       <mat-tab label="Kliento problemos">
         Kliento problemos

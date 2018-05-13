@@ -8,7 +8,7 @@ namespace Ping.Database
     {
         public static string GetInternetUsers = @"SELECT id, ipAddress FROM internetuser;";
 
-        public static string InsertInternetUser = @"INSERT INTO ping_results(internetUserId, ipAddress,time,recorded)
-VALUES(@InternetUserId,@IpAddress,@Time,@Recorded);";
+        public static string InsertInternetUser = @"INSERT INTO ping_results(internetUserId, ipAddress,time,recorded, status)
+VALUES(@InternetUserId,@IpAddress,@Time,@Recorded, @Status);";
     }
 }
