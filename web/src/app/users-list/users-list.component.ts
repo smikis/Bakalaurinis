@@ -69,6 +69,10 @@ export class UsersListComponent implements OnInit {
     this.resultsLength = this.dataSource.length;
   }
 
+  selectRow(row: User) {
+    this.router.navigate(['/systemUser', row.id]);
+  }
+
 }
 
 export class UserDataSource extends DataSource<any> {

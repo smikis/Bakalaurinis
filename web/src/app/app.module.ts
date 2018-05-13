@@ -58,6 +58,7 @@ import { InternetUserListComponent } from './internet-user-list/internet-user-li
 import { CreateProblemDialogComponent } from './create-problem-dialog/create-problem-dialog.component';
 import { InternetUserInformationComponent } from './internet-user-information/internet-user-information.component';
 import { UserCompletedTasksComponent } from './user-completed-tasks/user-completed-tasks.component';
+import { ViewSystemUserComponent } from './view-system-user/view-system-user.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -69,7 +70,8 @@ const appRoutes: Routes = [
   { path: 'createProblem', component: CreateProblemComponent },
   { path: 'userTasks', component: UserCompletedTasksComponent },
   { path: 'problem/:id', component: ViewProblemComponent },
-  { path: 'internetUser/:id', component: InternetUserInformationComponent }
+  { path: 'internetUser/:id', component: InternetUserInformationComponent },
+  { path: 'systemUser/:id', component: ViewSystemUserComponent }
 ];
 
 @NgModule({
@@ -84,7 +86,8 @@ const appRoutes: Routes = [
     InternetUserListComponent,
     CreateProblemDialogComponent,
     InternetUserInformationComponent,
-    UserCompletedTasksComponent
+    UserCompletedTasksComponent,
+    ViewSystemUserComponent
   ],
   imports: [
     ChartsModule,
