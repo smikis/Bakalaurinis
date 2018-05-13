@@ -26,57 +26,32 @@ export class InternetUserInformationComponent implements OnInit {
   map: google.maps.Map;
   geocoder: google.maps.Geocoder;
 
-  // Shared chart options
-  globalChartOptions: any = {
-    responsive: true,
-    legend: {
-      display: false,
-      position: 'bottom'
-    }
-  };
-
-  // Bar
-  barChartLabels: string[] = ['1', '2', '3', '4', '5', '6', '7'];
-  barChartType = 'bar';
-  barChartLegend = true;
-  barChartData: any[] = [{
-    data: [6, 5, 8, 8, 5, 5, 4],
-    label: 'Series A',
-    borderWidth: 0
-  }, {
-    data: [5, 4, 4, 2, 6, 2, 5],
-    label: 'Series B',
-    borderWidth: 0
-  }];
-  barChartOptions: any = Object.assign({
-    scaleShowVerticalLines: false,
-    tooltips: {
-      mode: 'index',
-      intersect: false
-    },
+  // lineChart
+  public lineChartData:Array<any> = [0];
+  public lineChartLabels:Array<any> = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+  public lineChartOptions:any = {
     responsive: true,
     scales: {
-      xAxes: [{
-        gridLines: {
-          color: 'rgba(0,0,0,0.02)',
-          defaultFontColor: 'rgba(0,0,0,0.02)',
-          zeroLineColor: 'rgba(0,0,0,0.02)'
-        },
-        stacked: true,
+      yAxes: [{
         ticks: {
           beginAtZero: true
         }
-      }],
-      yAxes: [{
-        gridLines: {
-          color: 'rgba(0,0,0,0.02)',
-          defaultFontColor: 'rgba(0,0,0,0.02)',
-          zeroLineColor: 'rgba(0,0,0,0.02)'
-        },
-        stacked: true
       }]
     }
-  }, this.globalChartOptions);
+    
+  };
+  public lineChartColors:Array<any> = [
+    { // grey
+      backgroundColor: 'rgba(148,159,177,0.2)',
+      borderColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }
+  ];
+  public lineChartLegend:boolean = false;
+  public lineChartType:string = 'line';
 
   constructor(private route: ActivatedRoute,
     private internetUserService: InternetUserService,
@@ -102,6 +77,10 @@ export class InternetUserInformationComponent implements OnInit {
         this.pingResults = result;
         this.dataSource.data = result;
         this.isLoadingResults = false;
+        var chartData = result.map(x=> x.time);
+        this.lineChartData = [
+          {data: chartData, label: 'Atsako laikas'}
+        ];
       });
 
       this.pingService.getInternetUserPingInformation(this.internetUserId).subscribe(result=> {

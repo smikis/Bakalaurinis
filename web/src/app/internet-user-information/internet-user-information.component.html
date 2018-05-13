@@ -144,8 +144,13 @@
                       <mat-card-content>
                         <mat-card>
                           <mat-card-content>
-                            <canvas baseChart class="chart" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-                              [colors]="chartColors" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+                              <canvas baseChart
+                              [datasets]="lineChartData"
+                              [labels]="lineChartLabels"
+                              [options]="lineChartOptions"
+                              [colors]="lineChartColors"
+                              [legend]="lineChartLegend"
+                              [chartType]="lineChartType"></canvas>
                           </mat-card-content>
                         </mat-card>
                       </mat-card-content>
