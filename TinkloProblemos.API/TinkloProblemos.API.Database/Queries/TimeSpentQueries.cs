@@ -13,7 +13,14 @@ namespace TinkloProblemos.API.Database.Queries
 
         public static string GetPage = @"SELECT * FROM timespent LIMIT @skip, @take";
 
-        public static string GetUserTimeSpentInTimeframe = @"SELECT * FROM bakalaurinis.timespent
+        public static string GetUserTimeSpentInTimeframe = @"SELECT 
+timeSpent.id,
+timespent.hoursSpent,
+timespent.description,
+timespent.dateRecorded,
+timeSpent.problemId,
+problem.name as problemName
+FROM timespent inner join problem on timespent.problemId = problem.id
 WHERE userId=@userId
  && DateRecorded >= @dateFrom 
  && DateRecorded <= @dateTo;";

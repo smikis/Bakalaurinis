@@ -88,7 +88,7 @@ export class UserCompletedTasksComponent implements OnInit {
       for (let entry of result) {
         var event = {
           start: new Date(entry.dateRecorded),
-          title: `${entry.description}. Laikas: ${entry.hoursSpent} valandos`,
+          title: `Problema: ${entry.problemName}. Atlikti darbai: ${entry.description}. Laikas: ${entry.hoursSpent} valandos`,
           problemId: entry.problemId
         };
         events.push(event);

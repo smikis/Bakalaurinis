@@ -10,8 +10,8 @@
         </button>
     </mat-toolbar>
 
-    <mat-sidenav-container class="example-sidenav-container">
-        <mat-sidenav #snav mode='side' opened='true' class="sidebar-panel">
+    <mat-sidenav-container class="example-sidenav-container" >
+        <mat-sidenav #snav mode='side' opened='true' class="sidebar-panel" *ngIf="user">
             <mat-nav-list class="navigation">
                 <mat-list-item>
                     <a class="relative" [routerLink]="['/', 'login']">
