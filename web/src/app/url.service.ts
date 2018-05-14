@@ -48,4 +48,5 @@ export class Endpoints {
   static readonly getTimeConsumingUsers: (dateFrom: string, dateTo: string) => Endpoint = (dateFrom, dateTo) => { return { value: `/api/Reports/internetUser/5/${dateFrom}/${dateTo}` }};
   static readonly getTimeConsumingProblems: (dateFrom: string, dateTo: string) => Endpoint = (dateFrom, dateTo) => { return { value: `/api/Reports/problem/5/${dateFrom}/${dateTo}` }};
   static readonly getUserLocation: (userId: string) => Endpoint = (userId) => { return { value: `/api/Location/${userId}/` }};
+  static readonly getUser: (userId: string) => Endpoint = (userId) => { return { value: `/api/User/${userId}/` }};
 }

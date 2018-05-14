@@ -29,17 +29,21 @@ namespace TinkloProblemos.API.Services
             });
         }
 
-        public async Task<GetUser> GetUser(string userId)
+        public async Task<GetUserExtended> GetUser(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
             if (user != null)
             {
-                return new GetUser
+                return new GetUserExtended
                 {
                     Email = user.Email,
                     Id = user.Id,
                     LastName = user.LastName,
-                    Name = user.FirstName
+                    Name = user.FirstName,
+                    UserName = user.UserName,
+                    PhoneNumber = user.PhoneNumber,
+                    Address = user.Address,
+                    RegistrationDate = user.RegistrationDate
                 };
             }
 

@@ -32,7 +32,7 @@ namespace TinkloProblemos.API.Controllers
         }
 
         [HttpGet("{userId}")]
-        public async Task<GetUser> GetUser(string userId)
+        public async Task<GetUserExtended> GetUser(string userId)
         {
             var user = await _userService.GetUser(userId);
             return user;

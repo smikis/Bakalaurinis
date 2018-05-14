@@ -21,6 +21,16 @@ export class UserService {
     return this.http.get<UsersPage>(baseUrl);
   }
 
+  getUserLocation(userId: string) {
+    let baseUrl = this.url.getApiUrl(Endpoints.getUserLocation(userId));
+    return this.http.get<Location>(baseUrl);
+  }
+
+  getUser(userId: string) {
+    let baseUrl = this.url.getApiUrl(Endpoints.getUser(userId));
+    return this.http.get<UserExtended>(baseUrl);
+  }
+
   generateArgs(search?: string | undefined) : string {
     let args ="?";
       if(search !== undefined) {
@@ -42,4 +52,22 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
+}
+
+export interface UserExtended {
+  id:               string;
+  name:             string;
+  lastName:         string;
+  email:            string;
+  userName:         string;
+  phoneNumber:      string;
+  address:          string;
+  registrationDate: string;
+}
+
+
+export interface Location {
+  lat:        number;
+  lng:        number;
+  modifyDate: Date;
 }

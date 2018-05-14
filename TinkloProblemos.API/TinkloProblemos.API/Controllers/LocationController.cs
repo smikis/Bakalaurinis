@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TinkloProblemos.API.Contracts.Location;
@@ -10,6 +11,7 @@ using TinkloProblemos.API.Interfaces.Services;
 namespace TinkloProblemos.API.Controllers
 {
     [Produces("application/json")]
+    [EnableCors("CorsPolicy")]
     [Route("api/Location")]
     public class LocationController : Controller
     {

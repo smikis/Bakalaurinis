@@ -2,7 +2,63 @@
   <mat-card-content>
     <mat-tab-group>
       <mat-tab label="Vartotojo informacija">
-        Informacija
+        <div fxLayout="row">
+          <mat-card fxFlex="30%">
+            <mat-card-title>Informacija</mat-card-title>
+            <mat-card fxLayout="row">
+              <strong>ID: </strong>
+              <span fxFlex></span>
+              <span>{{user?.id}}</span>
+            </mat-card>
+            <mat-card fxLayout="row">
+              <strong>Vardas: </strong>
+              <span fxFlex></span>
+              <span>{{user?.name}}</span>
+            </mat-card>
+            <mat-card fxLayout="row">
+              <strong>Pavardė: </strong>
+              <span fxFlex></span>
+              <span>{{user?.lastName}}</span>
+            </mat-card>
+            <mat-card fxLayout="row">
+              <strong>Elektroninis paštas: </strong>
+              <span fxFlex></span>
+              <span>{{user?.email}}</span>
+            </mat-card>
+            <mat-card fxLayout="row">
+              <strong>Prisijungimo vardas: </strong>
+              <span fxFlex></span>
+              <span>{{user?.userName}}</span>
+            </mat-card>
+            <mat-card fxLayout="row">
+              <strong>Adresas: </strong>
+              <span fxFlex></span>
+              <span>{{user?.address}}</span>
+            </mat-card>
+            <mat-card fxLayout="row">
+              <strong>Telefonas: </strong>
+              <span fxFlex></span>
+              <span>{{user?.phoneNumber}}</span>
+            </mat-card>
+            <mat-card fxLayout="row">
+              <strong>Registracijos data: </strong>
+              <span fxFlex></span>
+              <span>{{user?.registrationDate}}</span>
+            </mat-card>
+          </mat-card>
+
+          <mat-card fxFlex="70%">
+              <mat-card-header>
+                <mat-card-title>
+                  <b>Vartotojo paskutinė žinoma vieta</b>
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <button mat-raised-button (click) = "refreshLocationMarker()">Refresh</button>
+                <div #gmap style="width:100%;height:600px"></div>
+              </mat-card-content>
+            </mat-card>
+        </div>
       </mat-tab>
       <mat-tab label="Vartotojo vieta">
         Vartotojo vieta
