@@ -1,0 +1,96 @@
+<mat-card fxFlex="100%" class="padding">
+  <mat-card-title>Sistemos vartotojų darbo rezultatai</mat-card-title>
+  <mat-table fxLayout="column" #table [dataSource]="userReportsDataSource">
+    <ng-container matColumnDef="firstName" class="mat-column-id">
+      <mat-header-cell *matHeaderCellDef> Vardas </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef> Pavardė</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="time">
+      <mat-header-cell *matHeaderCellDef> Dirbta valandų </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.time}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="averageTaskTime">
+      <mat-header-cell *matHeaderCellDef> Vidutinis užduoties laikas </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.averageTaskTime}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="maxTime">
+      <mat-header-cell *matHeaderCellDef> Ilgiausia užduotis </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.maxTime}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="minTime">
+      <mat-header-cell *matHeaderCellDef> Trumpiausia užduotis </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.minTime}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="problemsSolved">
+      <mat-header-cell *matHeaderCellDef> Atlikta užduočių </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.problemsSolved}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="userReportsdisplayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: userReportsdisplayedColumns;" (click)="selectUser(row)"></mat-row>
+  </mat-table>
+</mat-card>
+
+<div fxLayout="row" fxLayoutGap="2%" fxLayout.sm="column" fxLayout.xs="column" class="padding">
+    <mat-card fxFlex="50%">
+        <mat-card-title>Daugiausia laiko reikalavusios problemos</mat-card-title>
+        <mat-table fxLayout="column" #table [dataSource]="costlyProblemsDataSource">
+          <ng-container matColumnDef="id" class="mat-column-id">
+            <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Pavadinimas</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="timeSpent">
+            <mat-header-cell *matHeaderCellDef> Praleista laiko </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.timeSpent}} </mat-cell>
+          </ng-container>
+      
+          <mat-header-row *matHeaderRowDef="costlyProblemsdisplayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: costlyProblemsdisplayedColumns;" (click)="selectProblem(row)"></mat-row>
+        </mat-table>
+      </mat-card>
+
+      <mat-card fxFlex="50%">
+          <mat-card-title>Daugiausiai laiko reikalaujantys interneto vartotojai</mat-card-title>
+          <mat-table fxLayout="column" #table [dataSource]="costlyUsersDataSource">
+            
+              <ng-container matColumnDef="internetUserId">
+                  <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.internetUserId}} </mat-cell>
+                </ng-container>
+            
+            <ng-container matColumnDef="firstName" class="mat-column-id">
+              <mat-header-cell *matHeaderCellDef> Vardas </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="lastName">
+              <mat-header-cell *matHeaderCellDef> Pavardė</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+            </ng-container> 
+
+            <ng-container matColumnDef="timeSpent">
+                <mat-header-cell *matHeaderCellDef> Praleista laiko </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.timeSpent}} </mat-cell>
+              </ng-container>
+                   
+            <mat-header-row *matHeaderRowDef="costlyUsersdisplayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: costlyUsersdisplayedColumns;" (click)="selectInternetUser(row)"></mat-row>
+          </mat-table>
+        </mat-card>
+</div>

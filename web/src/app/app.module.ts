@@ -59,6 +59,7 @@ import { CreateProblemDialogComponent } from './create-problem-dialog/create-pro
 import { InternetUserInformationComponent } from './internet-user-information/internet-user-information.component';
 import { UserCompletedTasksComponent } from './user-completed-tasks/user-completed-tasks.component';
 import { ViewSystemUserComponent } from './view-system-user/view-system-user.component';
+import { ReportsComponentComponent } from './reports-component/reports-component.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -69,6 +70,7 @@ const appRoutes: Routes = [
   { path: 'internetUsersList', component: InternetUserListComponent },
   { path: 'createProblem', component: CreateProblemComponent },
   { path: 'userTasks', component: UserCompletedTasksComponent },
+  { path: 'reports', component: ReportsComponentComponent },
   { path: 'problem/:id', component: ViewProblemComponent },
   { path: 'internetUser/:id', component: InternetUserInformationComponent },
   { path: 'systemUser/:id', component: ViewSystemUserComponent }
@@ -87,7 +89,8 @@ const appRoutes: Routes = [
     CreateProblemDialogComponent,
     InternetUserInformationComponent,
     UserCompletedTasksComponent,
-    ViewSystemUserComponent
+    ViewSystemUserComponent,
+    ReportsComponentComponent
   ],
   imports: [
     ChartsModule,

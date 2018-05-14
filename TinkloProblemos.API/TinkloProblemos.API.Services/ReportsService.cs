@@ -21,14 +21,14 @@ namespace TinkloProblemos.API.Services
             return _reportsRepository.GetAll(dateFrom, dateTo);
         }
 
-        public IEnumerable<TimeConsumingInternetUsers> GetTimeConsumingProblems(DateTime dateFrom, DateTime dateTo, int limit)
-        {
-            return _reportsRepository.GetTimeConsumingInternetUsers(dateFrom, dateTo, limit);
-        }
-
-        public IEnumerable<TimeConsumingProblem> GetTimeConsumingInternetUsers(DateTime dateFrom, DateTime dateTo, int limit)
+        public IEnumerable<TimeConsumingProblem> GetTimeConsumingProblems(DateTime dateFrom, DateTime dateTo, int limit)
         {
             return _reportsRepository.GetTimeConsumingProblems(dateFrom, dateTo, limit);
+        }
+
+        public IEnumerable<TimeConsumingInternetUsers> GetTimeConsumingInternetUsers(DateTime dateFrom, DateTime dateTo, int limit)
+        {
+            return _reportsRepository.GetTimeConsumingInternetUsers(dateFrom, dateTo, limit);
         }
     }
 }
