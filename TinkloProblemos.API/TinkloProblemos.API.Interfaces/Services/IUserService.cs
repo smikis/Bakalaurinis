@@ -13,5 +13,6 @@ namespace TinkloProblemos.API.Interfaces.Services
         Task<bool> DeleteUser(string userId);
         IEnumerable<GetUser> SearchUsers(string searchTerm);
         UsersPage SearchUsersPage(int page, int pageSize, string searchTerm);
+        Task<GetUser> GetUser(string userId);
     }
 }

@@ -29,6 +29,23 @@ namespace TinkloProblemos.API.Services
             });
         }
 
+        public async Task<GetUser> GetUser(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                return new GetUser
+                {
+                    Email = user.Email,
+                    Id = user.Id,
+                    LastName = user.LastName,
+                    Name = user.FirstName
+                };
+            }
+
+            return null;
+        }
+
         public IEnumerable<GetUser> GetUsers(int page, int pageSize)
         {
             var skip = (page - 1) * pageSize;

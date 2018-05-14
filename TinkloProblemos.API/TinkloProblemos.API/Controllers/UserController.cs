@@ -24,11 +24,18 @@ namespace TinkloProblemos.API.Controllers
         {
             return Ok(_userService.GetUsers());
         }
-
+        
         [HttpGet("{page}/{pageSize}")]
         public  IActionResult Get(int page, int pageSize)
         {
             return  Ok(_userService.GetUsers(page,pageSize));
+        }
+
+        [HttpGet("{userId}")]
+        public async Task<GetUser> GetUser(string userId)
+        {
+            var user = await _userService.GetUser(userId);
+            return user;
         }
 
         // GET: api/Problem

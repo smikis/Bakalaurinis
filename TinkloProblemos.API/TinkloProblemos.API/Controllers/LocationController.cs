@@ -26,7 +26,7 @@ namespace TinkloProblemos.API.Controllers
         }
 
         [HttpPost]
-        public bool Post(WriteLocation location)
+        public bool Post([FromBody] WriteLocation location)
         {
             return _locationService.Add(location);
         }
