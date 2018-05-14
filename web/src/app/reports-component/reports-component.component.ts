@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ReportsService, UserReport, TimeConsumingInternetUsers,TimeConsumingProblems} from '../reports.service';
 import { MatTableDataSource } from '@angular/material';
 import {Router} from "@angular/router";
+import { FormGroup, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-reports-component',
   templateUrl: './reports-component.component.html',
@@ -9,6 +10,7 @@ import {Router} from "@angular/router";
   providers: [ReportsService]
 })
 export class ReportsComponentComponent implements OnInit {
+  readonly updateForm : FormGroup;
 
   userReportsDataSource = new MatTableDataSource();
   userReportsdisplayedColumns = ['firstName', 'lastName', 'time', 'averageTaskTime', 'maxTime', 'minTime', 'problemsSolved'];
@@ -20,19 +22,34 @@ export class ReportsComponentComponent implements OnInit {
   costlyUsersdisplayedColumns = ['internetUserId', 'firstName','lastName', 'timeSpent'];
   
   constructor(private reportsService: ReportsService,
-    private router: Router) { }
+    private router: Router) { 
+      this.updateForm = new FormGroup({
+        selectedDateFrom: new FormControl(''),
+        selectedDateTo: new FormControl('')
+      });
+    }
 
   ngOnInit() {
-    this.reportsService.getUserReports('2018-01-01', '2018-09-01').subscribe(result=> {
+    var date = new Date();
+    var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    this.updateForm.controls['selectedDateFrom'].setValue(firstDay);
+    this.updateForm.controls['selectedDateTo'].setValue(lastDay);
+    this.updateData(firstDay, lastDay);
+    
+  }
+
+  updateData(firstDay: Date, lastDay:Date) {
+    this.reportsService.getUserReports(firstDay.toISOString(), lastDay.toISOString()).subscribe(result=> {
       this.userReportsDataSource.data = result;     
     });
 
-    this.reportsService.getCostlyInternetUsers('2018-01-01', '2018-09-01').subscribe(result=> {
+    this.reportsService.getCostlyInternetUsers(firstDay.toISOString(), lastDay.toISOString()).subscribe(result=> {
       this.costlyUsersDataSource.data = result;
       console.log(this.costlyUsersDataSource.data);
     });
 
-    this.reportsService.getCostlyProblems('2018-01-01', '2018-09-01').subscribe(result=> {
+    this.reportsService.getCostlyProblems(firstDay.toISOString(), lastDay.toISOString()).subscribe(result=> {
       this.costlyProblemsDataSource.data = result;
       console.log(this.costlyProblemsDataSource.data);
     });
@@ -48,6 +65,15 @@ export class ReportsComponentComponent implements OnInit {
 
   selectUser(row: any) {
     this.router.navigate(['/systemUser', row.userId]);
+  }
+
+  dateChanged() {
+    var dateFrom = <Date>this.updateForm.controls['selectedDateFrom'].value;
+    var dateTo = <Date>this.updateForm.controls['selectedDateTo'].value;
+
+    if(dateTo> dateFrom) {
+      this.updateData(dateFrom, dateTo);
+    }
   }
 
 }

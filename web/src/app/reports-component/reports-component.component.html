@@ -1,3 +1,18 @@
+<mat-card fxFlex="100%">
+<form fxLayout="row"  fxLayout.xs="column" fxLayoutGap="1.5em" [formGroup]="updateForm">
+    <mat-input-container>
+      <input matInput [matDatepicker]="datePickerFrom" placeholder="Nuo datos" formControlName="selectedDateFrom" (dateInput)="dateChanged()" />
+      <mat-datepicker-toggle matSuffix [for]="datePickerFrom"></mat-datepicker-toggle>
+    </mat-input-container>
+    <mat-datepicker #datePickerFrom></mat-datepicker>
+    <mat-input-container>
+      <input matInput [matDatepicker]="datePickerTo" placeholder="Iki datos" formControlName="selectedDateTo" (dateInput)="dateChanged()" />
+      <mat-datepicker-toggle matSuffix [for]="datePickerTo"></mat-datepicker-toggle>
+    </mat-input-container>
+    <mat-datepicker #datePickerTo></mat-datepicker>
+</form>
+</mat-card>
+
 <mat-card fxFlex="100%" class="padding">
   <mat-card-title>Sistemos vartotojų darbo rezultatai</mat-card-title>
   <mat-table fxLayout="column" #table [dataSource]="userReportsDataSource">

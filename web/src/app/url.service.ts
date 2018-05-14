@@ -44,4 +44,7 @@ export class Endpoints {
   static readonly getInternetUserPings: (internetUserId: number) => Endpoint = (internetUserId) => { return { value: `/api/Ping/${internetUserId}/` }};
   static readonly getInternetUserPingInformation: (internetUserId: number) => Endpoint = (internetUserId) => { return { value: `/api/Ping/information/${internetUserId}/` }};
   static readonly getInternetUserPingResponseTime: (internetUserId: number) => Endpoint = (internetUserId) => { return { value: `/api/Ping/response/${internetUserId}/` }};
+  static readonly getUserReports: (dateFrom: string, dateTo: string) => Endpoint = (dateFrom, dateTo) => { return { value: `/api/Reports/user/${dateFrom}/${dateTo}` }};
+  static readonly getTimeConsumingUsers: (dateFrom: string, dateTo: string) => Endpoint = (dateFrom, dateTo) => { return { value: `/api/Reports/internetUser/5/${dateFrom}/${dateTo}` }};
+  static readonly getTimeConsumingProblems: (dateFrom: string, dateTo: string) => Endpoint = (dateFrom, dateTo) => { return { value: `/api/Reports/problem/5/${dateFrom}/${dateTo}` }};
 }
