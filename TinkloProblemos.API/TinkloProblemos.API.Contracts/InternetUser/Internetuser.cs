@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TinkloProblemos.API.Contracts
+namespace TinkloProblemos.API.Contracts.InternetUser
 {
     public class Internetuser
     {

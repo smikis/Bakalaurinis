@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using TinkloProblemos.API.Contracts.InternetUser;
+using TinkloProblemos.API.Contracts.TimeSpent;
 using TinkloProblemos.API.Identity.Entities;
 
 namespace TinkloProblemos.API.Contracts.Problem

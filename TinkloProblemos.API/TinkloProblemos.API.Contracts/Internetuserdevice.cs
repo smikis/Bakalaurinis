@@ -1,4 +1,5 @@
 ﻿using System;
+using TinkloProblemos.API.Contracts.InternetUser;
 
 namespace TinkloProblemos.API.Contracts
 {

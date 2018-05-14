@@ -8,6 +8,7 @@ using MySql.Data.MySqlClient;
 using TinkloProblemos.API.Contracts.Reports;
 using TinkloProblemos.API.Contracts.Tag;
 using TinkloProblemos.API.Database.Queries;
+using TinkloProblemos.API.Interfaces.Repositories;
 
 namespace TinkloProblemos.API.Database
 {

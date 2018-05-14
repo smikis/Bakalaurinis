@@ -163,3 +163,24 @@ CHANGE COLUMN `Location` `Location` NVARCHAR(255) NULL DEFAULT NULL ;
 
 ALTER TABLE `bakalaurinis`.`ping_results` 
 ADD COLUMN `status` VARCHAR(45) NOT NULL AFTER `recorded`;
+
+CREATE TABLE `bakalaurinis`.`current_user_coordinates` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` CHAR(38) NOT NULL,
+  `lat` FLOAT(10,6) NOT NULL,
+  `lng` FLOAT(10,6) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_coordinates_user_idx` (`user_id` ASC),
+  CONSTRAINT `fk_coordinates_user`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `bakalaurinis`.`users` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+	ALTER TABLE `bakalaurinis`.`current_user_coordinates` 
+ADD COLUMN `modifyDate` DATETIME NOT NULL AFTER `lng`;
+
+ALTER TABLE `bakalaurinis`.`current_user_coordinates` 
+ADD UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC);
+

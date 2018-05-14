@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using TinkloProblemos.API.Contracts.Reports;
-using TinkloProblemos.API.Database;
+using TinkloProblemos.API.Interfaces.Repositories;
 
 namespace TinkloProblemos.API.Services
 {
