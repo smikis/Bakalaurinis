@@ -21,12 +21,12 @@ export class ProblemService {
     return this.http.get<Problem>(baseUrl);
   }
 
-  getPage(page:number, pageSize:number, start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined) : Observable<ProblemPage> {
+  getPage(page:number, pageSize:number, start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined, assignedUser?: string | undefined) : Observable<ProblemPage> {
     let baseUrl = this.url.getApiUrl(Endpoints.problemPage(page,pageSize)) + this.generateArgs(start,end,category,status,search);
     return this.http.get<ProblemPage>(baseUrl);
   }
 
-  generateArgs(start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined) : string {
+  generateArgs(start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined, assignedUser?: string | undefined) : string {
     let args ="?";
     if(typeof start === 'object') {
       args = "?" + "dateFrom=" + start.toLocaleDateString('en-GB');
@@ -42,7 +42,10 @@ export class ProblemService {
       }  
       if(search !== undefined) {
         args += "&searchTerm=" + search;
-      }        
+      }      
+      if(assignedUser !== undefined) {
+        args += "&assignedUser=" + search;
+      }     
     return args;
   }
 

@@ -50,6 +50,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProblemListComponent } from './problem-list/problem-list.component';
+import { ProblemListCompactComponent } from './problem-list-compact/problem-list-compact.component';
 import { CreateProblemComponent } from './create-problem/create-problem.component';
 import { ViewProblemComponent } from './view-problem/view-problem.component';
 import { ChartsModule } from 'ng2-charts';
@@ -90,7 +91,8 @@ const appRoutes: Routes = [
     InternetUserInformationComponent,
     UserCompletedTasksComponent,
     ViewSystemUserComponent,
-    ReportsComponentComponent
+    ReportsComponentComponent,
+    ProblemListCompactComponent
   ],
   imports: [
     ChartsModule,

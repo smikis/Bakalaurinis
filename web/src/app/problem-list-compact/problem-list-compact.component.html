@@ -1,0 +1,31 @@
+<div class="example-loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+       
+    <mat-table fxLayout="column" #table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="id" class="mat-column-id">
+        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Pavadinimas</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="assignedUserEmail">
+        <mat-header-cell *matHeaderCellDef> Priskirtas vartotojas </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.assignedUserEmail}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Statusas </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"  (click)="selectRow(row)"></mat-row>
+    </mat-table>
+    <mat-paginator [length]="resultsLength" hidePageSize="true" [pageSize]="pageSize" (page)="onPaginateChange($event)">
+    </mat-paginator>

@@ -63,8 +63,9 @@ export class InternetUserListComponent implements OnInit {
     this.searchUpdated.next(value);
   }
 
-  onPaginateChange(event : PageEvent){   
-    this.dataSource.loadPage(event.pageIndex,event.pageSize);
+  onPaginateChange(event : PageEvent){
+    var search = <string>this.updateForm.controls['search'].value;   
+    this.dataSource.loadPage(event.pageIndex,event.pageSize, search);
   }
 
   selectRow(row: InternetUser) {

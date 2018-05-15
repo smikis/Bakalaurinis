@@ -64,8 +64,8 @@ export class UsersListComponent implements OnInit {
   }
 
   onPaginateChange(event : PageEvent){
-   
-    this.dataSource.loadPage(event.pageIndex,event.pageSize);
+    var search = <string>this.updateForm.controls['search'].value;
+    this.dataSource.loadPage(event.pageIndex,event.pageSize,search);
     this.resultsLength = this.dataSource.length;
   }
 

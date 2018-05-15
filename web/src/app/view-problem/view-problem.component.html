@@ -136,7 +136,7 @@
 
           </mat-tab>
 
-          <mat-tab label="Kliento informacija">
+          <mat-tab *ngIf="internetUser" label="Kliento informacija">
             <mat-card>
               <mat-card-header>
                 <mat-card-title>
