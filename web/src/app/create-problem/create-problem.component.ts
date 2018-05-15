@@ -20,7 +20,8 @@ import {ProblemService, Problem, CreateProblem} from '../problem.service';
   providers: [InternetUserService,UserService, ProblemService]
 })
 export class CreateProblemComponent implements OnInit {
- 
+  automaticallyAssign = false;
+
   myform: FormGroup;
 
   internetUserCtrl: FormControl;

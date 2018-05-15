@@ -28,6 +28,11 @@ menuExpanded = false;
     });
   }
 
+  logout() {
+    this.user = null;
+    this.login.logout();
+  }
+
   onPlusClick() {
     let createproblemdialogRef = this.dialog.open(CreateProblemDialogComponent, {
       width: '30%',

@@ -70,7 +70,7 @@
                     </a>
                 </mat-list-item>
                 <mat-list-item>
-                    <a class="relative" [routerLink]="['/', 'login']">
+                    <a class="relative" (click)="logout()">
                         <mat-icon>lock_open</mat-icon>
                         <span>Atsijungti</span>
                     </a>

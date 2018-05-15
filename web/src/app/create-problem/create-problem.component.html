@@ -22,7 +22,7 @@
                 </mat-form-field>
               </td>
               <td>
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="example-full-width" *ngIf="!automaticallyAssign">
                     <input matInput placeholder="Priskiriamas vartotojas" aria-label="Priskiriamas vartotojas" [matAutocomplete]="auto" [formControl]="userCtrl">
                   <mat-autocomplete #auto="matAutocomplete">
                     <mat-option (onSelectionChange)="changedUser(user)" *ngFor="let user of users" [value]="user.name + ' ' + user.lastName">
@@ -33,7 +33,7 @@
               </td>
             </tr>
           </table>
-
+          
           <table class="example-full-width" cellspacing="0">
             <tr>
               <td>
@@ -62,11 +62,11 @@
             <mat-form-field class="example-full-width">
               <textarea matInput formControlName="description" placeholder="Aprašymas" matTextareaAutosize></textarea>
             </mat-form-field>
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="example-full-width" >
               <textarea matInput formControlName="location" placeholder="Problemos vieta"></textarea>
             </mat-form-field>
           </p>
-
+          <mat-checkbox (change)="automaticallyAssign = !automaticallyAssign">Automatiškai priskirti</mat-checkbox>
           <mat-card>
             <mat-card-subtitle>
               Žymės

@@ -54,7 +54,8 @@ export class LoginService {
   }
 
   logout(){
-  
+    window.localStorage.removeItem('accessToken');
+    this.router.navigate(['login']);
   }
 
   applyAuthentication(requestOptions?: RequestOptionsArgs | undefined) : HttpHeaders | undefined {
