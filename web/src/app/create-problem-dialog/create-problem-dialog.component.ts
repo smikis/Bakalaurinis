@@ -22,7 +22,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   providers: [InternetUserService,UserService, ProblemService]
 })
 export class CreateProblemDialogComponent implements OnInit {
-
+  automaticallyAssign = false;
   myform: FormGroup;
 
   internetUserCtrl: FormControl;

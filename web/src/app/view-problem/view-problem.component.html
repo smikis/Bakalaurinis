@@ -226,7 +226,7 @@
         <div fxLayout="row">
           <strong>Priskirtas vartotojas: </strong>
           <span fxFlex></span>
-          <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never" (click)="editAssignedUser = true">
+          <mat-form-field class="editable" [hideRequiredMarker]="true" (click)="editAssignedUser = true">
             <input matInput [value]="problem?.assignedUserEmail" [disabled]="!editAssignedUser">
             <span matSuffix>
               <i class="material-icons" *ngIf="!editAssignedUser">edit</i>
@@ -237,7 +237,7 @@
         <div fxLayout="row">
           <strong>Priskirtas klientas: </strong>
           <span fxFlex></span>
-          <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never" (click)="editInternetUser = true">
+          <mat-form-field class="editable" [hideRequiredMarker]="true" (click)="editInternetUser = true">
             <input matInput value="Tomas" [disabled]="!editInternetUser">
             <span matSuffix>
               <i class="material-icons">edit</i>
@@ -247,7 +247,7 @@
         <div fxLayout="row">
           <strong>Statusas: </strong>
           <span fxFlex></span>
-          <mat-form-field class="editable" [hideRequiredMarker]="true" [floatLabel]="never" (click)="editStatus = true">
+          <mat-form-field class="editable" [hideRequiredMarker]="true" (click)="editStatus = true">
             <input matInput [value]="problem?.status" [disabled]="!editStatus">
             <span matSuffix>
               <i class="material-icons">edit</i>

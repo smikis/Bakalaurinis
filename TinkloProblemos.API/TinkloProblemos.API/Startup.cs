@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.HttpOverrides;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using TinkloProblemos.API.Database;
 using TinkloProblemos.API.Identity;
@@ -128,6 +129,12 @@ namespace TinkloProblemos.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
+            app.UseCors("CorsPolicy");
             app.UseAuthentication();
             app.UseMvc();          
             app.UseSwagger();
@@ -135,7 +142,7 @@ namespace TinkloProblemos.API
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
-            app.UseCors("CorsPolicy");
+           
         }
     }
     public class SecurityRequirementsDocumentFilter : IDocumentFilter

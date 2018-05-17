@@ -12,7 +12,7 @@ import { TimeSpentTableDataSource } from '../cutom-material-table/timespent-tabl
 import { TimeSpentService, TimeSpent, CreateTimeSpent } from '../timespent.service';
 import { TagService, Tag} from '../tag.service';
 
-class TimeSpentValidatorService implements ValidatorService {
+export class TimeSpentValidatorService implements ValidatorService {
   getRowValidator(): FormGroup {
     return new FormGroup({
       'hoursSpent': new FormControl(null, Validators.required),
