@@ -77,6 +77,42 @@ namespace TinkloProblemos.API.Services
             return _problemRepository.GetProblemsUser(category, status, assingnedUser);
         }
 
-       
+        public bool AssignUserToProblem(string userId, int problemId)
+        {
+            if (_problemRepository.AssignUserToProblem(userId, problemId) != 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateDescription(string description, int problemId)
+        {
+            if (_problemRepository.UpdateDescription(description, problemId) != 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateInternetUser(int internetUserId, int problemId)
+        {
+            if (_problemRepository.UpdateInternetUser(internetUserId, problemId) != 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateStatus(int statusId, int problemId)
+        {
+            if (_problemRepository.UpdateStatus(statusId, problemId) != 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
     }
 }

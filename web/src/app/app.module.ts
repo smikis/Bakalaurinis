@@ -137,7 +137,7 @@ const appRoutes: Routes = [
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    CalendarModule.forRoot()
+    CalendarModule.forRoot() 
   ],
   providers: [UrlService, LoginService],
   entryComponents: [

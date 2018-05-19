@@ -101,6 +101,45 @@ namespace TinkloProblemos.API.Database
                 return dbConnection.Query<GetProblem>(ProblemQueries.GetFilteredUser, new { categoryName, status, assignedUser});
             }
         }
+        public int AssignUserToProblem(string userId, int problemId)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                try
+                {
+                    return dbConnection.Execute(ProblemQueries.UpdateAssignedUser, new {userId, problemId});
+                }
+                catch (Exception e)
+                {
+                    return 0;
+                }
+                
+            }
+        }
+
+        public int UpdateDescription(string description, int problemId)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                return dbConnection.Execute(ProblemQueries.UpdateDescription, new { description, problemId });
+            }
+        }
+
+        public int UpdateInternetUser(int internetUserId, int problemId)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                return dbConnection.Execute(ProblemQueries.UpdateInternetUser, new { internetUserId, problemId });
+            }
+        }
+
+        public int UpdateStatus(int statusId, int problemId)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                return dbConnection.Execute(ProblemQueries.UpdateStatus, new { statusId, problemId });
+            }
+        }
 
     }
 }

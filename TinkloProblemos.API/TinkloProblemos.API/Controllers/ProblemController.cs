@@ -56,6 +56,59 @@ namespace TinkloProblemos.API.Controllers
             return _problemService.GetUserProblems(category, status, userId);
         }
 
+        // PUT: api/Problem
+        [HttpPut("user/{problemId}")]
+        public IActionResult UpdateAssignedUser([FromQuery] string userId, int problemId)
+        {
+            var result = _problemService.AssignUserToProblem(userId, problemId);
+            if (result)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        // PUT: api/Problem
+        [HttpPut("description/{problemId}")]
+        public IActionResult UpdateDescription([FromQuery] string description, int problemId)
+        {
+            var result = _problemService.UpdateDescription(description, problemId);
+            if (result)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        // PUT: api/Problem
+        [HttpPut("internetUser/{problemId}")]
+        public IActionResult UpdateAssignedInternetUser([FromQuery] int internetUserId, int problemId)
+        {
+            var result = _problemService.UpdateInternetUser(internetUserId, problemId);
+            if (result)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        // PUT: api/Problem
+        [HttpPut("status/{problemId}")]
+        public IActionResult UpdateStatus([FromQuery] int statusId, int problemId)
+        {
+            var result = _problemService.UpdateStatus(statusId, problemId);
+            if (result)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+
         // POST: api/Problem
         [HttpPost]
         public IActionResult Post([FromBody]CreateProblem value)

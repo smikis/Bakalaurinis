@@ -13,5 +13,9 @@ namespace TinkloProblemos.API.Interfaces.Repositories
         IEnumerable<GetProblem> GetProblemsFiltered(string categoryName, string status, string assignedUser, DateTime? dateFrom, DateTime? dateTo);
         ProblemPage GetProblemsFilteredSearch(int skip, int take, string categoryName, string status, string assignedUser, string searchQuery, DateTime? dateFrom, DateTime? dateTo);
         GetProblem GetProblem(int id);
+        int AssignUserToProblem(string userId, int problemId);
+        int UpdateDescription(string description, int problemId);
+        int UpdateInternetUser(int internetUserId, int problemId);
+        int UpdateStatus(int statusId, int problemId);
     }
 }

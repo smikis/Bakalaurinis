@@ -6,6 +6,21 @@
                                     VALUES(@Name, @Description, @Location, NOW(), @StatusId, @AssignedUser, @InternetUserId);
                                     SELECT LAST_INSERT_ID();";
 
+        public static string UpdateAssignedUser = @"UPDATE bakalaurinis.problem
+SET assignedUser = @userId
+WHERE id = @problemId;";
+
+        public static string UpdateDescription = @"UPDATE bakalaurinis.problem
+SET description = @description
+WHERE id = @problemId;";
+
+        public static string UpdateInternetUser = @"UPDATE bakalaurinis.problem
+SET internetUserId = @internetUserId
+WHERE id = @problemId;";
+        public static string UpdateStatus = @"UPDATE bakalaurinis.problem
+SET statusId = @statusId
+WHERE id = @problemId;";
+
         public static string GetProblem =
             @"SELECT problem.Id, problem.Name,problem.Location, problem.Created, problem.Description, problem.Created, problem.internetuserid, category.Id as categoryId, category.Name as categoryName,
 users.Id as assignedUserId, users.FirstName as assignedUserFirstName, users.Email as assignedUserEmail, status.name as status

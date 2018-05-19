@@ -13,5 +13,9 @@ namespace TinkloProblemos.API.Interfaces.Services
         IEnumerable<GetProblem> GetProblems(string category, string status, string assingnedUser, DateTime? dateFrom, DateTime? dateTo);
         IEnumerable<GetProblem> GetUserProblems(string category, string status, string assingnedUser);
         GetProblem GetProblem(int id);
+        bool AssignUserToProblem(string userId, int problemId);
+        bool UpdateDescription(string description, int problemId);
+        bool UpdateInternetUser(int internetUserId, int problemId);
+        bool UpdateStatus(int statusId, int problemId);
     }
 }
