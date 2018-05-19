@@ -224,35 +224,48 @@
     <mat-card>
       <mat-card-content>
         <div fxLayout="row">
-          <strong>Priskirtas vartotojas: </strong>
-          <span fxFlex></span>
-          <mat-form-field class="editable" [hideRequiredMarker]="true" (click)="editAssignedUser = true">
-            <input matInput [value]="problem?.assignedUserEmail" [disabled]="!editAssignedUser">
+          <mat-form-field class="editable full-width" [hideRequiredMarker]="true" (click)="userCtrl.enable(); editAssignedUser = true">
+            <input matInput placeholder="Priskirtas vartotojas" [matAutocomplete]="auto" [value]="problem?.assignedUserEmail" [formControl]="userCtrl">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option (onSelectionChange)="changedUser(user)" *ngFor="let user of users" [value]="user.name + ' ' + user.lastName">
+                <span>{{ user.name }} {{user.lastName}}</span>
+              </mat-option>
+            </mat-autocomplete>
+
             <span matSuffix>
               <i class="material-icons" *ngIf="!editAssignedUser">edit</i>
             </span>
           </mat-form-field>
-          <i class="hover" *ngIf="editAssignedUser" (click)="editAssignedUser = false" class="material-icons">done</i>
+          <i class="hover" *ngIf="editAssignedUser" (click)="userCtrl.disable();editAssignedUser = false" class="material-icons">done</i>
         </div>
         <div fxLayout="row">
-          <strong>Priskirtas klientas: </strong>
-          <span fxFlex></span>
-          <mat-form-field class="editable" [hideRequiredMarker]="true" (click)="editInternetUser = true">
-            <input matInput value="Tomas" [disabled]="!editInternetUser">
+          <mat-form-field class="editable full-width" [hideRequiredMarker]="true" (click)="internetUserCtrl.enable(); editInternetUser = true">
+            <input matInput placeholder="Priskirtas interneto vartotojas" [value]="Tomas" aria-label="Priskirtas interneto vartotojas"
+              [matAutocomplete]="autoInternetUser" [formControl]="internetUserCtrl">
+            <mat-autocomplete #autoInternetUser="matAutocomplete">
+              <mat-option (onSelectionChange)="changedInternetUser(internetUser)" *ngFor="let internetUser of internetUsers" [value]="internetUser.firstName + ' ' + internetUser.lastName">
+                <span>{{ internetUser.firstName }} {{internetUser.lastName}}</span>
+              </mat-option>
+            </mat-autocomplete>
             <span matSuffix>
-              <i class="material-icons">edit</i>
+              <i class="material-icons" *ngIf="!editInternetUser">edit</i>
             </span>
           </mat-form-field>
+          <i class="hover" *ngIf="editInternetUser" (click)="internetUserCtrl.disable();editInternetUser = false" class="material-icons">done</i>
+
         </div>
         <div fxLayout="row">
-          <strong>Statusas: </strong>
-          <span fxFlex></span>
-          <mat-form-field class="editable" [hideRequiredMarker]="true" (click)="editStatus = true">
-            <input matInput [value]="problem?.status" [disabled]="!editStatus">
+          <mat-form-field class="editable full-width" [hideRequiredMarker]="true" (click)="editStatus = true">
+            <mat-select placeholder="Statusas" matInput [value]="problem?.status" [disabled]="!editStatus">
+              <mat-option value="1">Sukurtas</mat-option>
+              <mat-option value="2">Priskirtas</mat-option>
+              <mat-option value="1">Pašalintas</mat-option>
+            </mat-select>
             <span matSuffix>
-              <i class="material-icons">edit</i>
+              <i class="material-icons" *ngIf="!editStatus">edit</i>
             </span>
           </mat-form-field>
+          <i class="hover" *ngIf="editStatus" (click)="editStatus = false" class="material-icons">done</i>
         </div>
         <div fxLayout="row">
           <strong>Užduotis sukurta: </strong>

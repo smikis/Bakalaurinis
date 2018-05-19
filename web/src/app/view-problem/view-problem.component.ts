@@ -11,6 +11,8 @@ import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators } 
 import { TimeSpentTableDataSource } from '../cutom-material-table/timespent-table-data-source';
 import { TimeSpentService, TimeSpent, CreateTimeSpent } from '../timespent.service';
 import { TagService, Tag} from '../tag.service';
+import {UserService, User} from '../user.service';
+import { Subscription } from 'rxjs/Rx';
 
 export class TimeSpentValidatorService implements ValidatorService {
   getRowValidator(): FormGroup {
@@ -27,7 +29,7 @@ export class TimeSpentValidatorService implements ValidatorService {
   selector: 'app-view-problem',
   templateUrl: './view-problem.component.html',
   styleUrls: ['./view-problem.component.css'],
-  providers:[ProblemService,InternetUserService, CommentService,TimeSpentService,TagService,
+  providers:[ProblemService,InternetUserService, CommentService,TimeSpentService,TagService,UserService,
     {provide: ValidatorService, useClass:TimeSpentValidatorService}]
 })
 export class ViewProblemComponent implements OnInit {
@@ -47,6 +49,14 @@ export class ViewProblemComponent implements OnInit {
 
   tags: Tag[];
 
+  users: User[];
+  userCtrl: FormControl;
+  filteredUsers: Subscription;
+
+  internetUserCtrl: FormControl;
+  filteredInternetUsers: Subscription;
+  internetUsers: InternetUser[];
+
   constructor(private route:ActivatedRoute, 
     private problemService: ProblemService, 
     private commentService: CommentService, 
@@ -55,7 +65,35 @@ export class ViewProblemComponent implements OnInit {
     private login: LoginService,
     private sourcesValidator: ValidatorService,
     private tagService: TagService,
-    private timeSpentService: TimeSpentService) { }
+    private userService: UserService,
+    private timeSpentService: TimeSpentService) {
+
+      this.userCtrl = new FormControl({value: '', disabled: true});
+       this.filteredUsers = this.userCtrl.valueChanges
+       .startWith(null)
+       .debounceTime(400)
+          .do(val => {
+            userService.searchUsers(val)
+            .toPromise()
+            .then(res => {
+              this.users = res
+            })
+          })
+          .subscribe();
+
+          this.internetUserCtrl = new FormControl({value: '', disabled: true});
+          this.filteredInternetUsers = this.internetUserCtrl.valueChanges
+          .startWith(null)
+          .debounceTime(400)
+             .do(val => {
+               internetUserService.searchInternetUsers(val)
+               .toPromise()
+               .then(res => {
+                 this.internetUsers = res
+               })
+             })
+             .subscribe();
+     }
 
   ngOnInit() {
     this.route.params.subscribe( params => {

@@ -19,7 +19,7 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width" *ngIf="!automaticallyAssign">
-                    <input matInput placeholder="Priskiriamas vartotojas" aria-label="Priskiriamas vartotojas" [matAutocomplete]="auto" [formControl]="userCtrl">
+                  <input matInput placeholder="Priskiriamas vartotojas" aria-label="Priskiriamas vartotojas" [matAutocomplete]="auto" [formControl]="userCtrl">
                   <mat-autocomplete #auto="matAutocomplete">
                     <mat-option (onSelectionChange)="changedUser(user)" *ngFor="let user of users" [value]="user.name + ' ' + user.lastName">
                       <span>{{ user.name }} {{user.lastName}}</span>

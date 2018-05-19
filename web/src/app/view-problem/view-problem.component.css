@@ -7,6 +7,10 @@
     flex-wrap: wrap;
 }
 
+.full-width {
+    width: 100%;
+  }
+
 .side {
     flex: 30%;
     padding: 20px;
