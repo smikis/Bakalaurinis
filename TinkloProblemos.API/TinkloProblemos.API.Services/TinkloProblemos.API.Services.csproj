@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="RestSharp" Version="106.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TinkloProblemos.API.Identity\TinkloProblemos.API.Identity.csproj" />
     <ProjectReference Include="..\TinkloProblemos.API.Interfaces\TinkloProblemos.API.Interfaces.csproj" />
   </ItemGroup>

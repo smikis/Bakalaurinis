@@ -13,6 +13,7 @@ import {InternetUserService, InternetUser} from '../internet.user.service';
 import {UserService, User} from '../user.service';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
 import {ProblemService, Problem, CreateProblem} from '../problem.service';
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-create-problem',
   templateUrl: './create-problem.component.html',
@@ -41,7 +42,7 @@ export class CreateProblemComponent implements OnInit {
   addOnBlur: boolean = true;
   separatorKeysCodes = [ENTER, COMMA];
 
-  constructor(private internetUserService: InternetUserService, private userService: UserService, private problemService: ProblemService) {     
+  constructor(private internetUserService: InternetUserService, private router: Router, private userService: UserService, private problemService: ProblemService) {     
     this.internetUserCtrl = new FormControl();
     this.filteredInternetUsers = this.internetUserCtrl.valueChanges
     .startWith(null)
@@ -101,7 +102,7 @@ export class CreateProblemComponent implements OnInit {
     problem.tags = this.tags;
     console.log(problem);
     this.problemService.createProblem(problem).subscribe(result=> {
-      console.log(result);
+      this.router.navigate(['/problem', result]);
     })
   }
 

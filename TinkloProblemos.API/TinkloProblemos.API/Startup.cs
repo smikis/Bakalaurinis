@@ -55,6 +55,7 @@ namespace TinkloProblemos.API
             services.AddTransient<IPingService, PingService>();
             services.AddTransient<IReportsService, ReportsService>();
             services.AddTransient<ILocationService, LocationService>();
+            services.AddTransient<INotificationService, NotificationService>();
 
             string connectionString = Configuration.GetConnectionString("Database");
             services.AddTransient<IDatabaseConnectionService>(e => new DatabaseConnectionService(connectionString));

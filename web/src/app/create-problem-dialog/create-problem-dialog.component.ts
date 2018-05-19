@@ -14,6 +14,7 @@ import {UserService, User} from '../user.service';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
 import {ProblemService, Problem, CreateProblem} from '../problem.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-problem-dialog',
@@ -42,7 +43,7 @@ export class CreateProblemDialogComponent implements OnInit {
   addOnBlur: boolean = true;
   separatorKeysCodes = [ENTER, COMMA];
 
-  constructor(private internetUserService: InternetUserService, private userService: UserService, private problemService: ProblemService,
+  constructor(private internetUserService: InternetUserService,  private router: Router, private userService: UserService, private problemService: ProblemService,
     public dialogRef: MatDialogRef<CreateProblemDialogComponent>) {     
     this.internetUserCtrl = new FormControl();
     this.filteredInternetUsers = this.internetUserCtrl.valueChanges
@@ -103,7 +104,7 @@ export class CreateProblemDialogComponent implements OnInit {
     problem.tags = this.tags;
     console.log(problem);
     this.problemService.createProblem(problem).subscribe(result=> {
-      console.log(result);
+      this.dialogRef.close();
     })
   }
 

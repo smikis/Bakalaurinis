@@ -14,8 +14,11 @@ namespace TinkloProblemos.API.Services
     {
         private readonly IProblemRepository _problemRepository;
         private readonly ITagService _tagRepository;
-        public ProblemService(IProblemRepository problemRepository, ITagService tagRepository)
+        private readonly INotificationService _notificationService;
+
+        public ProblemService(IProblemRepository problemRepository, ITagService tagRepository, INotificationService notificationService)
         {
+            _notificationService = notificationService;
             _problemRepository = problemRepository;
             _tagRepository = tagRepository;
         }
@@ -40,6 +43,12 @@ namespace TinkloProblemos.API.Services
                         _tagRepository.AddProblemTag(createTagDto, result);
                     }
                 }
+
+                if (!string.IsNullOrEmpty(createProblem.AssignedUser))
+                {
+                    _notificationService.SendNotification(createProblem.AssignedUser, result, $"Jums priskirta problema: {createProblem.Name}");
+                }
+                
             }
 
             return databaseResult;
