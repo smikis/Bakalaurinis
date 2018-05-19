@@ -4,7 +4,7 @@ import { LoginService, AuthenticatedUser } from './login.service';
 import { Subscription } from 'rxjs/Subscription';
 import { CreateProblemDialogComponent } from './create-problem-dialog/create-problem-dialog.component';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import { MessagingService, User } from "./messaging.service";
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -32,17 +32,21 @@ export class AppComponent implements AfterViewInit, OnInit {
     }]);
     console.log('OneSignal Initialized');
 
-    this.OneSignal.push(function () {     
+    this.OneSignal.push(function () {
 
-      this.OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+      this.OneSignal.isPushNotificationsEnabled(function (isEnabled) {
         if (!isEnabled) {
           this.OneSignal.push(["registerForPushNotifications"]);
         }
       });
-    
-      this.OneSignal.on('notificationDisplay', function(event) {
+
+      this.OneSignal.on('notificationDisplay', function (event) {
         console.log(event);
       });
+
+      if (this.user) {
+        this.OneSignal.sendTag("user_id", this.user.id);
+      }
 
     });
   }
@@ -55,7 +59,9 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.user = null;
       } else {
         this.user = result;
-        this.OneSignal.sendTag("user_id", result.id);
+        this.OneSignal.push(function () {
+          this.OneSignal.sendTag("user_id", result.id);
+        });
       }
     });
   }

@@ -75,6 +75,7 @@ export interface Problem {
   categoryName: string;
   assignedUserEmail: string;
   status: string;
+  statusId: number;
   internetUserId: number;
   assignedUserId: string;
   created: Date;

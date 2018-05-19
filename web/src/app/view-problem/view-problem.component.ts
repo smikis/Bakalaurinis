@@ -35,10 +35,12 @@ export class TimeSpentValidatorService implements ValidatorService {
 export class ViewProblemComponent implements OnInit {
   problemId : number;
   problem: Problem;
+  status: string;
+  description: string;
   internetUser: InternetUser;
   editAssignedUser = false;
-  editInternetUser = false;
   editStatus = false;
+  editDescription = false;
 
   comments: Array<Comment>;
   commentText: string = null;
@@ -52,10 +54,7 @@ export class ViewProblemComponent implements OnInit {
   users: User[];
   userCtrl: FormControl;
   filteredUsers: Subscription;
-
-  internetUserCtrl: FormControl;
-  filteredInternetUsers: Subscription;
-  internetUsers: InternetUser[];
+  selectedUser: User;
 
   constructor(private route:ActivatedRoute, 
     private problemService: ProblemService, 
@@ -80,19 +79,6 @@ export class ViewProblemComponent implements OnInit {
             })
           })
           .subscribe();
-
-          this.internetUserCtrl = new FormControl({value: '', disabled: true});
-          this.filteredInternetUsers = this.internetUserCtrl.valueChanges
-          .startWith(null)
-          .debounceTime(400)
-             .do(val => {
-               internetUserService.searchInternetUsers(val)
-               .toPromise()
-               .then(res => {
-                 this.internetUsers = res
-               })
-             })
-             .subscribe();
      }
 
   ngOnInit() {
@@ -103,7 +89,7 @@ export class ViewProblemComponent implements OnInit {
       //Get problem data
         this.problemService.getProblem(this.problemId).subscribe(data=> {
             this.problem = data;
-            
+            this.status = data.statusId.toString();
             if(this.problem.internetUserId!== undefined) {
               this.internetUserService.getInternetUser(this.problem.internetUserId).subscribe(data=> {
                 this.internetUser = data;
@@ -157,6 +143,19 @@ export class ViewProblemComponent implements OnInit {
       this.comments.push(comment);
     });
 
+  }
+
+  confirmUserEdit() {
+    console.log(this.selectedUser);
+  }
+
+
+  setStatus() {
+    console.log(this.status);
+  }
+
+  setDescription() {
+    console.log(this.description);
   }
 
   visible: boolean = true;

@@ -72,7 +72,12 @@ export class UserCompletedTasksComponent implements OnInit {
     private login: LoginService,
     private timeSpentService: TimeSpentService,
     private router: Router) {
-    this.getEvents(this.viewDate);
+
+      this.login.userSubscription.subscribe(result => {
+        if (result !== null && result !== undefined) {
+          this.getEvents(this.viewDate);
+        }
+      });
   
    }
 

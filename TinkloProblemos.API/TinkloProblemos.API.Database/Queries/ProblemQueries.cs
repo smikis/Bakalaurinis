@@ -22,7 +22,7 @@ SET statusId = @statusId
 WHERE id = @problemId;";
 
         public static string GetProblem =
-            @"SELECT problem.Id, problem.Name,problem.Location, problem.Created, problem.Description, problem.Created, problem.internetuserid, category.Id as categoryId, category.Name as categoryName,
+            @"SELECT problem.Id, problem.StatusId, problem.Name,problem.Location, problem.Created, problem.Description, problem.Created, problem.internetuserid, category.Id as categoryId, category.Name as categoryName,
 users.Id as assignedUserId, users.FirstName as assignedUserFirstName, users.Email as assignedUserEmail, status.name as status
 FROM problem left join category_problem on problem.id = category_problem.problemId
 left join category on category.id = category_problem.categoryId

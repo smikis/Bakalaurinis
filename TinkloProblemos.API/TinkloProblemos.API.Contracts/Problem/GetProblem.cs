@@ -17,6 +17,7 @@ namespace TinkloProblemos.API.Contracts.Problem
         public string AssignedUserEmail { get; set; }
         public int? InternetUserId { get; set; }
         public string Status { get; set; }
+        public int StatusId { get; set; }
         public DateTime Created { get; set; }
     }
 }
