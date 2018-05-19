@@ -20,7 +20,7 @@ namespace TinkloProblemos.API.Identity.Tables
 
         public Task<IdentityResult> CreateAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
-            const string command = "INSERT INTO Users " +
+            const string command = "INSERT INTO users " +
                                    "VALUES (@Id, @FirstName, @LastName, @UserName, @NormalizedUserName, @Email, @NormalizedEmail, @EmailConfirmed, " +
                                            "@PasswordHash, @PhoneNumber, @PhoneNumberConfirmed, @PhotoUrl, @Address, @ConcurrencyStamp, @SecurityStamp, " +
                                            "@RegistrationDate, @LastLoginDate, @LockoutEnabled, @LockoutEndDateTimeUtc, @TwoFactorEnabled, @AccessFailedCount);";
@@ -60,7 +60,7 @@ namespace TinkloProblemos.API.Identity.Tables
         public Task<IdentityResult> DeleteAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
             const string command = "DELETE " +
-                                   "FROM Users " +
+                                   "FROM users " +
                                    "WHERE Id = @Id;";
 
             int rowsDeleted = Task.Run(() => _sqlConnection.ExecuteAsync(command, new
@@ -78,7 +78,7 @@ namespace TinkloProblemos.API.Identity.Tables
         public Task<ApplicationUser> FindByIdAsync(Guid userId)
         {
             const string command = "SELECT * " +
-                                   "FROM Users " +
+                                   "FROM users " +
                                    "WHERE Id = @Id;";
 
             return _sqlConnection.QuerySingleOrDefaultAsync<ApplicationUser>(command, new
@@ -90,7 +90,7 @@ namespace TinkloProblemos.API.Identity.Tables
         public Task<ApplicationUser> FindByNameAsync(string normalizedUserName)
         {
             const string command = "SELECT * " +
-                                   "FROM Users " +
+                                   "FROM users " +
                                    "WHERE NormalizedUserName = @NormalizedUserName;";
 
             return _sqlConnection.QuerySingleOrDefaultAsync<ApplicationUser>(command, new
@@ -102,7 +102,7 @@ namespace TinkloProblemos.API.Identity.Tables
         public Task<ApplicationUser> FindByEmailAsync(string normalizedEmail)
         {
             const string command = "SELECT * " +
-                                   "FROM Users " +
+                                   "FROM users " +
                                    "WHERE NormalizedEmail = @NormalizedEmail;";
 
             return _sqlConnection.QuerySingleOrDefaultAsync<ApplicationUser>(command, new
@@ -113,7 +113,7 @@ namespace TinkloProblemos.API.Identity.Tables
 
         public Task<IdentityResult> UpdateAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
-            const string command = "UPDATE Users " +
+            const string command = "UPDATE users " +
                                    "SET FirstName = @FirstName, LastName = @LastName, UserName = @UserName, NormalizedUserName = @NormalizedUserName, Email = @Email, NormalizedEmail = @NormalizedEmail, " +
                                        "EmailConfirmed = @EmailConfirmed, PasswordHash = @PasswordHash, PhoneNumber = @PhoneNumber, PhoneNumberConfirmed = @PhoneNumberConfirmed, PhotoUrl = @PhotoUrl, Address = @Address, " +
                                        "ConcurrencyStamp = @ConcurrencyStamp, SecurityStamp = @SecurityStamp, RegistrationDate = @RegistrationDate, LastLoginDate = @LastLoginDate, LockoutEnabled = @LockoutEnabled, LockoutEndDateTimeUtc = @LockoutEndDateTimeUtc, " +
@@ -155,7 +155,7 @@ namespace TinkloProblemos.API.Identity.Tables
         public Task<IEnumerable<ApplicationUser>> GetAllUsers()
         {
             const string command = "SELECT * " +
-                                   "FROM Users;";
+                                   "FROM users;";
 
             return _sqlConnection.QueryAsync<ApplicationUser>(command);
         }

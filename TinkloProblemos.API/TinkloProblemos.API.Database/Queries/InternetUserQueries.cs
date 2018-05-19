@@ -4,10 +4,10 @@
     {
         public static string Add = @"INSERT INTO internetuser (FirstName, LastName, Description, Location, IpAddress) 
                                     VALUES(@FirstName, @LastName, @Description, @Location, @IpAddress)";
-        public static string GetAll = @"SELECT * FROM InternetUser";
+        public static string GetAll = @"SELECT * FROM internetuser";
 
-        public static string GetPage = @"SELECT * FROM InternetUser LIMIT @skip, @take";
-        public static string GetPageCount = @"SELECT COUNT(*) FROM InternetUser";
+        public static string GetPage = @"SELECT * FROM internetuser LIMIT @skip, @take";
+        public static string GetPageCount = @"SELECT COUNT(*) FROM internetuser";
 
         public static string Search = @"SELECT * FROM internetuser
 WHERE MATCH(FirstName, LastName) AGAINST(@searchQuery IN BOOLEAN MODE);";

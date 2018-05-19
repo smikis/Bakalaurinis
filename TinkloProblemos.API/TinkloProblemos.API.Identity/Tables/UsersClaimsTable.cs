@@ -22,7 +22,7 @@ namespace TinkloProblemos.API.Identity.Tables
         public Task<IList<Claim>> GetClaimsAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
             const string command = "SELECT * " +
-                                   "FROM UsersClaims " +
+                                   "FROM usersclaims " +
                                    "WHERE UserId = @UserId;";
 
             IEnumerable<UserClaim> userClaims = Task.Run(() => _sqlConnection.QueryAsync<UserClaim>(command, new
@@ -35,7 +35,7 @@ namespace TinkloProblemos.API.Identity.Tables
 
         public Task AddClaimsAsync(ApplicationUser user, IEnumerable<Claim> claims)
         {
-            const string command = "INSERT INTO UsersClaims " +
+            const string command = "INSERT INTO usersclaims " +
                                    "VALUES (@Id, @UserId, @ClaimType, @ClaimValue);";
 
             return _sqlConnection.ExecuteAsync(command, claims.Select(e => new
@@ -49,7 +49,7 @@ namespace TinkloProblemos.API.Identity.Tables
 
         public Task ReplaceClaimAsync(ApplicationUser user, Claim claim, Claim newClaim)
         {
-            const string command = "UPDATE UsersClaims " +
+            const string command = "UPDATE usersclaims " +
                                    "SET ClaimType = @NewClaimType, ClaimValue = @NewClaimValue " +
                                    "WHERE UserId = @UserId AND ClaimType = @ClaimType AND ClaimValue = @ClaimType;";
 

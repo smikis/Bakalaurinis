@@ -21,7 +21,7 @@ namespace TinkloProblemos.API.Identity.Tables
 
         public Task AddLoginAsync(ApplicationUser user, UserLoginInfo login)
         {
-            const string command = "INSERT INTO UsersLogins " +
+            const string command = "INSERT INTO userslogins " +
                                    "VALUES (@LoginProvider, @ProviderKey, @UserId, @ProviderDisplayName);";
 
             return _sqlConnection.ExecuteAsync(command, new
@@ -36,7 +36,7 @@ namespace TinkloProblemos.API.Identity.Tables
         public Task RemoveLoginAsync(ApplicationUser user, string loginProvider, string providerKey)
         {
             const string command = "DELETE " +
-                                   "FROM UsersLogins " +
+                                   "FROM userslogins " +
                                    "WHERE UserId = @UserId AND LoginProvider = @LoginProvider AND ProviderKey = @ProviderKey;";
 
             return _sqlConnection.ExecuteAsync(command, new
@@ -50,7 +50,7 @@ namespace TinkloProblemos.API.Identity.Tables
         public Task<IList<UserLoginInfo>> GetLoginsAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
             const string command = "SELECT * " +
-                                   "FROM UsersLogins " +
+                                   "FROM userslogins " +
                                    "WHERE UserId = @UserId;";
 
             IEnumerable<UserLogin> userLogins = Task.Run(() => _sqlConnection.QueryAsync<UserLogin>(command, new
@@ -66,7 +66,7 @@ namespace TinkloProblemos.API.Identity.Tables
             string[] command =
             {
                 "SELECT UserId " +
-                "FROM UsersLogins " +
+                "FROM userslogins " +
                 "WHERE LoginProvider = @LoginProvider AND ProviderKey = @ProviderKey;"
             };
 
@@ -82,7 +82,7 @@ namespace TinkloProblemos.API.Identity.Tables
             }
 
             command[0] = "SELECT * " +
-                         "FROM Users " +
+                         "FROM users " +
                          "WHERE Id = @Id;";
 
             return _sqlConnection.QuerySingleAsync<ApplicationUser>(command[0], new { Id = userGuid });

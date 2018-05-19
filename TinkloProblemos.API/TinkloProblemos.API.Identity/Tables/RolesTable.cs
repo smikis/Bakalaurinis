@@ -20,7 +20,7 @@ namespace TinkloProblemos.API.Identity.Tables
 
         public Task<IdentityResult> CreateAsync(ApplicationRole role, CancellationToken cancellationToken)
         {
-            const string command = "INSERT INTO Roles " +
+            const string command = "INSERT INTO roles " +
                                    "VALUES (@Id, @ConcurrencyStamp, @Name, @NormalizedName);";
 
             int rowsInserted = Task.Run(() => _sqlConnection.ExecuteAsync(command, new
@@ -40,7 +40,7 @@ namespace TinkloProblemos.API.Identity.Tables
 
         public Task<IdentityResult> UpdateAsync(ApplicationRole role, CancellationToken cancellationToken)
         {
-            const string command = "UPDATE Roles " +
+            const string command = "UPDATE roles " +
                                    "SET ConcurrencyStamp = @ConcurrencyStamp, Name = @Name, NormalizedName = @NormalizedName " +
                                    "WHERE Id = @Id;";
 
@@ -62,7 +62,7 @@ namespace TinkloProblemos.API.Identity.Tables
         public Task<IdentityResult> DeleteAsync(ApplicationRole role, CancellationToken cancellationToken)
         {
             const string command = "DELETE " +
-                                   "FROM Roles " +
+                                   "FROM roles " +
                                    "WHERE Id = @Id;";
 
             int rowsDeleted = Task.Run(() => _sqlConnection.ExecuteAsync(command, new { role.Id }), cancellationToken).Result;
@@ -77,7 +77,7 @@ namespace TinkloProblemos.API.Identity.Tables
         public Task<ApplicationRole> FindByIdAsync(Guid roleId)
         {
             const string command = "SELECT * " +
-                                   "FROM Roles " +
+                                   "FROM roles " +
                                    "WHERE Id = @Id;";
 
             return _sqlConnection.QuerySingleOrDefaultAsync<ApplicationRole>(command, new
@@ -89,7 +89,7 @@ namespace TinkloProblemos.API.Identity.Tables
         public Task<ApplicationRole> FindByNameAsync(string normalizedRoleName)
         {
             const string command = "SELECT * " +
-                                   "FROM Roles " +
+                                   "FROM roles " +
                                    "WHERE NormalizedName = @NormalizedName;";
 
             return _sqlConnection.QuerySingleOrDefaultAsync<ApplicationRole>(command, new
@@ -101,7 +101,7 @@ namespace TinkloProblemos.API.Identity.Tables
         public Task<IEnumerable<ApplicationRole>> GetAllRoles()
         {
             const string command = "SELECT * " +
-                                   "FROM Roles;";
+                                   "FROM roles;";
 
             return _sqlConnection.QueryAsync<ApplicationRole>(command);
         }

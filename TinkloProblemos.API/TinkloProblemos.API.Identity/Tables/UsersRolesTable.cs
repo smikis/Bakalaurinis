@@ -20,7 +20,7 @@ namespace TinkloProblemos.API.Identity.Tables
 
         public Task AddToRoleAsync(ApplicationUser user, string roleId)
         {
-            const string command = "INSERT INTO UsersRoles " +
+            const string command = "INSERT INTO usersroles " +
                                    "VALUES (@UserId, @RoleId);";
 
             return _sqlConnection.ExecuteAsync(command, new
@@ -33,7 +33,7 @@ namespace TinkloProblemos.API.Identity.Tables
         public Task RemoveFromRoleAsync(ApplicationUser user, string roleId)
         {
             const string command = "DELETE " +
-                                   "FROM UsersRoles " +
+                                   "FROM usersroles " +
                                    "WHERE UserId = @UserId AND RoleId = @RoleId;";
 
             return _sqlConnection.ExecuteAsync(command, new
@@ -46,8 +46,8 @@ namespace TinkloProblemos.API.Identity.Tables
         public Task<IList<string>> GetRolesAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
             const string command = "SELECT r.Name " +
-                                   "FROM Roles as r " +
-                                   "INNER JOIN UsersRoles AS ur ON ur.RoleId = r.Id " +
+                                   "FROM roles as r " +
+                                   "INNER JOIN usersroles AS ur ON ur.RoleId = r.Id " +
                                    "WHERE ur.UserId = @UserId;";
 
             IEnumerable<string> userRoles = Task.Run(() => _sqlConnection.QueryAsync<string>(command, new
