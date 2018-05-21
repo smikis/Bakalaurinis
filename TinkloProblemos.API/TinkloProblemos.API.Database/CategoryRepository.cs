@@ -56,7 +56,7 @@ namespace TinkloProblemos.API.Database
         {
             using (IDbConnection dbConnection = Connection)
             {
-                return dbConnection.Execute(CategoryQueries.Update, new { prod, categoryId });
+                return dbConnection.Execute(CategoryQueries.Update, new { prod.Name, prod.Description, id = categoryId });
             }
         }
     }

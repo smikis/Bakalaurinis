@@ -8,6 +8,7 @@ namespace TinkloProblemos.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/Category")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -17,7 +18,7 @@ namespace TinkloProblemos.API.Controllers
         }
 
         // GET: api/Category
-        [Authorize(AuthenticationSchemes = "Bearer")]
+       
         [HttpGet]
         public IEnumerable<CategoryDto> Get()
         {

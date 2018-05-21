@@ -52,7 +52,7 @@ namespace PingComponent
 
         private static void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Console.WriteLine("Started writing ping information");
+            Console.WriteLine("Write ping information");
             var internetUsers = _database.GetInternetUsers();
             int timeout = 1024;
             var results = GetPingResults(internetUsers, timeout);
