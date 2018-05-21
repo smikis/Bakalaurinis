@@ -61,6 +61,8 @@ import { InternetUserInformationComponent } from './internet-user-information/in
 import { UserCompletedTasksComponent } from './user-completed-tasks/user-completed-tasks.component';
 import { ViewSystemUserComponent } from './view-system-user/view-system-user.component';
 import { ReportsComponentComponent } from './reports-component/reports-component.component';
+import { CreateInterentuserDialogComponent } from './create-interentuser-dialog/create-interentuser-dialog.component';
+import { CreateSystemuserDialogComponent } from './create-systemuser-dialog/create-systemuser-dialog.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -92,7 +94,9 @@ const appRoutes: Routes = [
     UserCompletedTasksComponent,
     ViewSystemUserComponent,
     ReportsComponentComponent,
-    ProblemListCompactComponent
+    ProblemListCompactComponent,
+    CreateInterentuserDialogComponent,
+    CreateSystemuserDialogComponent
   ],
   imports: [
     ChartsModule,
