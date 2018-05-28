@@ -59,17 +59,22 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.user = null;
       } else {
         this.user = result;
-        this.OneSignal.push(function () {
-          this.OneSignal.sendTag("user_id", result.id);
-        });
+        if(this.OneSignal) {
+          this.OneSignal.push(function () {
+            this.OneSignal.sendTag("user_id", result.id);
+          });
+        }
+       
       }
     });
   }
 
   logout() {
     this.user = null;
-    this.OneSignal.deleteTag("user_id");
-    this.login.logout();
+    if(typeof(this.OneSignal.deleteTag)  === typeof(Function)) {
+      this.OneSignal.deleteTag("user_id");    
+    }
+    this.login.logout();  
   }
 
   onPlusClick() {

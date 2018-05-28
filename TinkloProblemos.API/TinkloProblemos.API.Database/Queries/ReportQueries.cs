@@ -10,8 +10,8 @@ namespace TinkloProblemos.API.Database.Queries
 COUNT(timespent.userId) as timeSpentCount,
 COUNT(DISTINCT timespent.problemId) as problemsSolved,
 SUM(timespent.hoursSpent) as time,
-MAX(timeSpent.hoursSpent) as maxTime,
-MIN(timeSpent.hoursSpent) as minTime,
+MAX(timespent.hoursSpent) as maxTime,
+MIN(timespent.hoursSpent) as minTime,
 SUM(timespent.hoursSpent) / COUNT(*) as averageTaskTime,
 users.Id as userId,
 users.firstName,
@@ -29,9 +29,9 @@ ORDER BY timeSpent desc
 LIMIT @limit;";
 
         public static string GetInternetClientWithMostTimeSpent = @"
-SELECT problem.internetUserId, internetUser.firstName as firstName, internetUser.lastName as lastName, SUM(timespent.hoursSpent) as timeSpent
+SELECT problem.internetUserId, internetuser.firstName as firstName, internetuser.lastName as lastName, SUM(timespent.hoursSpent) as timeSpent
 FROM timespent inner join problem on timespent.problemId = problem.id
-inner join internetUser on internetUser.id = problem.internetUserId
+inner join internetuser on internetuser.id = problem.internetUserId
 WHERE timespent.dateRecorded > @dateFrom && timespent.dateRecorded < @dateTo
 GROUP BY problem.id
 ORDER BY timeSpent desc
