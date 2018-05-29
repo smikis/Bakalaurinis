@@ -16,6 +16,30 @@ export class ProblemService {
     return this.http.post<number>(baseUrl, problem);
   }
 
+  updateProblemInternetUser(problemId: number, internetUserId: number) {
+    let baseUrl = this.url.getApiUrl(Endpoints.updateProblemInternetUser(problemId));
+    baseUrl += "?internetUserId=" + internetUserId;
+    return this.http.put(baseUrl);
+  }
+
+  updateProblemAssignedUser(problemId: number, userId: string) {
+    let baseUrl = this.url.getApiUrl(Endpoints.updateProblemAssignedUser(problemId));
+    baseUrl += "?userId=" + userId;
+    return this.http.put(baseUrl);
+  }
+
+  updateProblemDescription(problemId: number, description: string) {
+    let baseUrl = this.url.getApiUrl(Endpoints.updateProblemDescription(problemId));
+    baseUrl += "?description=" + description;
+    return this.http.put(baseUrl);
+  }
+
+  updateProblemStatus(problemId: number, status: number) {
+    let baseUrl = this.url.getApiUrl(Endpoints.updateProblemStatus(problemId));
+    baseUrl += "?statusId=" + status;
+    return this.http.put(baseUrl);
+  }
+
   getProblem(id: number) {
     let baseUrl = this.url.getApiUrl(Endpoints.getProblem(id));
     return this.http.get<Problem>(baseUrl);

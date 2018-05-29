@@ -25,18 +25,24 @@ export class LoginService {
 
   constructor(private http: HttpClient, private url: UrlService, private router : Router) {
     this.accessToken = localStorage.getItem('accessToken');
-
-    this.getUser().subscribe(data=> {
-      this.lastAuthenticatedUser = new AuthenticatedUser(data.email, data.id,data.firstName, data.lastName,data.roles);
-      console.log(this.lastAuthenticatedUser);  
-      this.accessToken = data.token;
-        this.userSubscription.next(this.lastAuthenticatedUser);    
-        window.localStorage.setItem('accessToken', this.accessToken);
-    },
-  error=> {
-    window.localStorage.removeItem('accessToken');
-    this.router.navigate(['login']);
-  });
+    if(this.accessToken) {
+      this.getUser().subscribe(data=> {
+        this.lastAuthenticatedUser = new AuthenticatedUser(data.email, data.id,data.firstName, data.lastName,data.roles);
+        console.log(this.lastAuthenticatedUser);  
+        this.accessToken = data.token;
+          this.userSubscription.next(this.lastAuthenticatedUser);    
+          window.localStorage.setItem('accessToken', this.accessToken);
+      },
+    error=> {
+      console.log(error);
+      window.localStorage.removeItem('accessToken');
+      this.router.navigate(['login']);
+    });
+    }
+    else {
+      this.router.navigate(['login']);
+    }
+   
   }
 
   getUser() {

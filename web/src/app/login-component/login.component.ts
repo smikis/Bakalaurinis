@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['dashboard']);
        }     
    }).catch(error=> {
+     console.log(error);
     this.snackbar.open('Neteisingi prisijungimo duomenys', 'Gerai').afterDismissed().subscribe((value: MatSnackBarDismiss) => {
         this.loginForm.controls['password'].reset();
       });

@@ -59,10 +59,13 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.user = null;
       } else {
         this.user = result;
-        if(this.OneSignal) {
+        try {
           this.OneSignal.push(function () {
             this.OneSignal.sendTag("user_id", result.id);
           });
+        }
+        catch(e) {
+          console.log(e);
         }
        
       }

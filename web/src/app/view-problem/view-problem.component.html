@@ -249,7 +249,8 @@
             <mat-select [(ngModel)]="status" placeholder="Statusas" matInput [disabled]="!editStatus">
               <mat-option  value="1">Sukurtas</mat-option>
               <mat-option  value="2">Priskirtas</mat-option>
-              <mat-option  value="3">Pašalintas</mat-option>
+              <mat-option  value="3">Atliktas</mat-option>
+              <mat-option  value="4">Pašalintas</mat-option>
             </mat-select>
             <span matSuffix>
               <i class="material-icons" *ngIf="!editStatus;">edit</i>

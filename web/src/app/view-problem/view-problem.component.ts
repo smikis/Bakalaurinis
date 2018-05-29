@@ -146,7 +146,9 @@ export class ViewProblemComponent implements OnInit {
   }
 
   confirmUserEdit() {
-    console.log(this.selectedUser);
+    this.problemService.updateProblemAssignedUser(this.problemId, this.selectedUser.id).subscribe(result=> {
+          console.log(result);
+    });
   }
 
 

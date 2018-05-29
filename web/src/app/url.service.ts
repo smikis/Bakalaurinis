@@ -24,6 +24,10 @@ export class Endpoints {
   static readonly login: Endpoint = { value: 'api/Login' };
   static readonly problemPage: (page: number, pageSize: number) => Endpoint = (page, pageSize) => { return { value: `api/Problem/filtered/${page}/${pageSize}` }};
   static readonly getProblem: (id: number) => Endpoint = (id) => { return { value: `api/Problem/${id}/` }};
+  static readonly updateProblemAssignedUser: (id: number) => Endpoint = (id) => { return { value: `api/Problem/user/${id}` }};
+  static readonly updateProblemInternetUser: (id: number) => Endpoint = (id) => { return { value: `api/Problem/internetUser/${id}` }};
+  static readonly updateProblemDescription: (id: number) => Endpoint = (id) => { return { value: `api/Problem/description/${id}` }};
+  static readonly updateProblemStatus: (id: number) => Endpoint = (id) => { return { value: `api/Problem/status/${id}` }};
   static readonly problem: Endpoint = { value: 'api/Problem' };
   static readonly internetUser: Endpoint = { value: 'api/InternetUser' };
   static readonly getInternetUser: (id: number) => Endpoint = (id) => { return { value: `api/InternetUser/${id}/` }};

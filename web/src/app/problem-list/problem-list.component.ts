@@ -28,13 +28,16 @@ export class ProblemListComponent implements OnInit {
   readonly updateForm : FormGroup;
 
   statuses = [
-    {value: 'Created', viewValue: 'Created'},
-    {value: 'Completed', viewValue: 'Completed'}
+    {value: 'Sukurtas', viewValue: 'Sukurtas'},
+    {value: 'Priskirtas', viewValue: 'Priskirtas'},
+    {value: 'Atliktas', viewValue: 'Atliktas'},
+    {value: 'Pašalintas', viewValue: 'Pašalintas'}
   ];
 
   categories = [
-    {value: 'First', viewValue: 'First'},
-    {value: 'Second', viewValue: 'Second'}
+    {value: 'Interneto vartotojų problemos', viewValue: 'Interneto vartotojų problemos'},
+    {value: 'Tinklo problemos', viewValue: 'Tinklo problemos'},
+    {value: 'Įrenginiai', viewValue: 'Įrenginiai'}
   ];
 
   private searchUpdated: Subject<string> = new Subject<string>();
