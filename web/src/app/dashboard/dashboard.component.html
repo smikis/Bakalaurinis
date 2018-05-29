@@ -28,7 +28,7 @@
         Priskirtos problemos
       </mat-card-subtitle>
       <mat-card-content>
-          <app-problem-list-compact>
+          <app-problem-list-compact [assignedUser]='user?.id'>
 
           </app-problem-list-compact>
       </mat-card-content>
@@ -41,7 +41,7 @@
         Nepriskirtos problemos
       </mat-card-subtitle>
       <mat-card-content>
-          <app-problem-list-compact>
+          <app-problem-list-compact [status]='status'>
 
             </app-problem-list-compact>
       </mat-card-content>

@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
 import { LoginService, AuthenticatedUser } from '../login.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-my-problem-list',
+  templateUrl: './my-problem-list.component.html',
+  styleUrls: ['./my-problem-list.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class MyProblemListComponent implements OnInit {
+
   private authSub: Subscription | null;
   user: AuthenticatedUser | null = null;
   status = 'Sukurtas';
@@ -21,15 +21,6 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-
-  pageSize = 5;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  ngAfterViewInit() {
-
-  }
-
 
   ngOnInit() {
   }

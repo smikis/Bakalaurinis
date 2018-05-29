@@ -46,7 +46,7 @@ export class ProblemService {
   }
 
   getPage(page:number, pageSize:number, start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined, assignedUser?: string | undefined) : Observable<ProblemPage> {
-    let baseUrl = this.url.getApiUrl(Endpoints.problemPage(page,pageSize)) + this.generateArgs(start,end,category,status,search);
+    let baseUrl = this.url.getApiUrl(Endpoints.problemPage(page,pageSize)) + this.generateArgs(start,end,category,status,search,assignedUser);
     return this.http.get<ProblemPage>(baseUrl);
   }
 
@@ -68,7 +68,7 @@ export class ProblemService {
         args += "&searchTerm=" + search;
       }      
       if(assignedUser !== undefined) {
-        args += "&assignedUser=" + search;
+        args += "&assingnedUser=" + assignedUser;
       }     
     return args;
   }

@@ -38,10 +38,7 @@
                     <a [routerLink]="['/', 'createProblem']" class="relative">Sukurti problemą</a>
                 </mat-list-item>
                 <mat-list-item routerLinkActive="open" *ngIf="menuExpanded">
-                    <a [routerLink]="['/', 'problemList']" class="relative">Mano problemos</a>
-                </mat-list-item>
-                <mat-list-item routerLinkActive="open" *ngIf="menuExpanded">
-                    <a [routerLink]="['/', 'problemList']" class="relative">Nepriskirtos problemos</a>
+                    <a [routerLink]="['/', 'myProblemList']" class="relative">Mano problemos</a>
                 </mat-list-item>
                 <mat-list-item routerLinkActive="open" *ngIf="menuExpanded">
                     <a [routerLink]="['/', 'problemList']" class="relative">Visos problemos</a>

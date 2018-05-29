@@ -27,5 +27,5 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"  (click)="selectRow(row)"></mat-row>
     </mat-table>
-    <mat-paginator [length]="resultsLength" hidePageSize="true" [pageSize]="pageSize" (page)="onPaginateChange($event)">
+    <mat-paginator [length]="dataSource?.length" hidePageSize="true" [pageSize]="pageSize" (page)="onPaginateChange($event)">
     </mat-paginator>

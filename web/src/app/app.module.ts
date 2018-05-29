@@ -63,12 +63,14 @@ import { ViewSystemUserComponent } from './view-system-user/view-system-user.com
 import { ReportsComponentComponent } from './reports-component/reports-component.component';
 import { CreateInterentuserDialogComponent } from './create-interentuser-dialog/create-interentuser-dialog.component';
 import { CreateSystemuserDialogComponent } from './create-systemuser-dialog/create-systemuser-dialog.component';
+import { MyProblemListComponent } from './my-problem-list/my-problem-list.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'problemList', component: ProblemListComponent },
+  { path: 'myProblemList', component: MyProblemListComponent },
   { path: 'usersList', component: UsersListComponent },
   { path: 'internetUsersList', component: InternetUserListComponent },
   { path: 'createProblem', component: CreateProblemComponent },
@@ -96,7 +98,8 @@ const appRoutes: Routes = [
     ReportsComponentComponent,
     ProblemListCompactComponent,
     CreateInterentuserDialogComponent,
-    CreateSystemuserDialogComponent
+    CreateSystemuserDialogComponent,
+    MyProblemListComponent
   ],
   imports: [
     ChartsModule,

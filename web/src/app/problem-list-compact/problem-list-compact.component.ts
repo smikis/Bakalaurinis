@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input,OnChanges,SimpleChanges } from '@angular/core';
 import {MatPaginator, PageEvent, MatSelectChange} from '@angular/material';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DataSource} from '@angular/cdk/collections';
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./problem-list-compact.component.css'],
   providers:[ProblemService]
 })
-export class ProblemListCompactComponent implements OnInit {
+export class ProblemListCompactComponent implements OnInit,OnChanges {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() assignedUser: string;
   @Input() status: string;
@@ -22,8 +22,15 @@ export class ProblemListCompactComponent implements OnInit {
   displayedColumns = ['id', 'name', 'assignedUserEmail', 'status'];
   dataSource : ProblemsDataSource;
 
-  constructor(private problemService: ProblemService, private router: Router) { 
-    this.problemService.getPage(0,this.pageSize).subscribe(data=> {
+  constructor(private problemService: ProblemService, private router: Router) {
+  
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    
+    this.problemService.getPage(0,this.pageSize,undefined,undefined,undefined,this.status,undefined,this.assignedUser).subscribe(data=> {
+      console.log(changes);
+      console.log(this.assignedUser);
       this.resultsLength = data.total;
       this.dataSource = new ProblemsDataSource(this.problemService, data.data, data.total);
       this.isLoadingResults = false;
@@ -40,8 +47,7 @@ export class ProblemListCompactComponent implements OnInit {
   }
 
   onPaginateChange(event : PageEvent){ 
-    this.dataSource.loadPage(event.pageIndex,event.pageSize);
-    this.resultsLength = this.dataSource.length;
+    this.dataSource.loadPage(event.pageIndex,event.pageSize, this.assignedUser, this.status);
   }
 
 }

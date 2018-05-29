@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, EventEmitter,Input,SimpleChanges,OnChanges } from '@angular/core';
 import {MatPaginator, PageEvent, MatSelectChange} from '@angular/material';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DataSource} from '@angular/cdk/collections';
@@ -16,8 +16,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./problem-list.component.css'],
   providers:[ProblemService]
 })
-export class ProblemListComponent implements OnInit {
+export class ProblemListComponent implements OnInit, OnChanges {
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @Input() assignedUser: string;
 
   searchChangeEmitter: EventEmitter<any> = new EventEmitter<any>();
   isLoadingResults = true;
@@ -66,6 +67,14 @@ export class ProblemListComponent implements OnInit {
 
   }
 
+  ngOnChanges(changes: SimpleChanges) {  
+    this.problemService.getPage(0,this.pageSize,undefined,undefined,undefined,undefined,undefined,this.assignedUser).subscribe(data=> {
+      this.resultsLength = data.total;
+      this.dataSource = new ProblemsDataSource(this.problemService, data.data, data.total);
+      this.isLoadingResults = false;
+    });
+  }
+
   ngOnInit() {
     this.paginator.pageIndex = 0;
   }
@@ -90,7 +99,7 @@ export class ProblemListComponent implements OnInit {
     var category = <string>this.updateForm.controls['category'].value;
     var status = <string>this.updateForm.controls['problemStatus'].value;
     var search = <string>this.updateForm.controls['search'].value;
-    this.dataSource.loadPage(0, this.pageSize, dateFrom, dateTo, category, status, search);
+    this.dataSource.loadPage(0, this.pageSize, dateFrom, dateTo, category, status, search, this.assignedUser);
   }
 
   onPaginateChange(event : PageEvent){
@@ -116,8 +125,8 @@ export class ProblemsDataSource extends DataSource<any> {
   connect(): Observable<Problem[]> {
     return this.subject.asObservable();
   }
-  loadPage(page:number, pageSize:number, start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined){
-    this.reportService.getPage(page,pageSize,start,end,category,status,search).subscribe(data=> {
+  loadPage(page:number, pageSize:number, start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined,assignedUser?: string | undefined){
+    this.reportService.getPage(page,pageSize,start,end,category,status,search,assignedUser).subscribe(data=> {
     this.subject.next(data.data);
     this.length = data.total;
   })
