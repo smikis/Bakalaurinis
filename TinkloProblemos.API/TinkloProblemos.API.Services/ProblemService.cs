@@ -65,20 +65,20 @@ namespace TinkloProblemos.API.Services
             return _problemRepository.GetProblems(skip, pageSize);
         }
 
-        public ProblemPage GetProblems(int page, int pageSize, string category, string status, string assingnedUser, string searchTerm, DateTime? dateFrom, DateTime? dateTo)
+        public ProblemPage GetProblems(int page, int pageSize, string category, string status, string assingnedUser, string searchTerm, int? internetUser, DateTime? dateFrom, DateTime? dateTo)
         {
             int skip = page * pageSize;
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 var sqlSearchQuery = SqlQueryHelper.ConvertToSqlSearchQuery(searchTerm);
-                return _problemRepository.GetProblemsFilteredSearch(skip, pageSize, category, status, assingnedUser, sqlSearchQuery, dateFrom, dateTo);
+                return _problemRepository.GetProblemsFilteredSearch(skip, pageSize, category, status, assingnedUser, internetUser, sqlSearchQuery, dateFrom, dateTo);
             }
-            return _problemRepository.GetProblemsFiltered(skip, pageSize, category, status, assingnedUser, dateFrom, dateTo);
+            return _problemRepository.GetProblemsFiltered(skip, pageSize, category, status, assingnedUser, internetUser, dateFrom, dateTo);
         }
 
-        public IEnumerable<GetProblem> GetProblems(string category, string status, string assingnedUser, DateTime? dateFrom, DateTime? dateTo)
+        public IEnumerable<GetProblem> GetProblems(string category, string status, string assingnedUser, int? internetUser, DateTime? dateFrom, DateTime? dateTo)
         {
-            return _problemRepository.GetProblemsFiltered(category, status, assingnedUser, dateFrom, dateTo);
+            return _problemRepository.GetProblemsFiltered(category, status, assingnedUser, internetUser, dateFrom, dateTo);
         }
 
         public IEnumerable<GetProblem> GetUserProblems(string category, string status, string assingnedUser)

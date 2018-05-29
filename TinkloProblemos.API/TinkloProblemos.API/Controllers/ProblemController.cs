@@ -37,16 +37,16 @@ namespace TinkloProblemos.API.Controllers
 
         // GET: api/Problem
         [HttpGet("filtered/{page}/{pageSize}")]
-        public ProblemPage GetFiltered(int page, int pageSize, [FromQuery] string category, [FromQuery]string status, [FromQuery]string assingnedUser, [FromQuery]string searchTerm, [FromQuery]DateTime? dateFrom, [FromQuery]DateTime? dateTo)
+        public ProblemPage GetFiltered(int page, int pageSize, [FromQuery] string category, [FromQuery]string status, [FromQuery]string assingnedUser, [FromQuery]int? internetUser, [FromQuery]string searchTerm, [FromQuery]DateTime? dateFrom, [FromQuery]DateTime? dateTo)
         {
-            return _problemService.GetProblems(page, pageSize, category, status, assingnedUser, searchTerm, dateFrom, dateTo);
+            return _problemService.GetProblems(page, pageSize, category, status, assingnedUser, searchTerm, internetUser, dateFrom, dateTo);
         }
 
         // GET: api/Problem
         [HttpGet("filtered")]
-        public IEnumerable<GetProblem> GetFiltered([FromQuery] string category, [FromQuery]string status, [FromQuery]string assingnedUser, [FromQuery]DateTime? dateFrom, [FromQuery]DateTime? dateTo)
+        public IEnumerable<GetProblem> GetFiltered([FromQuery] string category, [FromQuery]string status, [FromQuery]string assingnedUser, [FromQuery]int? internetUser, [FromQuery]DateTime? dateFrom, [FromQuery]DateTime? dateTo)
         {
-            return _problemService.GetProblems(category, status, assingnedUser, dateFrom, dateTo);
+            return _problemService.GetProblems(category, status, assingnedUser, internetUser, dateFrom, dateTo);
         }
 
         // GET: api/Problem

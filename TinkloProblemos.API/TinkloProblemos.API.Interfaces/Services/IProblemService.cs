@@ -9,8 +9,8 @@ namespace TinkloProblemos.API.Interfaces.Services
     {
         DatabaseResult Add(CreateProblem createProblem);
         IEnumerable<GetProblem> GetProblems(int page, int pageSize);
-        ProblemPage GetProblems(int page, int pageSize, string category, string status, string assingnedUser, string searchTerm, DateTime? dateFrom, DateTime? dateTo);
-        IEnumerable<GetProblem> GetProblems(string category, string status, string assingnedUser, DateTime? dateFrom, DateTime? dateTo);
+        ProblemPage GetProblems(int page, int pageSize, string category, string status, string assingnedUser,  string searchTerm, int? internetUser, DateTime? dateFrom, DateTime? dateTo);
+        IEnumerable<GetProblem> GetProblems(string category, string status, string assingnedUser, int? internetUser, DateTime? dateFrom, DateTime? dateTo);
         IEnumerable<GetProblem> GetUserProblems(string category, string status, string assingnedUser);
         GetProblem GetProblem(int id);
         bool AssignUserToProblem(string userId, int problemId);

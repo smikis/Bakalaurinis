@@ -51,6 +51,7 @@ AND ((@status is not null AND status.Name = @status) OR @status is null)
 AND ((@assignedUser is not null AND users.Id = @assignedUser) OR @assignedUser is null)
 AND ((@dateFrom is not null AND problem.Created >= @dateFrom) OR @dateFrom is null)
 AND ((@dateTo is not null AND problem.Created <= @dateTo) OR @dateTo is null)
+AND ((@internetUser is not null AND problem.InternetUserId = @internetUser) OR @internetUser is null)
 order by problem.Id
 LIMIT @skip, @take";
         public static string GetFilteredPageCount =
@@ -63,6 +64,7 @@ where ((@categoryName is not null AND category.Name = @categoryName) OR @categor
 AND ((@status is not null AND status.Name = @status) OR @status is null)
 AND ((@assignedUser is not null AND users.Id = @assignedUser) OR @assignedUser is null)
 AND ((@dateFrom is not null AND problem.Created >= @dateFrom) OR @dateFrom is null)
+AND ((@internetUser is not null AND problem.InternetUserId = @internetUser) OR @internetUser is null)
 AND ((@dateTo is not null AND problem.Created <= @dateTo) OR @dateTo is null)";
 
         public static string GetFiltered =
@@ -76,6 +78,7 @@ where ((@categoryName is not null AND category.Name = @categoryName) OR @categor
 AND ((@status is not null AND status.Name = @status) OR @status is null)
 AND ((@assignedUser is not null AND users.Id = @assignedUser) OR @assignedUser is null)
 AND ((@dateFrom is not null AND problem.Created >= @dateFrom) OR @dateFrom is null)
+AND ((@internetUser is not null AND problem.InternetUserId = @internetUser) OR @internetUser is null)
 AND ((@dateTo is not null AND problem.Created <= @dateTo) OR @dateTo is null)
 order by problem.Id";
 
@@ -91,6 +94,7 @@ AND ((@status is not null AND status.Name = @status) OR @status is null)
 AND ((@assignedUser is not null AND users.Id = @assignedUser) OR @assignedUser is null)
 AND ((@dateFrom is not null AND problem.Created >= @dateFrom) OR @dateFrom is null)
 AND ((@dateTo is not null AND problem.Created <= @dateTo) OR @dateTo is null)
+AND ((@internetUser is not null AND problem.InternetUserId = @internetUser) OR @internetUser is null)
 AND MATCH(problem.Name,problem.Description,problem.Location) AGAINST(@searchQuery IN BOOLEAN MODE)
 order by problem.Id
 LIMIT @skip, @take";
@@ -106,6 +110,7 @@ AND ((@status is not null AND status.Name = @status) OR @status is null)
 AND ((@assignedUser is not null AND users.Id = @assignedUser) OR @assignedUser is null)
 AND ((@dateFrom is not null AND problem.Created >= @dateFrom) OR @dateFrom is null)
 AND ((@dateTo is not null AND problem.Created <= @dateTo) OR @dateTo is null)
+AND ((@internetUser is not null AND problem.InternetUserId = @internetUser) OR @internetUser is null)
 AND MATCH(problem.Name,problem.Description,problem.Location) AGAINST(@searchQuery IN BOOLEAN MODE)";
 
         public static string GetFilteredUser =

@@ -55,14 +55,14 @@ namespace TinkloProblemos.API.Database
             }
         }
 
-        public ProblemPage GetProblemsFiltered(int skip, int take, string categoryName, string status, string assignedUser, DateTime? dateFrom, DateTime? dateTo)
+        public ProblemPage GetProblemsFiltered(int skip, int take, string categoryName, string status, string assignedUser, int? internetUser, DateTime? dateFrom, DateTime? dateTo)
         {
             using (IDbConnection dbConnection = Connection)
             {
                 var count = dbConnection.ExecuteScalar<int>(ProblemQueries.GetFilteredPageCount,
-                    new {categoryName, status, assignedUser, dateFrom, dateTo});
+                    new {categoryName, status, assignedUser, dateFrom, dateTo, internetUser });
                 var data = dbConnection.Query<GetProblem>(ProblemQueries.GetFilteredPage,
-                    new {skip, take, categoryName, status, assignedUser, dateFrom, dateTo});
+                    new {skip, take, categoryName, status, assignedUser, dateFrom, dateTo, internetUser });
                 return new ProblemPage
                 {
                     Data = data,
@@ -71,21 +71,21 @@ namespace TinkloProblemos.API.Database
             }
         }
 
-        public IEnumerable<GetProblem> GetProblemsFiltered(string categoryName, string status, string assignedUser, DateTime? dateFrom, DateTime? dateTo)
+        public IEnumerable<GetProblem> GetProblemsFiltered(string categoryName, string status, string assignedUser, int? internetUser, DateTime? dateFrom, DateTime? dateTo)
         {
             using (IDbConnection dbConnection = Connection)
             {
-                return dbConnection.Query<GetProblem>(ProblemQueries.GetFiltered, new {categoryName, status, assignedUser, dateFrom, dateTo });
+                return dbConnection.Query<GetProblem>(ProblemQueries.GetFiltered, new {categoryName, status, assignedUser, dateFrom, dateTo, internetUser });
             }
         }
 
-        public ProblemPage GetProblemsFilteredSearch(int skip, int take, string categoryName, string status, string assignedUser, string searchQuery, DateTime? dateFrom, DateTime? dateTo)
+        public ProblemPage GetProblemsFilteredSearch(int skip, int take, string categoryName, string status, string assignedUser, int? internetUser, string searchQuery, DateTime? dateFrom, DateTime? dateTo)
         {
             using (IDbConnection dbConnection = Connection)
             {          
                 var count = dbConnection.ExecuteScalar<int>(ProblemQueries.GetFilteredSearchCount,
-                    new { categoryName, status, assignedUser, dateFrom, dateTo, searchQuery });
-                var data = dbConnection.Query<GetProblem>(ProblemQueries.GetFilteredSearch, new { skip, take, categoryName, status, assignedUser, dateFrom, dateTo, searchQuery });
+                    new { categoryName, status, assignedUser, dateFrom, dateTo, searchQuery, internetUser });
+                var data = dbConnection.Query<GetProblem>(ProblemQueries.GetFilteredSearch, new { skip, take, categoryName, status, assignedUser, dateFrom, dateTo, searchQuery, internetUser });
                 return new ProblemPage
                 {
                     Data = data,

@@ -162,7 +162,9 @@
         </div>
       </mat-tab>
       <mat-tab label="Kliento problemos">
-        Kliento problemos
+        <app-problem-list-compact [internetUser]='internetUserId'>
+
+        </app-problem-list-compact>
       </mat-tab>
     </mat-tab-group>
   </mat-card-content>

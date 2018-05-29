@@ -45,12 +45,12 @@ export class ProblemService {
     return this.http.get<Problem>(baseUrl);
   }
 
-  getPage(page:number, pageSize:number, start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined, assignedUser?: string | undefined) : Observable<ProblemPage> {
-    let baseUrl = this.url.getApiUrl(Endpoints.problemPage(page,pageSize)) + this.generateArgs(start,end,category,status,search,assignedUser);
+  getPage(page:number, pageSize:number, start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined, assignedUser?: string | undefined, internetUser?: number | undefined) : Observable<ProblemPage> {
+    let baseUrl = this.url.getApiUrl(Endpoints.problemPage(page,pageSize)) + this.generateArgs(start,end,category,status,search,assignedUser,internetUser);
     return this.http.get<ProblemPage>(baseUrl);
   }
 
-  generateArgs(start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined, assignedUser?: string | undefined) : string {
+  generateArgs(start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined, assignedUser?: string | undefined, internetUser?: number | undefined) : string {
     let args ="?";
     if(typeof start === 'object') {
       args = "?" + "dateFrom=" + start.toLocaleDateString('en-GB');
@@ -69,7 +69,10 @@ export class ProblemService {
       }      
       if(assignedUser !== undefined) {
         args += "&assingnedUser=" + assignedUser;
-      }     
+      }
+      if(internetUser !== undefined) {
+        args += "&internetUser=" + internetUser;
+      }        
     return args;
   }
 

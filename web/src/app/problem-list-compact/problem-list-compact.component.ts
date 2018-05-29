@@ -15,6 +15,7 @@ import { Observable } from 'rxjs/Observable';
 export class ProblemListCompactComponent implements OnInit,OnChanges {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() assignedUser: string;
+  @Input() internetUser: number;
   @Input() status: string;
   isLoadingResults = true;
   resultsLength = 0;
@@ -28,9 +29,9 @@ export class ProblemListCompactComponent implements OnInit,OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     
-    this.problemService.getPage(0,this.pageSize,undefined,undefined,undefined,this.status,undefined,this.assignedUser).subscribe(data=> {
+    this.problemService.getPage(0,this.pageSize,undefined,undefined,undefined,this.status,undefined,this.assignedUser, this.internetUser).subscribe(data=> {
       console.log(changes);
-      console.log(this.assignedUser);
+      console.log(this.internetUser);
       this.resultsLength = data.total;
       this.dataSource = new ProblemsDataSource(this.problemService, data.data, data.total);
       this.isLoadingResults = false;
@@ -47,7 +48,7 @@ export class ProblemListCompactComponent implements OnInit,OnChanges {
   }
 
   onPaginateChange(event : PageEvent){ 
-    this.dataSource.loadPage(event.pageIndex,event.pageSize, this.assignedUser, this.status);
+    this.dataSource.loadPage(event.pageIndex,event.pageSize, this.assignedUser, this.status, this.internetUser);
   }
 
 }
@@ -64,8 +65,8 @@ export class ProblemsDataSource extends DataSource<any> {
   connect(): Observable<Problem[]> {
     return this.subject.asObservable();
   }
-  loadPage(page:number, pageSize:number, assignedUser?: string | undefined, status?: string | undefined){
-    this.reportService.getPage(page,pageSize,undefined,undefined,undefined,status,undefined,assignedUser).subscribe(data=> {
+  loadPage(page:number, pageSize:number, assignedUser?: string | undefined, status?: string | undefined, internetUser?: number | undefined){
+    this.reportService.getPage(page,pageSize,undefined,undefined,undefined,status,undefined,assignedUser, internetUser).subscribe(data=> {
     this.subject.next(data.data);
     this.length = data.total;
   })
