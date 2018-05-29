@@ -10,6 +10,8 @@ import "rxjs/add/operator/debounceTime";
 import { Subject } from "rxjs/Subject";
 import "rxjs/add/operator/distinctUntilChanged";
 import {Router} from "@angular/router";
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { CreateInterentuserDialogComponent } from '../create-interentuser-dialog/create-interentuser-dialog.component';
 
 @Component({
   selector: 'app-internet-user-list',
@@ -30,7 +32,7 @@ export class InternetUserListComponent implements OnInit {
 
   private searchUpdated: Subject<string> = new Subject<string>();
 
-  constructor(private internetUserService: InternetUserService, private router: Router) {
+  constructor(private internetUserService: InternetUserService, private router: Router,private dialog: MatDialog) {
     this.internetUserService.getPage(0,this.pageSize).subscribe(data=> {
       this.resultsLength = data.total;
       this.dataSource = new UserDataSource(this.internetUserService, data.data, data.total);
@@ -70,6 +72,17 @@ export class InternetUserListComponent implements OnInit {
 
   selectRow(row: InternetUser) {
     this.router.navigate(['/internetUser', row.id]);
+  }
+
+  createInternetUser() {
+    let createproblemdialogRef = this.dialog.open(CreateInterentuserDialogComponent, {
+      width: '30%',
+    });
+    createproblemdialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getFilteredData();
+      }
+    });
   }
 
 }

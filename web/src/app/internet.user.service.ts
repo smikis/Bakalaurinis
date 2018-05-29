@@ -16,6 +16,11 @@ export class InternetUserService {
     return this.http.get<InternetUser[]>(baseUrl);
   }
 
+  createInternetUser(internetUser: CreateInternetUser) {
+    let baseUrl = this.url.getApiUrl(Endpoints.internetUser);
+    return this.http.post(baseUrl, internetUser);
+  }
+
   getPage(page:number, pageSize:number, search?: string | undefined) : Observable<InternetUserPage> {
     let baseUrl = this.url.getApiUrl(Endpoints.internetUsersPage(page,pageSize)) + this.generateArgs(search);
     return this.http.get<InternetUserPage>(baseUrl);
@@ -55,5 +60,14 @@ export interface InternetUser {
   location: string;
   ipAddress: string;
   created: Date;
+  internetPlan: string;
+}
+
+export class CreateInternetUser {
+  firstName: string;
+  lastName: string;
+  description: string;
+  location: string;
+  ipAddress: string;
   internetPlan: string;
 }

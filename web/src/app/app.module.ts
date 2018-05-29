@@ -145,7 +145,8 @@ const appRoutes: Routes = [
   ],
   providers: [UrlService, LoginService],
   entryComponents: [
-    CreateProblemDialogComponent
+    CreateProblemDialogComponent,
+    CreateInterentuserDialogComponent
   ],
   bootstrap: [AppComponent]
 })

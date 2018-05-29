@@ -9,9 +9,8 @@ export class UrlService {
   private readonly baseUrl: string;
 
   constructor() {
-   // this.baseUrl = window.location.protocol + '//' + window.location.host + '/WasteControl.Api/';
-  // this.baseUrl = "http://localhost:3442/"
-  this.baseUrl = "http://138.68.65.226:3000/";
+   this.baseUrl = "http://localhost:64448/"
+  //this.baseUrl = "http://138.68.65.226:3000/";
   }
 
   getApiUrl(endpoint: Endpoint) {
@@ -33,7 +32,7 @@ export class Endpoints {
   static readonly getProblemComments: (problemId: number) => Endpoint = (problemId) => { return { value: `api/Comment/${problemId}/` }};
   static readonly comment: Endpoint = { value: 'api/Comment' };
   static readonly getProblemTimeSpent: (id: number) => Endpoint = (id) => { return { value: `api/TimeSpent/problem/${id}/` }};
-  static readonly getUserTimeSpentPeriod: (userId: string, date: string) => Endpoint = (userId, date) => { return { value: `/api/TimeSpent/user/${userId}/${date}` }};
+  static readonly getUserTimeSpentPeriod: (userId: string, date: string) => Endpoint = (userId, date) => { return { value: `api/TimeSpent/user/${userId}/${date}` }};
   static readonly getUserTimeSpent: (userId: string) => Endpoint = (userId) => { return { value: `api/TimeSpent/user/${userId}/` }};
   static readonly getTimeSpent: (id: number) => Endpoint = (id) => { return { value: `api/TimeSpent/${id}/` }};
   static readonly timeSpent: Endpoint = { value: 'api/TimeSpent' };

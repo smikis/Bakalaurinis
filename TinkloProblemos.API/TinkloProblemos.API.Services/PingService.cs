@@ -44,12 +44,18 @@ namespace TinkloProblemos.API.Services
             }
 
             var firstSuccessfull = _pingRepository.GetFirstSuccessfullInternetUserPing(internetUserId);
-            TimeSpan durationFirst = DateTime.Now.Subtract(firstSuccessfull.Recorded);
-            return new PingInformation
+            if (firstSuccessfull != null)
             {
-                LastFailDate = null,
-                Uptime = (long)durationFirst.TotalMilliseconds
-            };
+                TimeSpan durationFirst = DateTime.Now.Subtract(firstSuccessfull.Recorded);
+                return new PingInformation
+                {
+                    LastFailDate = null,
+                    Uptime = (long)durationFirst.TotalMilliseconds
+                };
+            }
+
+            return null;
+
         }
     }
 }
