@@ -16,7 +16,10 @@ namespace TinkloProblemos.API.Services
             var searchQuery = new StringBuilder();
             foreach (var word in words)
             {
-                searchQuery.Append($"+{word}* ");
+                if (!string.IsNullOrEmpty(word))
+                {
+                    searchQuery.Append($"+{word}* ");
+                }             
             }
 
             return searchQuery.ToString();

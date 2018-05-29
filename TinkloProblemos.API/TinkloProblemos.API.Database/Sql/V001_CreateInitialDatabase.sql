@@ -126,8 +126,6 @@ CHANGE COLUMN `Description` `Description` NVARCHAR(512) NULL DEFAULT NULL ;
 ALTER TABLE `bakalaurinis`.`timespent` 
 CHANGE COLUMN `Description` `Description` NVARCHAR(512) NULL DEFAULT NULL ;
 
-alter table internetuser ADD FULLTEXT INDEX (FirstName,LastName);
-
 ALTER TABLE `bakalaurinis`.`users` 
 CHANGE COLUMN `Address` `Address` NVARCHAR(256) NULL DEFAULT NULL ;
 
@@ -183,4 +181,15 @@ ADD COLUMN `modifyDate` DATETIME NOT NULL AFTER `lng`;
 
 ALTER TABLE `bakalaurinis`.`current_user_coordinates` 
 ADD UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC);
+
+ALTER TABLE `bakalaurinis`.`internetuser` 
+CHANGE COLUMN `IpAddress` `IpAddress` NVARCHAR(255) NULL DEFAULT NULL ;
+
+alter table internetuser ADD FULLTEXT INDEX (FirstName,LastName, Location,IpAddress);
+
+ALTER TABLE `bakalaurinis`.`internetuser` 
+ADD COLUMN `ContractId` INT NULL AFTER `Created`;
+
+ALTER TABLE `bakalaurinis`.`internetuser` 
+ADD COLUMN `StatusId` INT NOT NULL DEFAULT 1 AFTER `ContractId`;
 

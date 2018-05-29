@@ -22,7 +22,9 @@ export class CreateInterentuserDialogComponent implements OnInit {
       description: new FormControl('', Validators.required),
       location: new FormControl('', Validators.required),
       ipAddress: new FormControl('',Validators.pattern('(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')),
-      internetPlan: new FormControl('')
+      internetPlan: new FormControl(''),
+      contract: new FormControl(''),
+      status: new FormControl('', Validators.required)
   });
   }
 
@@ -35,6 +37,8 @@ export class CreateInterentuserDialogComponent implements OnInit {
     internetUser.location = this.myform.controls['location'].value;
     internetUser.ipAddress = this.myform.controls['ipAddress'].value;
     internetUser.internetPlan = this.myform.controls['internetPlan'].value;
+    internetUser.statusId = this.myform.controls['status'].value;
+    internetUser.contractId = this.myform.controls['contract'].value;
 
     console.log(internetUser);
     this.internetUserService.createInternetUser(internetUser).subscribe(result=> {

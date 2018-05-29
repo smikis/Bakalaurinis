@@ -61,6 +61,8 @@ export interface InternetUser {
   ipAddress: string;
   created: Date;
   internetPlan: string;
+  statusId: number;
+  contractId: number;
 }
 
 export class CreateInternetUser {
@@ -70,4 +72,6 @@ export class CreateInternetUser {
   location: string;
   ipAddress: string;
   internetPlan: string;
+  statusId: number;
+  contractId: number;
 }

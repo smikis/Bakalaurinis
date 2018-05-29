@@ -28,7 +28,7 @@ export class TimeSpentService {
     createTimeSpent.userId = model.userId;
     createTimeSpent.description = model.description;
     createTimeSpent.hoursSpent = model.hoursSpent;
-    createTimeSpent.dateRecorded = model.dateRecorded.toISOString();
+    createTimeSpent.dateRecorded = model.dateRecorded.toDateString();
     return this.http.post<any>(baseUrl, createTimeSpent);
   }
 
@@ -37,7 +37,7 @@ export class TimeSpentService {
     var createTimeSpent = new UpdateTimeSpent();
     createTimeSpent.description = model.description;
     createTimeSpent.hoursSpent = model.hoursSpent;
-    createTimeSpent.dateRecorded = model.dateRecorded.toISOString();
+    createTimeSpent.dateRecorded = model.dateRecorded.toDateString();
     return this.http.put<TimeSpent>(baseUrl, createTimeSpent);
   }
 

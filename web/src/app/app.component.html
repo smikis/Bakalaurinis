@@ -5,7 +5,8 @@
         </button>
         <h1 class="example-app-name">Interneto problemos</h1>
         <div class="spacer"></div>
-        <button mat-button (click)="onPlusClick()">
+        <span *ngIf="user">{{user.firstName + ' ' + user.lastName}}</span>
+        <button *ngIf="user" mat-button (click)="onPlusClick()">
             <i class="material-icons">add</i>
         </button>
     </mat-toolbar>

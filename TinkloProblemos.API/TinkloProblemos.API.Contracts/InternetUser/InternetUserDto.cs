@@ -14,9 +14,11 @@ namespace TinkloProblemos.API.Contracts.InternetUser
         public string Description { get; set; }
         [Required]
         public string Location { get; set; }
-        [Required]
+
         public string IpAddress { get; set; }
         public DateTime Created { get; set; }
         public string InternetPlan { get; set; }
+        public int? ContractId { get; set; }
+        public int StatusId { get; set; } = 1;
     }
 }

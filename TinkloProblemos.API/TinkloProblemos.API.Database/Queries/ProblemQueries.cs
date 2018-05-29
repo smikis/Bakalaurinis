@@ -51,6 +51,7 @@ AND ((@status is not null AND status.Name = @status) OR @status is null)
 AND ((@assignedUser is not null AND users.Id = @assignedUser) OR @assignedUser is null)
 AND ((@dateFrom is not null AND problem.Created >= @dateFrom) OR @dateFrom is null)
 AND ((@dateTo is not null AND problem.Created <= @dateTo) OR @dateTo is null)
+order by problem.Id
 LIMIT @skip, @take";
         public static string GetFilteredPageCount =
             @"SELECT COUNT(*)
@@ -75,7 +76,8 @@ where ((@categoryName is not null AND category.Name = @categoryName) OR @categor
 AND ((@status is not null AND status.Name = @status) OR @status is null)
 AND ((@assignedUser is not null AND users.Id = @assignedUser) OR @assignedUser is null)
 AND ((@dateFrom is not null AND problem.Created >= @dateFrom) OR @dateFrom is null)
-AND ((@dateTo is not null AND problem.Created <= @dateTo) OR @dateTo is null)";
+AND ((@dateTo is not null AND problem.Created <= @dateTo) OR @dateTo is null)
+order by problem.Id";
 
         public static string GetFilteredSearch =
             @"SELECT problem.Id, problem.Name,problem.Location,  problem.Description, problem.Created, category.Id as categoryId, category.Name as categoryName,
@@ -90,6 +92,7 @@ AND ((@assignedUser is not null AND users.Id = @assignedUser) OR @assignedUser i
 AND ((@dateFrom is not null AND problem.Created >= @dateFrom) OR @dateFrom is null)
 AND ((@dateTo is not null AND problem.Created <= @dateTo) OR @dateTo is null)
 AND MATCH(problem.Name,problem.Description,problem.Location) AGAINST(@searchQuery IN BOOLEAN MODE)
+order by problem.Id
 LIMIT @skip, @take";
 
         public static string GetFilteredSearchCount =

@@ -13,5 +13,7 @@ namespace TinkloProblemos.API.Contracts.InternetUser
         public string Location { get; set; }
         [Required]
         public string IpAddress { get; set; }
+        public int? ContractId { get; set; }
+        public int StatusId { get; set; } = 1;
     }
 }
