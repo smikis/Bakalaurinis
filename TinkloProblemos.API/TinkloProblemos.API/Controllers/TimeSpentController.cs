@@ -12,6 +12,7 @@ namespace TinkloProblemos.API.Controllers
     [EnableCors("CorsPolicy")]
     [Produces("application/json")]
     [Route("api/TimeSpent")]
+    [Authorize(AuthenticationSchemes = "Bearer", Roles = "Administrator, User")]
     public class TimeSpentController : Controller
     {
         private readonly ITimeSpentService _timeSpentService;

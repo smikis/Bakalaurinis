@@ -13,12 +13,12 @@ export class PingService {
 
   getInternetUserPings(id: number) : Observable<Ping[]> {
     let baseUrl = this.url.getApiUrl(Endpoints.getInternetUserPings(id));
-    return this.http.get<Ping[]>(baseUrl);
+    return this.http.get<Ping[]>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
   getInternetUserPingInformation(id: number) : Observable<PingInformation> {
     let baseUrl = this.url.getApiUrl(Endpoints.getInternetUserPingInformation(id));
-    return this.http.get<PingInformation>(baseUrl);
+    return this.http.get<PingInformation>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
 }

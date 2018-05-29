@@ -13,12 +13,12 @@ export class TimeSpentService {
 
   getProblemTimeSpent(id: number) : Observable<TimeSpent[]> {
     let baseUrl = this.url.getApiUrl(Endpoints.getProblemTimeSpent(id));
-    return this.http.get<TimeSpent[]>(baseUrl);
+    return this.http.get<TimeSpent[]>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
   getUserTimeSpentPeriod(userId: string, date:string) : Observable<TimeSpentCalendar[]> {
     let baseUrl = this.url.getApiUrl(Endpoints.getUserTimeSpentPeriod(userId, date));
-    return this.http.get<TimeSpentCalendar[]>(baseUrl);
+    return this.http.get<TimeSpentCalendar[]>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
   createTimeSpent(model: TimeSpent){
@@ -29,7 +29,7 @@ export class TimeSpentService {
     createTimeSpent.description = model.description;
     createTimeSpent.hoursSpent = model.hoursSpent;
     createTimeSpent.dateRecorded = model.dateRecorded.toDateString();
-    return this.http.post<any>(baseUrl, createTimeSpent);
+    return this.http.post<any>(baseUrl, createTimeSpent, {headers: this.login.applyAuthentication()});
   }
 
   update(model: TimeSpent, timeSpentId: number) : Observable<TimeSpent> {
@@ -38,12 +38,12 @@ export class TimeSpentService {
     createTimeSpent.description = model.description;
     createTimeSpent.hoursSpent = model.hoursSpent;
     createTimeSpent.dateRecorded = model.dateRecorded.toDateString();
-    return this.http.put<TimeSpent>(baseUrl, createTimeSpent);
+    return this.http.put<TimeSpent>(baseUrl, createTimeSpent, {headers: this.login.applyAuthentication()});
   }
 
   delete(timeSpentId: number) {
     let baseUrl = this.url.getApiUrl(Endpoints.getTimeSpent(timeSpentId));
-    return this.http.delete<TimeSpent>(baseUrl);
+    return this.http.delete<TimeSpent>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
 

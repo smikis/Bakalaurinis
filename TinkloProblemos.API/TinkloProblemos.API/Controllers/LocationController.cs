@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ namespace TinkloProblemos.API.Controllers
     [Produces("application/json")]
     [EnableCors("CorsPolicy")]
     [Route("api/Location")]
+
     public class LocationController : Controller
     {
         private readonly ILocationService _locationService;
@@ -21,6 +23,7 @@ namespace TinkloProblemos.API.Controllers
             _locationService = locationService;
         }
 
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Administrator")]
         [HttpGet("{userId}")]
         public GetLocation Get(string userId)
         {

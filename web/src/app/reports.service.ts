@@ -14,17 +14,17 @@ export class ReportsService {
 
   getUserReports(dateFrom: string, dateTo:string) : Observable<UserReport[]> {
     let baseUrl = this.url.getApiUrl(Endpoints.getUserReports(dateFrom, dateTo));
-    return this.http.get<UserReport[]>(baseUrl);
+    return this.http.get<UserReport[]>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
   getCostlyInternetUsers(dateFrom: string, dateTo:string) : Observable<TimeConsumingInternetUsers[]> {
     let baseUrl = this.url.getApiUrl(Endpoints.getTimeConsumingUsers(dateFrom, dateTo));
-    return this.http.get<TimeConsumingInternetUsers[]>(baseUrl);
+    return this.http.get<TimeConsumingInternetUsers[]>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
   getCostlyProblems(dateFrom: string, dateTo:string) : Observable<TimeConsumingProblems[]> {
     let baseUrl = this.url.getApiUrl(Endpoints.getTimeConsumingProblems(dateFrom, dateTo));
-    return this.http.get<TimeConsumingProblems[]>(baseUrl);
+    return this.http.get<TimeConsumingProblems[]>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
 

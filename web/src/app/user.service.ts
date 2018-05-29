@@ -13,22 +13,22 @@ export class UserService {
 
   searchUsers(searchQuery: string) {
     let baseUrl = this.url.getApiUrl(Endpoints.searchUsers(searchQuery));
-    return this.http.get<User[]>(baseUrl);
+    return this.http.get<User[]>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
   getPage(page:number, pageSize:number, search?: string | undefined) : Observable<UsersPage> {
     let baseUrl = this.url.getApiUrl(Endpoints.usersPage(page,pageSize)) + this.generateArgs(search);
-    return this.http.get<UsersPage>(baseUrl);
+    return this.http.get<UsersPage>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
   getUserLocation(userId: string) {
     let baseUrl = this.url.getApiUrl(Endpoints.getUserLocation(userId));
-    return this.http.get<Location>(baseUrl);
+    return this.http.get<Location>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
   getUser(userId: string) {
     let baseUrl = this.url.getApiUrl(Endpoints.getUser(userId));
-    return this.http.get<UserExtended>(baseUrl);
+    return this.http.get<UserExtended>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
   generateArgs(search?: string | undefined) : string {

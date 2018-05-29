@@ -13,27 +13,27 @@ export class InternetUserService {
 
   getAllInternetUsers() {
     let baseUrl = this.url.getApiUrl(Endpoints.internetUser);
-    return this.http.get<InternetUser[]>(baseUrl);
+    return this.http.get<InternetUser[]>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
   createInternetUser(internetUser: CreateInternetUser) {
     let baseUrl = this.url.getApiUrl(Endpoints.internetUser);
-    return this.http.post(baseUrl, internetUser);
+    return this.http.post(baseUrl, internetUser, {headers: this.login.applyAuthentication()});
   }
 
   getPage(page:number, pageSize:number, search?: string | undefined) : Observable<InternetUserPage> {
     let baseUrl = this.url.getApiUrl(Endpoints.internetUsersPage(page,pageSize)) + this.generateArgs(search);
-    return this.http.get<InternetUserPage>(baseUrl);
+    return this.http.get<InternetUserPage>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
   searchInternetUsers(searchQuery: string) {
     let baseUrl = this.url.getApiUrl(Endpoints.searchInternetUsers(searchQuery));
-    return this.http.get<InternetUser[]>(baseUrl);
+    return this.http.get<InternetUser[]>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
   getInternetUser(id: number) {
     let baseUrl = this.url.getApiUrl(Endpoints.getInternetUser(id));
-    return this.http.get<InternetUser>(baseUrl);
+    return this.http.get<InternetUser>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
   generateArgs(search?: string | undefined) : string {

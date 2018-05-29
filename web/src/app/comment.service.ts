@@ -18,12 +18,12 @@ export class CommentService {
     comment.problemId = problemId;
 
     let baseUrl = this.url.getApiUrl(Endpoints.comment);
-    return this.http.post(baseUrl, comment);
+    return this.http.post(baseUrl, comment, {headers: this.login.applyAuthentication()});
   }
 
   getProblemComments(problemId: number) {
     let baseUrl = this.url.getApiUrl(Endpoints.getProblemComments(problemId));
-    return this.http.get<Array<Comment>>(baseUrl);
+    return this.http.get<Array<Comment>>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
 }

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using TinkloProblemos.API.Contracts.User;
@@ -19,18 +20,21 @@ namespace TinkloProblemos.API.Controllers
             _userService = userService;
         }
 
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Administrator")]
         [HttpGet]
         public IActionResult Get()
         {
             return Ok(_userService.GetUsers());
         }
-        
+
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Administrator")]
         [HttpGet("{page}/{pageSize}")]
         public  IActionResult Get(int page, int pageSize)
         {
             return  Ok(_userService.GetUsers(page,pageSize));
         }
 
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Administrator")]
         [HttpGet("{userId}")]
         public async Task<GetUserExtended> GetUser(string userId)
         {
@@ -38,6 +42,7 @@ namespace TinkloProblemos.API.Controllers
             return user;
         }
 
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Administrator")]
         // GET: api/Problem
         [HttpGet("filtered/{page}/{pageSize}")]
         public UsersPage GetFiltered(int page, int pageSize,  [FromQuery]string searchTerm)
@@ -52,6 +57,7 @@ namespace TinkloProblemos.API.Controllers
             return Ok(_userService.SearchUsers(searchTerm));
         }
 
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Administrator")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Register registerModel)
         {
@@ -66,6 +72,7 @@ namespace TinkloProblemos.API.Controllers
             return BadRequest(this.GetModelStateErrors());
         }
 
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Administrator")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromBody] EditUser editUser, string id)
         {
@@ -80,6 +87,7 @@ namespace TinkloProblemos.API.Controllers
             return BadRequest(this.GetModelStateErrors());
         }
 
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Administrator")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {

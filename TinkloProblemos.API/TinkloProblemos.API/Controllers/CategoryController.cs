@@ -8,7 +8,7 @@ namespace TinkloProblemos.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/Category")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(AuthenticationSchemes = "Bearer", Roles = "Administrator, User")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -26,7 +26,7 @@ namespace TinkloProblemos.API.Controllers
         }
 
         // GET: api/Category/5
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}")]
         public CategoryDto Get(int id)
         {
             return _categoryService.GetById(id);

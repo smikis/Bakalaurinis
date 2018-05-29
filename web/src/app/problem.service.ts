@@ -13,41 +13,41 @@ export class ProblemService {
 
   createProblem(problem: CreateProblem) {
     let baseUrl = this.url.getApiUrl(Endpoints.problem);
-    return this.http.post<number>(baseUrl, problem);
+    return this.http.post<number>(baseUrl, problem, {headers: this.login.applyAuthentication()});
   }
 
   updateProblemInternetUser(problemId: number, internetUserId: number) {
     let baseUrl = this.url.getApiUrl(Endpoints.updateProblemInternetUser(problemId));
     baseUrl += "?internetUserId=" + internetUserId;
-    return this.http.put(baseUrl, null);
+    return this.http.put(baseUrl, null, {headers: this.login.applyAuthentication()});
   }
 
   updateProblemAssignedUser(problemId: number, userId: string) {
     let baseUrl = this.url.getApiUrl(Endpoints.updateProblemAssignedUser(problemId));
     baseUrl += "?userId=" + userId;
-    return this.http.put(baseUrl,null);
+    return this.http.put(baseUrl,null, {headers: this.login.applyAuthentication()});
   }
 
   updateProblemDescription(problemId: number, description: string) {
     let baseUrl = this.url.getApiUrl(Endpoints.updateProblemDescription(problemId));
     baseUrl += "?description=" + description;
-    return this.http.put(baseUrl,null);
+    return this.http.put(baseUrl,null, {headers: this.login.applyAuthentication()});
   }
 
   updateProblemStatus(problemId: number, status: string) {
     let baseUrl = this.url.getApiUrl(Endpoints.updateProblemStatus(problemId));
     baseUrl += "?statusId=" + status;
-    return this.http.put(baseUrl,null);
+    return this.http.put(baseUrl,null, {headers: this.login.applyAuthentication()});
   }
 
   getProblem(id: number) {
     let baseUrl = this.url.getApiUrl(Endpoints.getProblem(id));
-    return this.http.get<Problem>(baseUrl);
+    return this.http.get<Problem>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
   getPage(page:number, pageSize:number, start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined, assignedUser?: string | undefined, internetUser?: number | undefined) : Observable<ProblemPage> {
     let baseUrl = this.url.getApiUrl(Endpoints.problemPage(page,pageSize)) + this.generateArgs(start,end,category,status,search,assignedUser,internetUser);
-    return this.http.get<ProblemPage>(baseUrl);
+    return this.http.get<ProblemPage>(baseUrl, {headers: this.login.applyAuthentication()});
   }
 
   generateArgs(start?: Date | undefined, end?: Date | undefined, category?: string | undefined, status?: string | undefined, search?: string | undefined, assignedUser?: string | undefined, internetUser?: number | undefined) : string {
