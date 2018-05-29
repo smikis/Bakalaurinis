@@ -94,9 +94,12 @@ export class ProblemListComponent implements OnInit {
   }
 
   onPaginateChange(event : PageEvent){
-   
-    this.dataSource.loadPage(event.pageIndex,event.pageSize);
-    this.resultsLength = this.dataSource.length;
+    var dateFrom = <Date>this.updateForm.controls['selectedDateFrom'].value;
+    var dateTo = <Date>this.updateForm.controls['selectedDateTo'].value;
+    var category = <string>this.updateForm.controls['category'].value;
+    var status = <string>this.updateForm.controls['problemStatus'].value;
+    var search = <string>this.updateForm.controls['search'].value;
+    this.dataSource.loadPage(event.pageIndex,event.pageSize, dateFrom, dateTo, category, status, search);
   }
 
 }

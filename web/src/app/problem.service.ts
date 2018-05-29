@@ -34,7 +34,7 @@ export class ProblemService {
     return this.http.put(baseUrl);
   }
 
-  updateProblemStatus(problemId: number, status: number) {
+  updateProblemStatus(problemId: number, status: string) {
     let baseUrl = this.url.getApiUrl(Endpoints.updateProblemStatus(problemId));
     baseUrl += "?statusId=" + status;
     return this.http.put(baseUrl);

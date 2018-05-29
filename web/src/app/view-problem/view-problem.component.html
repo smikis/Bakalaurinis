@@ -13,14 +13,12 @@
             <mat-card>
               <mat-card-content>
                 <div class="flex-row">
-                  <button mat-button routerLink="/login" routerLinkActive="active">
-                    <i class="material-icons">mode_edit</i>Redaguoti</button>
-                  <button mat-button routerLink="/login" routerLinkActive="active">
+                  <button mat-button routerLink="/#" routerLinkActive="active">
                     <i class="material-icons">comment</i>Komentuoti</button>
-                  <button mat-button routerLink="/login" routerLinkActive="active">
+                  <button mat-button (click)="closeProblem()">
                     <i class="material-icons">lock_outline</i>Uždaryti</button>
-                  <button mat-button routerLink="/login" routerLinkActive="active">
-                    <i class="material-icons">lock_open</i>Atidaryti</button>
+                  <button mat-button (click)="openProblem()">
+                    <i class="material-icons" >lock_open</i>Atidaryti</button>
                 </div>
               </mat-card-content>
             </mat-card>
@@ -239,7 +237,7 @@
           </mat-form-field>
           <i class="hover" *ngIf="editAssignedUser" (click)="userCtrl.disable();editAssignedUser = false;confirmUserEdit();" class="material-icons">done</i>
         </div>
-        <div fxLayout="row">
+        <div *ngIf="internetUser" fxLayout="row">
           <mat-form-field class="editable full-width" [hideRequiredMarker]="true" >
             <input matInput placeholder="Interneto vartotojas" disabled [value]="internetUser?.firstName + ' ' + internetUser?.lastName" aria-label="Priskirtas interneto vartotojas">
           </mat-form-field>
