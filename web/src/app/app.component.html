@@ -49,7 +49,7 @@
                         <span>Atlikti darbai</span>
                     </a>
                 </mat-list-item>
-                <mat-list-item>
+                <mat-list-item *ngIf="user.isInRole('Administrator')">
                     <a class="relative" [routerLink]="['/','reports']">
                         <mat-icon>access_time</mat-icon>
                         <span>Laiko ataskaitos</span>
@@ -61,7 +61,7 @@
                         <span>Interneto vartotojai</span>
                     </a>
                 </mat-list-item>
-                <mat-list-item>
+                <mat-list-item *ngIf="user.isInRole('Administrator')">
                     <a class="relative" [routerLink]="['/','usersList']">
                         <mat-icon>perm_identity</mat-icon>
                         <span>Vartotojai</span>
