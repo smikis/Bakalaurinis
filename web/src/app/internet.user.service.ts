@@ -21,6 +21,11 @@ export class InternetUserService {
     return this.http.post(baseUrl, internetUser, {headers: this.login.applyAuthentication()});
   }
 
+  updateInternetUser(internetUser: CreateInternetUser, id:number) {
+    let baseUrl = this.url.getApiUrl(Endpoints.getInternetUser(id));
+    return this.http.put(baseUrl, internetUser, {headers: this.login.applyAuthentication()});
+  }
+
   getPage(page:number, pageSize:number, search?: string | undefined) : Observable<InternetUserPage> {
     let baseUrl = this.url.getApiUrl(Endpoints.internetUsersPage(page,pageSize)) + this.generateArgs(search);
     return this.http.get<InternetUserPage>(baseUrl, {headers: this.login.applyAuthentication()});

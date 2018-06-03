@@ -12,6 +12,7 @@ import "rxjs/add/operator/distinctUntilChanged";
 import {Router} from "@angular/router";
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { CreateInterentuserDialogComponent } from '../create-interentuser-dialog/create-interentuser-dialog.component';
+import { UpdateInternetuserDialogComponent } from '../update-internetuser-dialog/update-internetuser-dialog.component';
 
 @Component({
   selector: 'app-internet-user-list',
@@ -27,7 +28,7 @@ export class InternetUserListComponent implements OnInit {
   isLoadingResults = true;
   resultsLength = 0;
   pageSize = 10;
-  displayedColumns = ['id', 'firstName', 'lastName', 'location', 'ipAddress', 'internetPlan'];
+  displayedColumns = ['id', 'firstName', 'lastName', 'location', 'ipAddress', 'internetPlan', 'actionsColumn'];
   dataSource : UserDataSource;
 
   private searchUpdated: Subject<string> = new Subject<string>();
@@ -79,6 +80,19 @@ export class InternetUserListComponent implements OnInit {
       width: '30%',
     });
     createproblemdialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getFilteredData();
+      }
+    });
+  }
+
+  updateInternetUser(row: InternetUser) {
+    console.log(row);
+    let updateUserdialogRef = this.dialog.open(UpdateInternetuserDialogComponent, {
+      width: '30%',
+      data: {row}
+    });
+    updateUserdialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.getFilteredData();
       }

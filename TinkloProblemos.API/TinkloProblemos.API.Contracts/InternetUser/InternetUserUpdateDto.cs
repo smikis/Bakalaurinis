@@ -6,12 +6,11 @@ namespace TinkloProblemos.API.Contracts.InternetUser
     {
         public string FirstName { get; set; }
         [Required]
-        public int LastName { get; set; }
+        public string LastName { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]
         public string Location { get; set; }
-        [Required]
         public string IpAddress { get; set; }
         public int? ContractId { get; set; }
         public int StatusId { get; set; } = 1;

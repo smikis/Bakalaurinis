@@ -1,0 +1,50 @@
+<mat-dialog-content>
+  <div  fxLayout="row wrap" fxLayoutAlign="center stretch">
+    <div fxFlex="100">
+      <mat-card>
+        <mat-card-title>Interneto vartotojas</mat-card-title>
+        <mat-card-content>
+          <form class="example-form" [formGroup]="myform">
+  
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Vardas" formControlName="firstName">
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Pavardė" formControlName="lastName">
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <input matInput type="number" placeholder="Sutarties numeris" formControlName="contract">
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <textarea matInput placeholder="Aprašymas" formControlName="description"></textarea>
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Vieta" formControlName="location">
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="IP Adresas" formControlName="ipAddress">
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Turimas interneto planas" formControlName="internetPlan">
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="status" placeholder="Statusas">
+                  <mat-option value="1">Aktyvus</mat-option>
+                  <mat-option value="2">Pašalintas</mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <button mat-raised-button type="submit" color="primary" (click)="submit()" [disabled]="!myform.valid">Atnaujinti</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  </mat-dialog-content>

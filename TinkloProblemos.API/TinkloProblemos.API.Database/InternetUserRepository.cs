@@ -90,11 +90,11 @@ namespace TinkloProblemos.API.Database
             }
         }
 
-        public int Update(InternetUserUpdateDto prod, int categoryId)
+        public int Update(InternetUserUpdateDto prod, int internetUserId)
         {
             using (IDbConnection dbConnection = Connection)
             {
-                return dbConnection.Execute(InternetUserQueries.Update, new { prod, categoryId });
+                return dbConnection.Execute(InternetUserQueries.Update, new { prod.Description, prod.ContractId, prod.FirstName, prod.LastName, prod.IpAddress, prod.Location, prod.StatusId, Id = internetUserId });
             }
         }
     }
