@@ -193,3 +193,12 @@ ADD COLUMN `ContractId` INT NULL AFTER `Created`;
 ALTER TABLE `bakalaurinis`.`internetuser` 
 ADD COLUMN `StatusId` INT NOT NULL DEFAULT 1 AFTER `ContractId`;
 
+ALTER TABLE `bakalaurinis`.`internetuserdevice` 
+DROP FOREIGN KEY `FKInternetUs985626`;
+ALTER TABLE `bakalaurinis`.`internetuserdevice` 
+CHANGE COLUMN `InternetUserId` `InternetUserId` INT(10) NULL ;
+ALTER TABLE `bakalaurinis`.`internetuserdevice` 
+ADD CONSTRAINT `FKInternetUs985626`
+  FOREIGN KEY (`InternetUserId`)
+  REFERENCES `bakalaurinis`.`internetuser` (`Id`);
+

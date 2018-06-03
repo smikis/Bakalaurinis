@@ -32,23 +32,9 @@ export class AppComponent implements AfterViewInit, OnInit {
     }]);
     console.log('OneSignal Initialized');
 
-    this.OneSignal.push(function () {
+    this.OneSignal.push(["registerForPushNotifications"]);
+    this.OneSignal.push(["sendTag", "user_id", this.user.id]);
 
-      this.OneSignal.isPushNotificationsEnabled(function (isEnabled) {
-        if (!isEnabled) {
-          this.OneSignal.push(["registerForPushNotifications"]);
-        }
-      });
-
-      this.OneSignal.on('notificationDisplay', function (event) {
-        console.log(event);
-      });
-
-      if (this.user) {
-        this.OneSignal.sendTag("user_id", this.user.id);
-      }
-
-    });
   }
 
 
@@ -60,9 +46,8 @@ export class AppComponent implements AfterViewInit, OnInit {
       } else {
         this.user = result;
         try {
-          this.OneSignal.push(function () {
-            this.OneSignal.sendTag("user_id", result.id);
-          });
+          console.log(this.OneSignal);
+          this.OneSignal.push(["sendTag", "user_id", result.id]);        
         }
         catch(e) {
           console.log(e);
@@ -74,8 +59,13 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   logout() {
     this.user = null;
-    if(typeof(this.OneSignal.deleteTag)  === typeof(Function)) {
-      this.OneSignal.deleteTag("user_id");    
+    try {
+      this.OneSignal.push(function () {
+        this.OneSignal.deleteTag("user_id");   
+      });
+    }
+    catch(e) {
+      console.log(e);
     }
     this.login.logout();  
   }

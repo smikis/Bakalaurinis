@@ -10,6 +10,8 @@ import "rxjs/add/operator/debounceTime";
 import { Subject } from "rxjs/Subject";
 import "rxjs/add/operator/distinctUntilChanged";
 import {Router} from "@angular/router";
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { CreateSystemuserDialogComponent } from '../create-systemuser-dialog/create-systemuser-dialog.component';
 
 @Component({
   selector: 'app-users-list',
@@ -30,7 +32,7 @@ export class UsersListComponent implements OnInit {
 
   private searchUpdated: Subject<string> = new Subject<string>();
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService, private router: Router,private dialog: MatDialog) {
     this.userService.getPage(0,this.pageSize).subscribe(data=> {
       this.resultsLength = data.total;
       this.dataSource = new UserDataSource(this.userService, data.data, data.total);
@@ -71,6 +73,17 @@ export class UsersListComponent implements OnInit {
 
   selectRow(row: User) {
     this.router.navigate(['/systemUser', row.id]);
+  }
+
+  createUser() {
+    let createproblemdialogRef = this.dialog.open(CreateSystemuserDialogComponent, {
+      width: '30%',
+    });
+    createproblemdialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getFilteredData();
+      }
+    });
   }
 
 }

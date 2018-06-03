@@ -43,6 +43,7 @@ namespace TinkloProblemos.API
             services.AddSingleton<IPingRepository, PingRepository>();
             services.AddSingleton<IReportsRepository, ReportsRepository>();
             services.AddSingleton<ILocationRepository, LocationRepository>();
+            services.AddSingleton<IDeviceRepository, DeviceRepository>();
 
             services.AddTransient<IInternetUserService, InternetUserService>();
             services.AddTransient<ICategoryService, CategoryService>();
@@ -56,6 +57,7 @@ namespace TinkloProblemos.API
             services.AddTransient<IReportsService, ReportsService>();
             services.AddTransient<ILocationService, LocationService>();
             services.AddTransient<INotificationService, NotificationService>();
+            services.AddTransient<IDeviceService, DeviceService>();
 
             string connectionString = Configuration.GetConnectionString("Database");
             services.AddTransient<IDatabaseConnectionService>(e => new DatabaseConnectionService(connectionString));

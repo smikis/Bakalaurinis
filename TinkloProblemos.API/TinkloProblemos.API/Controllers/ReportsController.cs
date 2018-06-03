@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TinkloProblemos.API.Contracts.Reports;
+using TinkloProblemos.API.Interfaces.Services;
 using TinkloProblemos.API.Services;
 
 namespace TinkloProblemos.API.Controllers

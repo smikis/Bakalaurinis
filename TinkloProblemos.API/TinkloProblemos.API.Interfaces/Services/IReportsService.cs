@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using TinkloProblemos.API.Contracts.Reports;
 
-namespace TinkloProblemos.API.Services
+namespace TinkloProblemos.API.Interfaces.Services
 {
     public interface IReportsService
     {

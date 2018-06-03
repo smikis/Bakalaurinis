@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using TinkloProblemos.API.Contracts.Reports;
 using TinkloProblemos.API.Interfaces.Repositories;
+using TinkloProblemos.API.Interfaces.Services;
 
 namespace TinkloProblemos.API.Services
 {

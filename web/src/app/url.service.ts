@@ -10,7 +10,7 @@ export class UrlService {
 
   constructor() {
    this.baseUrl = "http://localhost:64448/"
-  //this.baseUrl = "http://138.68.65.226:3000/";
+ // this.baseUrl = "http://138.68.65.226:3000/";
   }
 
   getApiUrl(endpoint: Endpoint) {
@@ -44,6 +44,7 @@ export class Endpoints {
   static readonly getTag: (id: number) => Endpoint = (id) => { return { value: `api/Tag/${id}/` }};
   static readonly tags: Endpoint = { value: 'api/Tag' };
   static readonly searchUsers: (searchQuery: string) => Endpoint = (searchQuery) => { return { value: `api/User/search/${searchQuery}/` }};
+  static readonly users: Endpoint = { value: 'api/User' };
   static readonly usersPage: (page: number, pageSize: number) => Endpoint = (page, pageSize) => { return { value: `api/User/filtered/${page}/${pageSize}` }};
   static readonly getInternetUserPings: (internetUserId: number) => Endpoint = (internetUserId) => { return { value: `api/Ping/${internetUserId}/` }};
   static readonly getInternetUserPingInformation: (internetUserId: number) => Endpoint = (internetUserId) => { return { value: `api/Ping/information/${internetUserId}/` }};
