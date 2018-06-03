@@ -18,26 +18,35 @@
 
     <ng-container matColumnDef="id" class="mat-column-id">
       <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      <mat-cell *matCellDef="let element" (click)="selectRow(element)"> {{element.id}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Vardas</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      <mat-cell *matCellDef="let element" (click)="selectRow(element)"> {{element.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="lastName">
       <mat-header-cell *matHeaderCellDef> Pavardė </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+      <mat-cell *matCellDef="let element" (click)="selectRow(element)"> {{element.lastName}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="email">
       <mat-header-cell *matHeaderCellDef> Elektroninis paštas </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+      <mat-cell *matCellDef="let element" (click)="selectRow(element)"> {{element.email}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actionsColumn">
+      <mat-header-cell *matHeaderCellDef> Redaguoti </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-icon-button focusable="false" (click)="updateUser(element)">
+          <i class="material-icons">mode_edit</i>
+        </button>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"  (click)="selectRow(row)"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
   <mat-paginator [length]="resultsLength" hidePageSize="true" [pageSize]="pageSize" (page)="onPaginateChange($event)">
   </mat-paginator>

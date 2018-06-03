@@ -66,6 +66,7 @@ import { CreateSystemuserDialogComponent } from './create-systemuser-dialog/crea
 import { MyProblemListComponent } from './my-problem-list/my-problem-list.component';
 import { DeviceListComponent } from './device-list/device-list.component';
 import { UpdateInternetuserDialogComponent } from './update-internetuser-dialog/update-internetuser-dialog.component';
+import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dialog.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -104,7 +105,8 @@ const appRoutes: Routes = [
     CreateSystemuserDialogComponent,
     MyProblemListComponent,
     DeviceListComponent,
-    UpdateInternetuserDialogComponent
+    UpdateInternetuserDialogComponent,
+    UpdateUserDialogComponent
   ],
   imports: [
     ChartsModule,
@@ -156,7 +158,8 @@ const appRoutes: Routes = [
     CreateProblemDialogComponent,
     CreateInterentuserDialogComponent,
     CreateSystemuserDialogComponent,
-    UpdateInternetuserDialogComponent
+    UpdateInternetuserDialogComponent,
+    UpdateUserDialogComponent
   ],
   bootstrap: [AppComponent]
 })

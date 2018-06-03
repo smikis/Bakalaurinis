@@ -1,0 +1,31 @@
+<mat-dialog-content>
+  <div fxLayout="row wrap" fxLayoutAlign="center stretch">
+    <div fxFlex="100">
+      <mat-card>
+        <mat-card-title>Interneto vartotojas</mat-card-title>
+        <mat-card-content>
+          <form class="example-form" [formGroup]="myform">
+
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Vardas" formControlName="firstName">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Pavardė" formControlName="lastName">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Adresas" formControlName="address">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Elektroninis paštas" formControlName="email">
+            </mat-form-field>
+           
+            <button mat-raised-button type="submit" color="primary" (click)="submit()" [disabled]="!myform.valid">Sukurti</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</mat-dialog-content>

@@ -16,6 +16,11 @@ export class UserService {
     return this.http.post(baseUrl,user,{ headers: this.login.applyAuthentication() });
   }
 
+  updateUser(user: UpdateUser, id: string) {
+    let baseUrl = this.url.getApiUrl(Endpoints.getUser(id));
+    return this.http.put(baseUrl,user,{ headers: this.login.applyAuthentication() });
+  }
+
   searchUsers(searchQuery: string) {
     let baseUrl = this.url.getApiUrl(Endpoints.searchUsers(searchQuery));
     return this.http.get<User[]>(baseUrl, { headers: this.login.applyAuthentication() });
@@ -57,6 +62,13 @@ export class CreateUser {
   address: string;
   email: string;
   password: string;
+}
+
+export class UpdateUser {
+  name: string;
+  lastName: string;
+  address: string;
+  email: string;
 }
 
 

@@ -12,6 +12,7 @@ import "rxjs/add/operator/distinctUntilChanged";
 import {Router} from "@angular/router";
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { CreateSystemuserDialogComponent } from '../create-systemuser-dialog/create-systemuser-dialog.component';
+import { UpdateUserDialogComponent } from '../update-user-dialog/update-user-dialog.component';
 
 @Component({
   selector: 'app-users-list',
@@ -27,7 +28,7 @@ export class UsersListComponent implements OnInit {
   isLoadingResults = true;
   resultsLength = 0;
   pageSize = 10;
-  displayedColumns = ['id', 'name', 'lastName', 'email'];
+  displayedColumns = ['id', 'name', 'lastName', 'email','actionsColumn'];
   dataSource : UserDataSource;
 
   private searchUpdated: Subject<string> = new Subject<string>();
@@ -80,6 +81,18 @@ export class UsersListComponent implements OnInit {
       width: '30%',
     });
     createproblemdialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getFilteredData();
+      }
+    });
+  }
+
+  updateUser(row: User) {
+    let updateUserRef = this.dialog.open(UpdateUserDialogComponent, {
+      width: '30%',
+      data: {row}
+    });
+    updateUserRef.afterClosed().subscribe(result => {
       if (result) {
         this.getFilteredData();
       }
