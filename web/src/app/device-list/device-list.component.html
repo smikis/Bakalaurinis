@@ -1,0 +1,38 @@
+<mat-card fxFlex="100%" class="padding">
+  <mat-card-title>Interneto vartotojų įrenginiai</mat-card-title>
+  <mat-table fxLayout="column" #table [dataSource]="deviceListDataSource">
+    <ng-container matColumnDef="name" class="mat-column-id">
+      <mat-header-cell *matHeaderCellDef> Pavadinimas </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="manufacturer">
+      <mat-header-cell *matHeaderCellDef> Gamintojas</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.manufacturer}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="macAddress">
+      <mat-header-cell *matHeaderCellDef> Mac adresas </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.macAddress}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Aprašymas </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="internetUserId">
+      <mat-header-cell *matHeaderCellDef> Interneto vartotojas </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.internetUserId}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="warrantyExpiration">
+      <mat-header-cell *matHeaderCellDef> Garantinė trukmė </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.warrantyExpiration}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="deviceListdisplayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: deviceListdisplayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</mat-card>

@@ -64,6 +64,7 @@ import { ReportsComponentComponent } from './reports-component/reports-component
 import { CreateInterentuserDialogComponent } from './create-interentuser-dialog/create-interentuser-dialog.component';
 import { CreateSystemuserDialogComponent } from './create-systemuser-dialog/create-systemuser-dialog.component';
 import { MyProblemListComponent } from './my-problem-list/my-problem-list.component';
+import { DeviceListComponent } from './device-list/device-list.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -76,6 +77,7 @@ const appRoutes: Routes = [
   { path: 'createProblem', component: CreateProblemComponent },
   { path: 'userTasks', component: UserCompletedTasksComponent },
   { path: 'reports', component: ReportsComponentComponent },
+  { path: 'devices', component: DeviceListComponent },
   { path: 'problem/:id', component: ViewProblemComponent },
   { path: 'internetUser/:id', component: InternetUserInformationComponent },
   { path: 'systemUser/:id', component: ViewSystemUserComponent }
@@ -99,7 +101,8 @@ const appRoutes: Routes = [
     ProblemListCompactComponent,
     CreateInterentuserDialogComponent,
     CreateSystemuserDialogComponent,
-    MyProblemListComponent
+    MyProblemListComponent,
+    DeviceListComponent
   ],
   imports: [
     ChartsModule,
