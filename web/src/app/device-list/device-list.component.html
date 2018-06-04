@@ -1,3 +1,6 @@
+<button mat-button (click)="createDevice()">
+  <i class="material-icons">add</i>
+</button>
 <mat-card fxFlex="100%" class="padding">
   <mat-card-title>Interneto vartotojų įrenginiai</mat-card-title>
   <mat-table fxLayout="column" #table [dataSource]="deviceListDataSource">

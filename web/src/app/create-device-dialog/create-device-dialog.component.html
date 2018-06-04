@@ -1,0 +1,42 @@
+<mat-dialog-content>
+  <div class="max-height" fxLayout="row wrap" fxLayoutAlign="center stretch">
+    <div fxFlex="100">
+      <mat-card>
+        <mat-card-title>Įrenginio kūrimas</mat-card-title>
+        <mat-card-content>
+          <form class="example-form" [formGroup]="myform">
+
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Pavadinimas" formControlName="name">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Gamintojas" formControlName="manufacturer">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="MAC Adresas" formControlName="macAddress">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Aprašymas" formControlName="description">
+            </mat-form-field>    
+
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Interneto vartotojas" aria-label="Interneto vartotojas" [matAutocomplete]="autoInternetUser"
+                [formControl]="internetUserCtrl">
+              <mat-autocomplete #autoInternetUser="matAutocomplete">
+                <mat-option (onSelectionChange)="changedInternetUser(internetUser)" *ngFor="let internetUser of internetUsers" [value]="internetUser.firstName + ' ' + internetUser.lastName">
+                  <span>{{ internetUser.firstName }} {{internetUser.lastName}}</span>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+            <button mat-raised-button type="submit" color="primary" (click)="submit()" [disabled]="!myform.valid">Sukurti</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+            
+    </div>
+  </div>
+</mat-dialog-content>

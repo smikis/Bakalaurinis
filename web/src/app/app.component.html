@@ -49,6 +49,12 @@
                         <span>Atlikti darbai</span>
                     </a>
                 </mat-list-item>
+                <mat-list-item>
+                    <a class="relative" [routerLink]="['/', 'devices']">
+                        <mat-icon>router</mat-icon>
+                        <span>Įrenginiai</span>
+                    </a>
+                </mat-list-item>
                 <mat-list-item *ngIf="user.isInRole('Administrator')">
                     <a class="relative" [routerLink]="['/','reports']">
                         <mat-icon>access_time</mat-icon>
