@@ -9,8 +9,8 @@ export class UrlService {
   private readonly baseUrl: string;
 
   constructor() {
-   this.baseUrl = "http://localhost:64448/"
- // this.baseUrl = "http://138.68.65.226:3000/";
+   //this.baseUrl = "http://localhost:64448/"
+   this.baseUrl = "http://138.68.65.226:3000/";
   }
 
   getApiUrl(endpoint: Endpoint) {

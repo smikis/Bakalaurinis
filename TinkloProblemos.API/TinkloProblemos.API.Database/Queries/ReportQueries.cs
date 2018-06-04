@@ -33,7 +33,7 @@ SELECT problem.internetUserId, internetuser.firstName as firstName, internetuser
 FROM timespent inner join problem on timespent.problemId = problem.id
 inner join internetuser on internetuser.id = problem.internetUserId
 WHERE timespent.dateRecorded > @dateFrom && timespent.dateRecorded < @dateTo
-GROUP BY problem.id
+GROUP BY problem.internetUserId
 ORDER BY timeSpent desc
 LIMIT @limit;";
 
