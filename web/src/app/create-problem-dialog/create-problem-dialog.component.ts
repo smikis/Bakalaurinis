@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Tag} from '../tag.service';
-import {MatChipInputEvent} from '@angular/material';
+import {MatChipInputEvent} from '@angular/material/chips';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
@@ -14,13 +14,13 @@ import {UserService, User} from '../user.service';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
 import {ProblemService, Problem, CreateProblem} from '../problem.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-problem-dialog',
   templateUrl: './create-problem-dialog.component.html',
   styleUrls: ['./create-problem-dialog.component.scss'],
-  providers: [InternetUserService,UserService, ProblemService]
+  providers: [InternetUserService, UserService, ProblemService]
 })
 export class CreateProblemDialogComponent implements OnInit {
   automaticallyAssign = false;
@@ -37,14 +37,15 @@ export class CreateProblemDialogComponent implements OnInit {
   selectedUser: User;
 
   tags = new Array<string>();
-  visible: boolean = true;
-  selectable: boolean = true;
-  removable: boolean = true;
-  addOnBlur: boolean = true;
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
   separatorKeysCodes = [ENTER, COMMA];
 
-  constructor(private internetUserService: InternetUserService,  private router: Router, private userService: UserService, private problemService: ProblemService,
-    public dialogRef: MatDialogRef<CreateProblemDialogComponent>) {     
+  constructor(private internetUserService: InternetUserService,  private router: Router,
+     private userService: UserService, private problemService: ProblemService,
+    public dialogRef: MatDialogRef<CreateProblemDialogComponent>) {
     this.internetUserCtrl = new FormControl();
     this.filteredInternetUsers = this.internetUserCtrl.valueChanges
     .startWith(null)
@@ -53,8 +54,8 @@ export class CreateProblemDialogComponent implements OnInit {
          internetUserService.searchInternetUsers(val)
          .toPromise()
          .then(res => {
-           this.internetUsers = res
-         })
+           this.internetUsers = res;
+         });
        })
        .subscribe();
 
@@ -66,36 +67,36 @@ export class CreateProblemDialogComponent implements OnInit {
             userService.searchUsers(val)
             .toPromise()
             .then(res => {
-              this.users = res
-            })
+              this.users = res;
+            });
           })
           .subscribe();
 
     }
 
-      changedInternetUser(user:InternetUser) {
+      changedInternetUser(user: InternetUser) {
         this.myform.controls['location'].setValue(user.location);
         this.selectedInternetUser = user;
       }
 
-      changedUser(user:User) {
+      changedUser(user: User) {
         this.selectedUser = user;
       }
-      
+
   ngOnInit() {
     this.myform = new FormGroup({
       name: new FormControl('', Validators.required),
       status: new FormControl('1', Validators.required),
       category: new FormControl('1', Validators.required),
       description: new FormControl('', Validators.required),
-      location: new FormControl('',Validators.required)
+      location: new FormControl('', Validators.required)
   });
   }
 
   submit() {
-    var problem = new CreateProblem();
-    problem.assignedUser = this.selectedUser? this.selectedUser.id: null;
-    problem.internetUserId = this.selectedInternetUser? this.selectedInternetUser.id: null;
+    const problem = new CreateProblem();
+    problem.assignedUser = this.selectedUser ? this.selectedUser.id : null;
+    problem.internetUserId = this.selectedInternetUser ? this.selectedInternetUser.id : null;
     problem.category = +this.myform.controls['category'].value;
     problem.description = this.myform.controls['description'].value;
     problem.location = this.myform.controls['location'].value;
@@ -103,14 +104,14 @@ export class CreateProblemDialogComponent implements OnInit {
     problem.statusId = +this.myform.controls['status'].value;
     problem.tags = this.tags;
     console.log(problem);
-    this.problemService.createProblem(problem).subscribe(result=> {
+    this.problemService.createProblem(problem).subscribe(result => {
       this.dialogRef.close();
-    })
+    });
   }
 
   add(event: MatChipInputEvent): void {
-    let input = event.input;
-    let value = event.value;
+    const input = event.input;
+    const value = event.value;
 
     if ((value || '').trim()) {
       this.tags.push(value);
@@ -123,9 +124,9 @@ export class CreateProblemDialogComponent implements OnInit {
   }
 
   remove(tag: string): void {
-    let index = this.tags.indexOf(tag);
+    const index = this.tags.indexOf(tag);
 
-    if (index >= 0) {    
+    if (index >= 0) {
       this.tags.splice(index, 1);
     }
   }

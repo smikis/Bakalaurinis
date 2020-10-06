@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ReportsService, UserReport, TimeConsumingInternetUsers,TimeConsumingProblems} from '../reports.service';
-import { MatTableDataSource } from '@angular/material';
-import {Router} from "@angular/router";
+import {ReportsService, UserReport, TimeConsumingInternetUsers, TimeConsumingProblems} from '../reports.service';
+import { MatTableDataSource } from '@angular/material/table';
+import {Router} from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-reports-component',
@@ -10,7 +10,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   providers: [ReportsService]
 })
 export class ReportsComponentComponent implements OnInit {
-  readonly updateForm : FormGroup;
+  readonly updateForm: FormGroup;
 
   userReportsDataSource = new MatTableDataSource();
   userReportsdisplayedColumns = ['firstName', 'lastName', 'time', 'averageTaskTime', 'maxTime', 'minTime', 'problemsSolved'];
@@ -19,10 +19,10 @@ export class ReportsComponentComponent implements OnInit {
   costlyProblemsdisplayedColumns = ['id', 'name', 'timeSpent'];
 
   costlyUsersDataSource = new MatTableDataSource();
-  costlyUsersdisplayedColumns = ['internetUserId', 'firstName','lastName', 'timeSpent'];
-  
+  costlyUsersdisplayedColumns = ['internetUserId', 'firstName', 'lastName', 'timeSpent'];
+
   constructor(private reportsService: ReportsService,
-    private router: Router) { 
+    private router: Router) {
       this.updateForm = new FormGroup({
         selectedDateFrom: new FormControl(''),
         selectedDateTo: new FormControl('')
@@ -30,26 +30,26 @@ export class ReportsComponentComponent implements OnInit {
     }
 
   ngOnInit() {
-    var date = new Date();
-    var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-    var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    const date = new Date();
+    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
     this.updateForm.controls['selectedDateFrom'].setValue(firstDay);
     this.updateForm.controls['selectedDateTo'].setValue(lastDay);
     this.updateData(firstDay, lastDay);
-    
+
   }
 
-  updateData(firstDay: Date, lastDay:Date) {
-    this.reportsService.getUserReports(firstDay.toISOString(), lastDay.toISOString()).subscribe(result=> {
-      this.userReportsDataSource.data = result;     
+  updateData(firstDay: Date, lastDay: Date) {
+    this.reportsService.getUserReports(firstDay.toISOString(), lastDay.toISOString()).subscribe(result => {
+      this.userReportsDataSource.data = result;
     });
 
-    this.reportsService.getCostlyInternetUsers(firstDay.toISOString(), lastDay.toISOString()).subscribe(result=> {
+    this.reportsService.getCostlyInternetUsers(firstDay.toISOString(), lastDay.toISOString()).subscribe(result => {
       this.costlyUsersDataSource.data = result;
       console.log(this.costlyUsersDataSource.data);
     });
 
-    this.reportsService.getCostlyProblems(firstDay.toISOString(), lastDay.toISOString()).subscribe(result=> {
+    this.reportsService.getCostlyProblems(firstDay.toISOString(), lastDay.toISOString()).subscribe(result => {
       this.costlyProblemsDataSource.data = result;
       console.log(this.costlyProblemsDataSource.data);
     });
@@ -68,10 +68,10 @@ export class ReportsComponentComponent implements OnInit {
   }
 
   dateChanged() {
-    var dateFrom = <Date>this.updateForm.controls['selectedDateFrom'].value;
-    var dateTo = <Date>this.updateForm.controls['selectedDateTo'].value;
+    const dateFrom = <Date>this.updateForm.controls['selectedDateFrom'].value;
+    const dateTo = <Date>this.updateForm.controls['selectedDateTo'].value;
 
-    if(dateTo> dateFrom) {
+    if (dateTo > dateFrom) {
       this.updateData(dateFrom, dateTo);
     }
   }

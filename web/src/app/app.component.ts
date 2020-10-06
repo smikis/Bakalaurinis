@@ -1,9 +1,9 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { RouterOutlet, Router } from '@angular/router';
 import { LoginService, AuthenticatedUser } from './login.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { CreateProblemDialogComponent } from './create-problem-dialog/create-problem-dialog.component';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -11,19 +11,22 @@ import { MatDialog, MatDialogRef } from '@angular/material';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit, OnInit {
+  constructor(private login: LoginService, private router: Router, private dialog: MatDialog) {
+
+  }
   private authSub: Subscription | null;
   user: AuthenticatedUser | null = null;
   message;
   OneSignal;
-  constructor(private login: LoginService, private router: Router, private dialog: MatDialog) {
 
-  }
+
+  menuExpanded = false;
 
   ngOnInit() {
     this.OneSignal = window['OneSignal'] || [];
-    console.log("Init OneSignal");
-    this.OneSignal.push(["init", {
-      appId: "3c1aaa0e-b87c-4392-9b04-226e3c465c70",
+    console.log('Init OneSignal');
+    this.OneSignal.push(['init', {
+      appId: '3c1aaa0e-b87c-4392-9b04-226e3c465c70',
       autoRegister: true,
       allowLocalhostAsSecureOrigin: true,
       notifyButton: {
@@ -32,13 +35,10 @@ export class AppComponent implements AfterViewInit, OnInit {
     }]);
     console.log('OneSignal Initialized');
 
-    this.OneSignal.push(["registerForPushNotifications"]);
-    this.OneSignal.push(["sendTag", "user_id", this.user.id]);
+    this.OneSignal.push(['registerForPushNotifications']);
+    this.OneSignal.push(['sendTag', 'user_id', this.user.id]);
 
   }
-
-
-  menuExpanded = false;
   ngAfterViewInit() {
     this.authSub = this.login.userSubscription.subscribe(result => {
       if (result === null || result === undefined) {
@@ -47,12 +47,11 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.user = result;
         try {
           console.log(this.OneSignal);
-          this.OneSignal.push(["sendTag", "user_id", result.id]);        
-        }
-        catch(e) {
+          this.OneSignal.push(['sendTag', 'user_id', result.id]);
+        } catch (e) {
           console.log(e);
         }
-       
+
       }
     });
   }
@@ -61,17 +60,16 @@ export class AppComponent implements AfterViewInit, OnInit {
     this.user = null;
     try {
       this.OneSignal.push(function () {
-        this.OneSignal.deleteTag("user_id");   
+        this.OneSignal.deleteTag('user_id');
       });
-    }
-    catch(e) {
+    } catch (e) {
       console.log(e);
     }
-    this.login.logout();  
+    this.login.logout();
   }
 
   onPlusClick() {
-    let createproblemdialogRef = this.dialog.open(CreateProblemDialogComponent, {
+    const createproblemdialogRef = this.dialog.open(CreateProblemDialogComponent, {
       width: '30%',
     });
     createproblemdialogRef.afterClosed().subscribe(result => {

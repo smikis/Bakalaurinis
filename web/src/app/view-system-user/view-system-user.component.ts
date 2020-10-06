@@ -1,7 +1,8 @@
+/// <reference types="@types/googlemaps" />
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService, UserExtended} from '../user.service';
-import { } from '@types/googlemaps';
+
 @Component({
   selector: 'app-view-system-user',
   templateUrl: './view-system-user.component.html',
@@ -34,13 +35,13 @@ export class ViewSystemUserComponent implements OnInit {
       });
 
       this.refreshLocationMarker();
-   
+
     });
   }
 
   refreshLocationMarker() {
     this.userService.getUserLocation(this.userId).subscribe(result=> {
-      var location = new google.maps.LatLng(result.lat, result.lng);        
+      var location = new google.maps.LatLng(result.lat, result.lng);
       this.map.panTo(location);
 
         if(!this.marker) {
@@ -52,7 +53,7 @@ export class ViewSystemUserComponent implements OnInit {
         }
         else {
           this.marker.setPosition(location);
-        }     
+        }
     });
   }
 
