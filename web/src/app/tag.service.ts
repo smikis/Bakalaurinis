@@ -12,18 +12,18 @@ export class TagService {
     }
 
     getProblemTags(id: number): Observable<Tag[]> {
-        let baseUrl = this.url.getApiUrl(Endpoints.getProblemTags(id));
+        const baseUrl = this.url.getApiUrl(Endpoints.getProblemTags(id));
         return this.http.get<Tag[]>(baseUrl, {headers: this.login.applyAuthentication()});
     }
 
-    createProblemTag(name: string, problemId: number): Observable<Tag> {       
-        let baseUrl = this.url.getApiUrl(Endpoints.getProblemTags(problemId));
-        var createTag = new Tag(name);
+    createProblemTag(name: string, problemId: number): Observable<Tag> {
+        const baseUrl = this.url.getApiUrl(Endpoints.getProblemTags(problemId));
+        const createTag = new Tag(name);
         return this.http.post<Tag>(baseUrl, createTag, {headers: this.login.applyAuthentication()});
     }
 
     delete(timeSpentId: number) {
-        let baseUrl = this.url.getApiUrl(Endpoints.getTag(timeSpentId));
+        const baseUrl = this.url.getApiUrl(Endpoints.getTag(timeSpentId));
         return this.http.delete(baseUrl, {headers: this.login.applyAuthentication()});
     }
 

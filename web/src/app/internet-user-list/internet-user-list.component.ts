@@ -1,16 +1,16 @@
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
-import {MatPaginator, PageEvent, MatSelectChange} from '@angular/material';
+import {MatPaginator, PageEvent } from '@angular/material/paginator';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DataSource} from '@angular/cdk/collections';
 import {InternetUserService, InternetUser} from '../internet.user.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
-import "rxjs/add/operator/debounceTime";
-import { Subject } from "rxjs/Subject";
-import "rxjs/add/operator/distinctUntilChanged";
-import {Router} from "@angular/router";
-import { MatDialog, MatDialogRef } from '@angular/material';
+import 'rxjs/add/operator/debounceTime';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/distinctUntilChanged';
+import {Router} from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CreateInterentuserDialogComponent } from '../create-interentuser-dialog/create-interentuser-dialog.component';
 import { UpdateInternetuserDialogComponent } from '../update-internetuser-dialog/update-internetuser-dialog.component';
 
@@ -23,18 +23,18 @@ import { UpdateInternetuserDialogComponent } from '../update-internetuser-dialog
 export class InternetUserListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  readonly updateForm : FormGroup;
+  readonly updateForm: FormGroup;
   searchChangeEmitter: EventEmitter<any> = new EventEmitter<any>();
   isLoadingResults = true;
   resultsLength = 0;
   pageSize = 10;
   displayedColumns = ['id', 'firstName', 'lastName', 'location', 'ipAddress', 'internetPlan', 'actionsColumn'];
-  dataSource : UserDataSource;
+  dataSource: UserDataSource;
 
   private searchUpdated: Subject<string> = new Subject<string>();
 
-  constructor(private internetUserService: InternetUserService, private router: Router,private dialog: MatDialog) {
-    this.internetUserService.getPage(0,this.pageSize).subscribe(data=> {
+  constructor(private internetUserService: InternetUserService, private router: Router, private dialog: MatDialog) {
+    this.internetUserService.getPage(0, this.pageSize).subscribe(data => {
       this.resultsLength = data.total;
       this.dataSource = new UserDataSource(this.internetUserService, data.data, data.total);
       this.isLoadingResults = false;
@@ -47,7 +47,7 @@ export class InternetUserListComponent implements OnInit {
     this.searchChangeEmitter = <any>this.searchUpdated.asObservable()
     .debounceTime(1000)
      .distinctUntilChanged()
-     .subscribe(result=> {
+     .subscribe(result => {
       this.getFilteredData();
      });
 
@@ -58,7 +58,7 @@ export class InternetUserListComponent implements OnInit {
   }
 
   getFilteredData() {
-    var search = <string>this.updateForm.controls['search'].value;
+    const search = <string>this.updateForm.controls['search'].value;
     this.dataSource.loadPage(0, this.pageSize, search);
   }
 
@@ -66,9 +66,9 @@ export class InternetUserListComponent implements OnInit {
     this.searchUpdated.next(value);
   }
 
-  onPaginateChange(event : PageEvent){
-    var search = <string>this.updateForm.controls['search'].value;   
-    this.dataSource.loadPage(event.pageIndex,event.pageSize, search);
+  onPaginateChange(event: PageEvent) {
+    const search = <string>this.updateForm.controls['search'].value;
+    this.dataSource.loadPage(event.pageIndex, event.pageSize, search);
   }
 
   selectRow(row: InternetUser) {
@@ -76,7 +76,7 @@ export class InternetUserListComponent implements OnInit {
   }
 
   createInternetUser() {
-    let createproblemdialogRef = this.dialog.open(CreateInterentuserDialogComponent, {
+    const createproblemdialogRef = this.dialog.open(CreateInterentuserDialogComponent, {
       width: '30%',
     });
     createproblemdialogRef.afterClosed().subscribe(result => {
@@ -88,7 +88,7 @@ export class InternetUserListComponent implements OnInit {
 
   updateInternetUser(row: InternetUser) {
     console.log(row);
-    let updateUserdialogRef = this.dialog.open(UpdateInternetuserDialogComponent, {
+    const updateUserdialogRef = this.dialog.open(UpdateInternetuserDialogComponent, {
       width: '30%',
       data: {row}
     });
@@ -102,10 +102,10 @@ export class InternetUserListComponent implements OnInit {
 }
 
 export class UserDataSource extends DataSource<any> {
-  length : number;
+  length: number;
   problems:  Observable<InternetUser[]>;
   subject: BehaviorSubject<InternetUser[]>;
-  constructor(private reportService: InternetUserService, problems: InternetUser[], length:number) {
+  constructor(private reportService: InternetUserService, problems: InternetUser[], length: number) {
     super();
     this.length = length;
     this.subject = new BehaviorSubject<InternetUser[]>(problems);
@@ -113,12 +113,12 @@ export class UserDataSource extends DataSource<any> {
   connect(): Observable<InternetUser[]> {
     return this.subject.asObservable();
   }
-  loadPage(page:number, pageSize:number, search?: string | undefined){
-    this.reportService.getPage(page,pageSize,search).subscribe(data=> {
+  loadPage(page: number, pageSize: number, search?: string | undefined) {
+    this.reportService.getPage(page, pageSize, search).subscribe(data => {
     this.subject.next(data.data);
     console.log(data.total);
     this.length = data.total;
-  })
+  });
 }
   disconnect() {}
 }

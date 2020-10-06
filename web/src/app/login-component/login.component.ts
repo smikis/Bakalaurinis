@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginService, Login } from '../login.service';
 import { Router } from '@angular/router';
-import { MatSnackBar, MatSnackBarDismiss } from '@angular/material';
+import { MatSnackBar, MatSnackBarDismiss } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +11,12 @@ import { MatSnackBar, MatSnackBarDismiss } from '@angular/material';
 })
 export class LoginComponent implements OnInit {
 
-  readonly loginForm : FormGroup;
+  readonly loginForm: FormGroup;
 
   busy: boolean;
   hide = true;
 
-  constructor(private loginService : LoginService, private router : Router, private snackbar: MatSnackBar) {
+  constructor(private loginService: LoginService, private router: Router, private snackbar: MatSnackBar) {
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])
@@ -27,20 +27,20 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-   var login = new Login();
+   const login = new Login();
    login.email = <string>this.loginForm.controls['username'].value;
    login.password = <string>this.loginForm.controls['password'].value;
-   this.loginService.login(login).then(success=> {
-       if(success) {
+   this.loginService.login(login).then(success => {
+       if (success) {
         this.router.navigate(['dashboard']);
-       }     
-   }).catch(error=> {
+       }
+   }).catch(error => {
      console.log(error);
     this.snackbar.open('Neteisingi prisijungimo duomenys', 'Gerai').afterDismissed().subscribe((value: MatSnackBarDismiss) => {
         this.loginForm.controls['password'].reset();
       });
    });
-  
+
   }
 
 }

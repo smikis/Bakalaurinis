@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
 import { LoginService, AuthenticatedUser } from '../login.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -25,10 +25,6 @@ export class DashboardComponent implements OnInit {
   pageSize = 5;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  ngAfterViewInit() {
-
-  }
 
 
   ngOnInit() {
